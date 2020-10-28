@@ -29,6 +29,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -38,8 +40,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-//import com.google.android.gms.ads.AdRequest;
-//import com.google.android.gms.ads.AdView;
 import com.google.android.material.snackbar.Snackbar;
 import com.muniryenigul.kam.MainActivity;
 import com.muniryenigul.kam.interfaces.ApiService;
@@ -66,15 +66,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class PriceActivity extends AppCompatActivity {
-    //private ArrayList<HashMap<String, String>> arrayList;
     private RelativeLayout sortLayout;
     public static boolean askToUpdate= false;
     private boolean afterDetailSearch=false;
     public static boolean stillSearch=false;
     private String intentInfo, description, name, author, publisher, coverBig, isbn, volume, pages;
     private ArrayList<HowMuchAndWhere> arrayListPrice;
-    /*private AdView mAdView;*/
-    /*private AdRequest adRequest;*/
     public static SQLiteDatabase database, fav;
     private SuggestionAdapter adapter;
     private Button buttonFindPrices2;
@@ -108,76 +105,6 @@ public class PriceActivity extends AppCompatActivity {
         loadArrayList(arrayForSelectedSites,PriceActivity.this);
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
-    /*public boolean onTouchEvent(MotionEvent touchEvent){
-        switch(touchEvent.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                x1 = touchEvent.getX();
-                float y1 = touchEvent.getY();
-                break;
-            case MotionEvent.ACTION_UP:
-                float x2 = touchEvent.getX();
-                float y2 = touchEvent.getY();
-                if(x1 < x2){
-                    progressBar2.setVisibility(View.VISIBLE);
-                    createIntentFinalDetailFinal(arrayList,position - 1, "detail");
-
-                } else if(x1 > x2){
-                    progressBar2.setVisibility(View.VISIBLE);
-                    createIntentFinalDetailFinal(arrayList,position + 1, "detail");
-                }
-                break;
-        }
-        return false;
-    }*/
-
-    /*private void createIntentFinalDetailFinal(ArrayList<HashMap<String, String>> arrayList, int position, String way) {
-        try { if (arrayList != null && !arrayList.get(position).get("name").contains("Error")) {
-             (new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.bkmkitap.com/").client(new OkHttpClient().newBuilder().build()).build())
-                    .create(ApiService.class).getPrices(arrayList.get(position).get("individual")).enqueue(new retrofit2.Callback<String>() {
-                        @Override
-                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                Document doc = Jsoup.parse(response.body());
-                                String src = doc.select("div.fl.col-12 > iframe").attr("src");
-                                int index = src.indexOf("=");
-                                String volume = doc.select("div.col.cilt.col-12 > div:nth-child(1) > span:nth-child(2)").text();
-                                String pages = doc.select("div.col.cilt.col-12 > div:nth-child(2) > span:nth-child(2)").text();
-                                String isbn;
-                                Intent intent = new Intent(PriceActivity.this, PriceActivity.class);
-                                intent.putExtra("info", way);
-                                intent.putExtra("name", arrayList.get(position).get("name"));
-                                intent.putExtra("author", arrayList.get(position).get("author"));
-                                intent.putExtra("publisher", arrayList.get(position).get("publisher"));
-                                intent.putExtra("cover", arrayList.get(position).get("cover"));
-                                StringBuilder sb = new StringBuilder();
-                                for (Element table : doc.select("#productDetailTab")) { for (Element row : table.select("#productDetailTab > div > p")) { sb.append(row.text()).append("\n").append("\n"); } }
-                                intent.putExtra("description", sb.toString());
-                                intent.putExtra("coverBig", doc.select("#productImage > li > a > span > img").attr("src"));
-                                intent.putExtra("volume", volume);
-                                if (!doc.select("span[itemprop=isbn]").text().isEmpty()) isbn = doc.select("span[itemprop=isbn]").text();
-                                else if (!src.substring(index + 1).isEmpty()) isbn = src.substring(index + 1);
-                                else if (!doc.select("div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(3) > span:nth-child(2)").text().isEmpty()) isbn = doc.select("div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(3) > span:nth-child(2)").text();
-                                else if (!doc.select("#productRight > div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(2) > span:nth-child(2)").text().isEmpty()) isbn = doc.select("#productRight > div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(2) > span:nth-child(2)").text();
-                                else isbn = doc.select("div.col.cilt.col-12 > div > span:nth-child(2)").text();
-                                intent.putExtra("isbn", isbn);
-                                if(!pages.equals(isbn)) intent.putExtra("pages", pages);
-                                intent.putExtra("individual", arrayList.get(position).get("individual"));
-                                intent.putExtra("position",position);
-                                intent.putExtra("arrayList",arrayList);
-                                startActivity(intent);
-                                finish();
-                            } else progressBar.setVisibility(View.GONE);
-                        }
-                        @Override
-                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) { progressBar.setVisibility(View.GONE); }
-                    });
-
-        } else if(progressBar != null) progressBar.setVisibility(View.GONE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            progressBar.setVisibility(View.GONE);
-        }
-    }*/
 
     public void createIntent(ArrayList<SingleItemModel> singleItem, int position, String info) {
         try { (new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create())
@@ -228,8 +155,6 @@ public class PriceActivity extends AppCompatActivity {
         description = getIntent().getStringExtra("description");
         intentInfo = getIntent().getStringExtra("info");
         singleItemModel = new SingleItemModel(name, author, publisher, getIntent().getStringExtra("cover"), getIntent().getStringExtra("individual"), coverBig, isbn, description);
-        //arrayList = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("arrayList");
-        //arraylist SuggestionAdapter'da dahil edildi, sebebi PA'da sağa sola kaydırma yapabilmekti.
         position = getIntent().getIntExtra("position",0);
         arrayListPrice = new ArrayList<>();
         buttonFindPrices2 = findViewById(R.id.buttonSeeOrSearch2);
@@ -239,13 +164,9 @@ public class PriceActivity extends AppCompatActivity {
         TextView nameText = findViewById(R.id.nameText);
         TextView nameText2 = findViewById(R.id.nameText2);
         textDescription = findViewById(R.id.textDescription);
-        //textDescription.setMovementMethod(new ScrollingMovementMethod());
         textDescription2 = findViewById(R.id.textDescription2);
-        //textDescription2.setMovementMethod(new ScrollingMovementMethod());
         arrayForSelectedSites=new ArrayList<>();
         loadArrayList(arrayForSelectedSites,PriceActivity.this);
-//        adRequest = new AdRequest.Builder()/*.addTestDevice("7862BABA323567C3F1DAC26841AB3299")*/.build();
-//        mAdView = findViewById(R.id.adView);
         all = getResources().getStringArray(R.array.listOptions).length;
         progressBar2 = findViewById(R.id.progressBar2);
         recyclerView = findViewById(R.id.recylerView);
@@ -254,24 +175,6 @@ public class PriceActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_down_to_up));
         coverLoading = findViewById(R.id.coverLoading);
-        /*ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                int fromPosition = viewHolder.getAdapterPosition();
-                int toPosition = target.getAdapterPosition();
-                Collections.swap(arrayListPrice, fromPosition, toPosition);
-                recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
-                Log.d("fromPosition",""+fromPosition);
-                Log.d("toPosition",""+toPosition);
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-            }
-        });
-        itemTouchHelper.attachToRecyclerView(recyclerView);*/
         ImageView toolbar_image = findViewById(R.id.toolbar_image);
         ImageView toolbar_image2 = findViewById(R.id.toolbar_image2);
         linear = findViewById(R.id.linear);
@@ -345,7 +248,13 @@ public class PriceActivity extends AppCompatActivity {
                         if (arrayForSelectedSites == null || arrayForSelectedSites.isEmpty()) startActivity(new Intent(PriceActivity.this, Settings2Activity.class).putExtra("from", intentInfo));
                         else if(!receiver.isNetworkAvailable(PriceActivity.this)) alert("internet");
                         else if(favList != null && !favList.contains(name)) search(" ");
-                        else Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", v -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                        else {
+                            try {
+                                Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", v -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     } else if(!favList.contains(name)) save();
                     else Toast.makeText(PriceActivity.this, "Bu kitap zaten favoriler listesinde.", Toast.LENGTH_LONG).show();
                 } else if(!favList.contains(name)) save();
@@ -359,7 +268,13 @@ public class PriceActivity extends AppCompatActivity {
                         if (arrayForSelectedSites == null || arrayForSelectedSites.isEmpty()) startActivity(new Intent(PriceActivity.this, Settings2Activity.class).putExtra("from", intentInfo));
                         else if(!receiver.isNetworkAvailable(PriceActivity.this)) alert("internet");
                         else if(!favList.contains(name)) search(" ");
-                        else Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", v -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                        else {
+                            try {
+                                Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", v -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
                     } else if(!favList.contains(name)) save();
                     else Toast.makeText(PriceActivity.this, "Bu kitap zaten favoriler listesinde.", Toast.LENGTH_LONG).show();
                 } else if(!favList.contains(name)) save();
@@ -691,8 +606,14 @@ public class PriceActivity extends AppCompatActivity {
             else if(!receiver.isNetworkAvailable(PriceActivity.this)) alert("internet");
             else { fab.setVisibility(View.GONE);fab.hide();
                 fabUpdate.setVisibility(View.GONE);fabUpdate.hide();
-                /*search(" ");*/if(!favList.contains(name)) search(" ");
-                else Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", view1 -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                if(!favList.contains(name)) search(" ");
+                else {
+                    try {
+                        Snackbar.make(view, "Bu kitap zaten favoriler listesinde.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Fiyatları Gör", view1 -> createIntent(favSingleItem, favList.indexOf(name), "old")).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         } catch (Exception e) {
             buttonFindPrices2.setVisibility(View.GONE);
@@ -706,39 +627,6 @@ public class PriceActivity extends AppCompatActivity {
         arrayList.clear();
         for(int i=0;i<size;i++) arrayList.add(prefs.getString("arrayForSelectedSites" + "_" + i," "));
     }
-//    private void search(String s) {
-//        stillSearch=true;
-//        freeMemory();
-//        String isbnFinal = StringUtils.strip(isbn);
-//        int length = isbnFinal.length();
-//        if(length>13) isbn = StringUtils.substring(isbnFinal,length-13);
-//        else isbn = isbnFinal;
-//        try {
-//            linear.setVisibility(View.GONE);
-//            buttonAlpha.setVisibility(View.GONE);
-//            buttonNumer.setVisibility(View.GONE);
-//            coverLoading.setVisibility(View.VISIBLE);
-//            progressBar.setVisibility(View.VISIBLE);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) progressBar.setProgress(0, true);
-//            else progressBar.setProgress(0);
-//            Intent intent = new Intent(PriceActivity.this, PriceServiceWithRetrofit.class);
-//            ResultReceiver myResultReceiver = new MyResultReceiver(null);
-//            intent.putExtra("from","PA");
-//            intent.putExtra("receiver", myResultReceiver);
-//            intent.putExtra("name", name);
-//            intent.putExtra("author", author);
-//            intent.putExtra("publisher", publisher);
-//            intent.putExtra("isbn", isbn);
-//            intent.putExtra("description", description);
-//            intent.putExtra("code", s);
-//            intent.putStringArrayListExtra("selections", arrayForSelectedSites);
-//            startService(intent);
-//        } catch (OutOfMemoryError e) {
-//            e.printStackTrace();
-//            Toast.makeText(this, "Lütfen tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
-//        }
-//        freeMemory();
-//    }
     private void search(String s) {
         coverLoading.setVisibility(View.VISIBLE);
         stillSearch=true;
@@ -794,8 +682,6 @@ public class PriceActivity extends AppCompatActivity {
                         if (!connected) {
                             connected = true;
                             if (dialog != null && dialog.isShowing()) dialog.dismiss();
-//                            mAdView.loadAd(adRequest);
-//                            if (mAdView.getVisibility() != View.VISIBLE) mAdView.setVisibility(View.VISIBLE);
                         }
                         return true;
                     }
@@ -826,38 +712,6 @@ public class PriceActivity extends AppCompatActivity {
             }
         }
     }
-//    public class MyResultReceiver extends ResultReceiver {
-//        Handler handler = new Handler();
-//        MyResultReceiver(Handler handler) {
-//            super(handler);
-//        }
-//        @Override
-//        protected void onReceiveResult(int resultCode, final Bundle resultData) {
-//                handler.post(() -> {
-//                    try {
-//                        arrayListPrice = resultData.getParcelableArrayList("arrayListPrice");
-//                        sortNumeric();
-//                        sortLayout.setVisibility(View.VISIBLE);
-//                        coverLoading.setVisibility(View.GONE);
-//                        linear2.setVisibility(View.VISIBLE);
-//                        buttonAlpha.setVisibility(View.VISIBLE);
-//                        buttonNumer.setVisibility(View.VISIBLE);
-//                        //buttonFindPrices2.setVisibility(View.GONE);
-//                        if(intentInfo.equals("detail")||intentInfo.equals("new from Sugs")) {
-//                            afterDetailSearch=true;
-//                            fab2.setImageDrawable(ContextCompat.getDrawable(PriceActivity.this,R.drawable.addtofavorites));
-//                            (findViewById(R.id.view222)).setVisibility(View.GONE);
-//                        }
-//                        progressBar.setVisibility(View.GONE);
-//                        searched = true;
-//                    } catch (Exception e) { catchAndSend("sort error"); }
-//                    if (resultData.getString("code") != null && Objects.requireNonNull(resultData.getString("code")).equalsIgnoreCase("3") &&(intentInfo!=null&&intentInfo.equals("old") || intentInfo != null && intentInfo.equals("update") || intentInfo != null && intentInfo.equals("refresh") && favList != null && favList.contains(name))) updateDatabase();
-//                    //situations();
-//                });
-//            situations();
-//            super.onReceiveResult(resultCode, resultData);
-//        }
-//    }
         public class MyResultReceiver extends ResultReceiver {
         Handler handler = new Handler();
         MyResultReceiver(Handler handler) {
@@ -871,8 +725,7 @@ public class PriceActivity extends AppCompatActivity {
                     try {
                         arrayListPrice = resultData.getParcelableArrayList("arrayListPrice");
                         sortNumeric();
-                    } /*catch (Exception e) {
-                        catchAndSend("sort error"); e.printStackTrace();}*/
+                    }
                     catch (ConcurrentModificationException ignored) {
                         ignored.printStackTrace();
                     }
@@ -882,52 +735,12 @@ public class PriceActivity extends AppCompatActivity {
             } else if (resultCode == 2 && resultData != null) {
                 sortLayout.setVisibility(View.VISIBLE);
                 linear2.setVisibility(View.VISIBLE);
-                //coverLoading.setVisibility(View.GONE);
-                /*snackbar.dismiss();*/
                 handler.post(PriceActivity.this::situations);
             }
             super.onReceiveResult(resultCode, resultData);
         }
     }
 
-    //    public class MyResultReceiver extends ResultReceiver {
-//        Handler handler = new Handler();
-//        MyResultReceiver(Handler handler) {
-//            super(handler);
-//        }
-//        @Override
-//        protected void onReceiveResult(int resultCode, final Bundle resultData) {
-//            if (resultCode == 1 && resultData != null) {
-//                handler.post(() -> {
-//                    try {
-//                        arrayListPrice = resultData.getParcelableArrayList("arrayListPrice");
-//                        sortNumeric();
-//                        sortLayout.setVisibility(View.VISIBLE);
-//                        coverLoading.setVisibility(View.GONE);
-//                        linear2.setVisibility(View.VISIBLE);
-//                        buttonAlpha.setVisibility(View.VISIBLE);
-//                        buttonNumer.setVisibility(View.VISIBLE);
-//                        //buttonFindPrices2.setVisibility(View.GONE);
-//                        if(intentInfo.equals("detail")||intentInfo.equals("new from Sugs")) {
-//                            afterDetailSearch=true;
-//                            fab2.setImageDrawable(ContextCompat.getDrawable(PriceActivity.this,R.drawable.addtofavorites));
-//                            (findViewById(R.id.view222)).setVisibility(View.GONE);
-//                        }
-//                        progressBar.setVisibility(View.GONE);
-//                        searched = true;
-//                    } catch (Exception e) { catchAndSend("sort error"); }
-//                    if (resultData.getString("code") != null && Objects.requireNonNull(resultData.getString("code")).equalsIgnoreCase("3") &&(intentInfo!=null&&intentInfo.equals("old") || intentInfo != null && intentInfo.equals("update") || intentInfo != null && intentInfo.equals("refresh") && favList != null && favList.contains(name))) updateDatabase();
-//                    situations();
-//                });
-//            } else if (resultCode == 2 && resultData != null) {
-//                handler.post(() -> {
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) progressBar.setProgress((Integer.parseInt(Objects.requireNonNull(resultData.getString("count"))) * 100) / all, true);
-//                    else progressBar.setProgress((Integer.parseInt(Objects.requireNonNull(resultData.getString("count"))) * 100) / all);
-//                });
-//            }
-//            super.onReceiveResult(resultCode, resultData);
-//        }
-//    }
     private void updateDatabase() {
             PriceActivity.this.deleteDatabase(name);
             try { deleteDB(); } catch (SQLException e) { catchAndSend("updateError"); e.printStackTrace();}
@@ -939,27 +752,10 @@ public class PriceActivity extends AppCompatActivity {
                 saveDB(StringUtils.replace(name, "/", ""),"data","site","price","url",null,null,null,null,null);
             } catch (Exception e) { e.printStackTrace(); }
     }
-//    private void situations() {
-//        int notFound=0, error=0, unselect=0;
-//        for(int r=0;r<arrayListPrice.size();r++){
-//            switch (arrayListPrice.get(r).getPrice()) {
-//                case "¯\\_(ツ)_/¯": notFound++; break;
-//                case "ಠ_ಠ": error++; break;
-//                case "□": unselect++; break;
-//            }
-//        }
-//        if(stillSearch) {
-//            if(all==notFound) Toast.makeText(this, "Bu kitap için hiçbir sitede fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor", Toast.LENGTH_LONG).show();
-//            else {
-//                int result=all-notFound-error-unselect;
-//                if(result==0) Toast.makeText(this, "Seçilen site(ler)de fiyat bulunamadı", Toast.LENGTH_LONG).show();
-//                else Toast.makeText(this, +result+" sitede fiyat bulundu.", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 private void situations() {
-    int notFound=0, error=0, unselect=0;
-    for(int r=0;r<arrayListPrice.size();r++){
+    int notFound = 0, error = 0, unselect = 0, localAll = 0;
+    localAll = arrayListPrice.size();
+    for(int r = 0 ; r < localAll ; r++ ){
         switch (arrayListPrice.get(r).getPrice()) {
             case "¯\\_(ツ)_/¯": notFound++; break;
             case "ಠ_ಠ": error++; break;
@@ -968,44 +764,44 @@ private void situations() {
     }
     if(stillSearch) {
         String message;
-        if(all==notFound) message = "Bu kitap için hiçbir sitede fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor :(";
-        else {
-            int result=all-notFound-error-unselect;
-            if(result==0) {
-                if(arrayForSelectedSites.size() == 1) message = "Seçilen sitede fiyat bulunamadı :(";
-                else message = "Seçilen sitelerde fiyat bulunamadı :(";
-            } else message = +result+" sitede fiyat bulundu :)";
+        if(localAll == notFound + error) {
+            if(arrayForSelectedSites.size() == 1) message = "Seçilen sitede fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor :(";
+            else message = "Seçilen sitelerde fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor :(";
         }
-
+        else {
+            int result = localAll -notFound - error;
+            message = +result+" sitede fiyat bulundu :)";
+        }
         snackbar = Snackbar.make(linear2, message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }
     public void ofAdapter() {
-        adapter = new SuggestionAdapter(PriceActivity.this, arrayListPrice, arrayForSelectedSites, singleItemModel, recyclerView, volume, pages,"price");
-        recyclerView.setAdapter(adapter);
-        recyclerView.setVisibility(View.VISIBLE);
-        //coverLoading.setVisibility(View.GONE);
+        try {
+            adapter = new SuggestionAdapter(PriceActivity.this, arrayListPrice, arrayForSelectedSites, singleItemModel, recyclerView, volume, pages,"price");
+            recyclerView.setAdapter(adapter);
+            recyclerView.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-//    public void ofAdapter() {
-//        SingleItemModel singleItemModel = new SingleItemModel(name, author, publisher, getIntent().getStringExtra("cover"), getIntent().getStringExtra("individual"), coverBig, isbn, description);
-//        if (adapter == null) adapter = new SuggestionAdapter(PriceActivity.this, arrayListPrice, arrayForSelectedSites, singleItemModel, recyclerView, volume, pages,"price");
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setVisibility(View.VISIBLE);
-//    }
     public void sortNumeric() {
-        Collections.sort(arrayListPrice, new Comparator<HowMuchAndWhere>() {
-            @Override
-            public int compare(HowMuchAndWhere o1, HowMuchAndWhere o2) { return extractInt(o1.getPrice().toLowerCase(new Locale("tr", "TR"))) - extractInt(o2.getPrice().toLowerCase(new Locale("tr", "TR"))); }
-            int extractInt(String s) {
-                if (s.isEmpty()) s = "9999999";
-                else if (s.equals("ಠ_ಠ")) s = "99999999";
-                else if (s.equals("□")) s = "999999999";
-                else s = s.replace("¯\\_(ツ)_/¯", "999999").replaceAll("\\D", "");
-                return s.isEmpty() ? 0 : Integer.parseInt(s);
-            }
-        });
-        ofAdapter();
+        try {
+            Collections.sort(arrayListPrice, new Comparator<HowMuchAndWhere>() {
+                @Override
+                public int compare(HowMuchAndWhere o1, HowMuchAndWhere o2) { return extractInt(o1.getPrice().toLowerCase(new Locale("tr", "TR"))) - extractInt(o2.getPrice().toLowerCase(new Locale("tr", "TR"))); }
+                int extractInt(String s) {
+                    if (s.isEmpty()) s = "9999999";
+                    else if (s.equals("ಠ_ಠ")) s = "99999999";
+                    else if (s.equals("□")) s = "999999999";
+                    else s = s.replace("¯\\_(ツ)_/¯", "999999").replaceAll("\\D", "");
+                    return s.isEmpty() ? 0 : Integer.parseInt(s);
+                }
+            });
+            ofAdapter();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void sortNumeric2() {
         Collections.sort(arrayListPrice, new Comparator<HowMuchAndWhere>() {
@@ -1027,7 +823,10 @@ private void situations() {
                 arrayListPrice.remove(0);
             }
         }
-        synchronized(PriceActivity.this){ adapter.notifyDataSetChanged(); }//ofAdapter();
+        synchronized(PriceActivity.this) {
+            recyclerView.getRecycledViewPool().clear();
+            adapter.notifyDataSetChanged();
+        }
     }
     public void sortAlpha2(View view) {
         Collections.sort(arrayListPrice, (o1, o2) -> {
@@ -1035,8 +834,10 @@ private void situations() {
             return collator.compare(StringUtils.replace(o2.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""),
                     StringUtils.replace(o1.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""));
         });
-        //Collections.sort(arrayListPrice, (o1, o2) -> (o2.getSite().replace(" ", "")).compareToIgnoreCase(o1.getSite().replace(" ", "")));
-        synchronized(PriceActivity.this){ adapter.notifyDataSetChanged(); }//ofAdapter();
+        synchronized(PriceActivity.this){
+            recyclerView.getRecycledViewPool().clear();
+            adapter.notifyDataSetChanged();
+        }
     }
     public void sortAlpha(View view) {
         Collections.sort(arrayListPrice, (o1, o2) -> {
@@ -1044,8 +845,10 @@ private void situations() {
             return collator.compare(StringUtils.replace(o1.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""),
                     StringUtils.replace(o2.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""));
         });
-        //Collections.sort(arrayListPrice, (o1, o2) -> (o1.getSite().replace(" ", "")).compareToIgnoreCase(o2.getSite().replace(" ", "")));
-        synchronized(PriceActivity.this){ adapter.notifyDataSetChanged(); }//ofAdapter();
+        synchronized(PriceActivity.this){
+            recyclerView.getRecycledViewPool().clear();
+            adapter.notifyDataSetChanged();
+        }
     }
     public void sortNumer(View view) {sortNumeric(); }
     public void sortNumer2(View view) {sortNumeric2(); }

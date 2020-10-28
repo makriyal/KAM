@@ -118,6 +118,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
     private SuggestionAdapter comparisonAdapter;
     private ArrayList<HowMuchAndWhere> arrayListComparison;
     private TextView bestSite;
+    private RecyclerView recViewComparison;
 //    private WebView webView;
 //    private ProgressBar progressBar;
 //    private AppBarLayout appBarLayout;
@@ -127,161 +128,33 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        /*if(webView != null && webView.getVisibility() == View.VISIBLE) {
-            webView.setVisibility(View.GONE);
-            webView.clearCache(true);
-            webView.clearHistory();
-            appBarLayout.setVisibility(View.GONE);
-            deleteDatabase("webview.db");
-            deleteDatabase("webviewCache.db");
-        } else*/ if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         else super.onBackPressed();
     }
     @Override
     protected void onStop() {
         super.onStop();
-        //unregisterReceiver(receiver);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //register(receiver);
     }
-    //private void register(Utils.BroadcastingInnerClass receiver) { registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)); }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_and_best_price);
         context = this;
-        new RequestConfiguration.Builder().setTestDeviceIds(Collections.singletonList("693C73C45AE0D1F6AB06B23524732691"));
-        //appBarLayout = findViewById(R.id.appBarLayout);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setTitle("");
-        //webView = findViewById(R.id.webview);
-        //progressBar = findViewById(R.id.progressBar);
-        //webView.setWebChromeClient(new WebChromeClient());
-//        webView.getSettings().setSaveFormData(true);
-//        webView.getSettings().setSavePassword(true);
-        /*webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadUrl(url);
-                return true;
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onPageFinished(WebView view, String url){
-                progressBar.setVisibility(View.GONE);
-                invalidateOptionsMenu();
-                String query = null;
-                if(baseSite.equals(sites.get(1).toString())) query = "l=document.querySelector('a[rel=addtocart_product]');";
-                else if(baseSite.equals(sites.get(2).toString())) query = "l=document.querySelector('button.SepeteEkleButtonDetay.btn');";
-                else if(baseSite.equals(sites.get(3).toString())) query = "l=document.querySelector('div.buy-button > a.spe-button2');";
-                else if(baseSite.equals(sites.get(4).toString())) query = "l=document.querySelector('a[rel=addtocart_product]');";
-                else if(baseSite.equals(sites.get(5).toString())) query = "l=document.querySelector('button.btn-sepet.button-cart');";
-                else if(baseSite.equals(sites.get(6).toString())) query = "l=document.querySelector('button[class=ty-btn__primary ty-btn__big ty-btn__add-to-cart ty-btndetay cm-form-dialog-closer ty-btn]');";
-                else if(baseSite.equals(sites.get(16).toString())) query = "l=document.getElementById('addCartBtn');";
-                else if(baseSite.equals(sites.get(67).toString())) query = "l=document.querySelector('#divSatinAl > div > div.basketBtn > input');";;
-                webView.evaluateJavascript(StringUtils.join(query," e=document.createEvent('HTMLEvents'); e.initEvent('click',true,true);l.dispatchEvent(e);"), s -> {
-                    Log.d("LogName", s);
-                });
-            }
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                progressBar.setVisibility(View.GONE);
-                invalidateOptionsMenu();
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
-        //webView.clearCache(true);
-        //webView.clearHistory();
-        //webView.getSettings().setJavaScriptEnabled(true);
-        //webView.setHorizontalScrollBarEnabled(false);
         bestSite = findViewById(R.id.bestSite);
         arrayListComparison = new ArrayList<>();
         comparisonAdapter = new SuggestionAdapter(TableAndBestPriceActivity.this, arrayListComparison);
-        RecyclerView recViewComparison = findViewById(R.id.recViewComparison);
-        //recViewComparison.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
+        recViewComparison = findViewById(R.id.recViewComparison);
         recViewComparison.setAdapter(comparisonAdapter);
         recViewComparison.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(TableAndBestPriceActivity.this);
         llm.setAutoMeasureEnabled(false);
         recViewComparison.setLayoutManager(llm);
         recViewComparison.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_down_to_up));
-        /*recViewComparison.addOnItemTouchListener(
-                new RecyclerTouchListener(getApplicationContext(),
-                        recViewComparison, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
-                if (!receiver.isNetworkAvailable(context)) Utils.noInternet(TableAndBestPriceActivity.this);
-                else {
-                    WebStorage.getInstance().deleteAllData();
-                    baseSite = arrayListComparison.get(position).getSite();
-                    baseURL = StringUtils.join("https://", baseSite, "/");
-                    sites = Arrays.asList(getResources().getStringArray(R.array.listValues));
-                    int sitePosition = sites.indexOf(baseSite);
-                    appBarLayout.setVisibility(View.VISIBLE);
-                    webView.setVisibility(View.VISIBLE);
-                    for(int i = 0; i < favList.size(); i++) {
-                        String linkToSearch = arrayListAll.get(i).get(sitePosition).getURL();
-                        Log.d("linkToSearch",linkToSearch);
-                        try { (new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create())
-                                .baseUrl(baseURL).client(new OkHttpClient().newBuilder().build()).build())
-                                .create(ApiService.class).getPrices(linkToSearch).enqueue(new Callback<String>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                                        if (response.isSuccessful() && response.body() != null) {
-                                            Document doc = Jsoup.parse(response.body());
-                                            String individual = null;
-                                            if(baseSite.equals(sites.get(0).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(1).toString()))individual = StringUtils.join("https://", baseSite, doc.select("div.showcasePicture > a").attr("href"));
-                                            else if(baseSite.equals(sites.get(2).toString()))individual = StringUtils.join("https://", baseSite, doc.select("ul > li > div > a").attr("href"));
-                                            else  if(baseSite.equals(sites.get(3).toString()))individual = StringUtils.join("https://", baseSite, "/",doc.select("div.hbook-img > div > div > a").attr("href"));
-                                            else if(baseSite.equals(sites.get(4).toString()))individual = StringUtils.join("https://", baseSite, doc.select("div.showcasePicture > a").attr("href"));
-                                            else if(baseSite.equals(sites.get(5).toString()))individual = doc.select("div > div > div.image > a").attr("href");
-                                            else  if(baseSite.equals(sites.get(6).toString()))individual = doc.select("a.product-title").attr("href");
-                                            else if(baseSite.equals(sites.get(7).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(8).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(9).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(10).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(11).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(12).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(13).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(14).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(15).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(16).toString()))individual = StringUtils.join("https://", baseSite, doc.select("a.fl.col-12.text-description.detailLink").attr("href"));
-                                            else if(baseSite.equals(sites.get(67).toString()))individual = StringUtils.join("https://", baseSite, doc.select("div.productName > a").attr("href"));
-
-
-                                            assert individual != null;
-                                            Log.d("individual", individual);
-                                            webView.loadUrl(individual);
-                                        }
-                                    }
-                                    @Override
-                                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) { }
-                                });
-                        } catch (Exception e) { e.printStackTrace(); }
-                    }
-                }
-            }
-            @Override
-            public void onLongClick(View view, int position) {
-                Log.d("position onLongClick",""+position);
-            }
-        }));*/
         arrayListTotalPrices = new ArrayList<>();
         arrayListPresence = new ArrayList<>();
         arrayListBooleans = new ArrayList<>();
@@ -293,104 +166,15 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
         Collections.replaceAll(list, "maksimumkitap", "maksimum kitap");
         Collections.replaceAll(list, "KİTAPAMBARI", "KİTAP AMBARI");
         y = list.size();
-//        adRequest = new AdRequest.Builder()./*addTestDevice("B2808A4440CA69659F37A344FCCC82E9").*/build();
-//        mAdView = findViewById(R.id.adTable);
-//        mAdView.loadAd(adRequest);
-        //receiver = new Utils.BroadcastingInnerClass(/*dialog, */adRequest, mAdView);
         i = getIntent();
         from = i.getStringExtra("from");
         behavior = BottomSheetBehavior.from(linear);
         TableFixHeaders tablefixheaders = findViewById(R.id.tablefixheaders);
         tablefixheaders.setAdapter(getAdapter());
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.browser, menu);
-        return true;
-    }*/
-
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (!webView.canGoBack()) {
-            menu.getItem(0).setEnabled(false);
-            menu.getItem(0).getIcon().setAlpha(130);
-        } else {
-            menu.getItem(0).setEnabled(true);
-            menu.getItem(0).getIcon().setAlpha(255);
-        }
-        if (!webView.canGoForward()) {
-            menu.getItem(1).setEnabled(false);
-            menu.getItem(1).getIcon().setAlpha(130);
-        } else {
-            menu.getItem(1).setEnabled(true);
-            menu.getItem(1).getIcon().setAlpha(255);
-        }
-        return true;
-    }*/
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            webView.setVisibility(View.GONE);
-            webView.clearCache(true);
-            webView.clearHistory();
-            appBarLayout.setVisibility(View.GONE);
-            deleteDatabase("webview.db");
-            deleteDatabase("webviewCache.db");
-        }
-        if (item.getItemId() == R.id.action_back && webView.canGoBack()) webView.goBack();
-        if (item.getItemId() == R.id.action_forward && webView.canGoForward()) webView.goForward();
-        return super.onOptionsItemSelected(item);
-    }*/
-
     public void expand(View view) {
         behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
-//    public void noInternet() {
-//        View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
-//        final LinearLayout buttons_lay = alertLayout.findViewById(R.id.buttons_lay);
-//        buttons_lay.setVisibility(View.VISIBLE);
-//        final Button buttonConnect = alertLayout.findViewById(R.id.buttonSeeOrSearch);
-//        buttonConnect.setVisibility(View.VISIBLE);
-//        final TextView textView = alertLayout.findViewById(R.id.textView);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(TableAndBestPriceActivity.this);
-//        textView.setText(R.string.no_internet);
-//        buttonConnect.setText(R.string.connect);
-//        builder.setCancelable(true).setView(alertLayout);
-//        dialog = builder.create();
-//        dialog.show();
-//        buttonConnect.setOnClickListener(v -> {
-//            dialog.dismiss();
-//            startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-//        });
-//    }
-
-//    public class BroadcastingInnerClass extends BroadcastReceiver {
-//        boolean connected = false;
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            isNetworkAvailable();
-//        }
-//        public boolean isNetworkAvailable() {
-//            ConnectivityManager connectivity = (ConnectivityManager) TableAndBestPriceActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
-//            if (connectivity != null) {
-//                NetworkInfo[] info = connectivity.getAllNetworkInfo();
-//                for (NetworkInfo anInfo : info) {
-//                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
-//                        if (!connected) {
-//                            connected = true;
-//                            if (dialog != null && dialog.isShowing()) dialog.dismiss();
-//                            if (!mAdView.isShown()) mAdView.loadAd(adRequest);
-//                        }
-//                        return true;
-//                    }
-//                }
-//            }
-//            connected = false;
-//            return false;
-//        }
-//    }
     public BaseTableAdapter getAdapter() {
         BasicTableFixHeaderAdapter adapter = new BasicTableFixHeaderAdapter(this);
         List<List<String>> body = null;
@@ -549,6 +333,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    recViewComparison.getRecycledViewPool().clear();
                     comparisonAdapter.notifyDataSetChanged();
                 }
             } catch (Resources.NotFoundException | NumberFormatException e) {

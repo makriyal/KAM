@@ -10,25 +10,20 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.provider.Settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,8 +33,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.muniryenigul.kam.MainActivity;
 import com.muniryenigul.kam.R;
 import com.muniryenigul.kam.ers.BookFinalAdapter;
@@ -47,7 +40,6 @@ import com.muniryenigul.kam.ers.RecyclerTouchListener;
 import com.muniryenigul.kam.models.SingleItemModel;
 import com.muniryenigul.kam.interfaces.ApiService;
 import com.muniryenigul.kam.services.ServiceWithRetrofit;
-import com.muniryenigul.kam.utils.Utils;
 import com.squareup.picasso.Picasso;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -64,7 +56,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import static com.muniryenigul.kam.MainActivity.detect;
 import static com.muniryenigul.kam.MainActivity.favList;
 import static com.muniryenigul.kam.MainActivity.favSingleItem;
 import static com.muniryenigul.kam.activities.PriceActivity.database;
@@ -79,8 +70,6 @@ public class ShowMoreActivity extends AppCompatActivity {
     private Spinner spinner;
     private BroadcastingInnerClass receiver;
     private Dialog dialog;
-    //private AdRequest adRequest;
-    //private AdView mAdView;
     public int search=1, all, count;
     public static int pages;
     private String mQuery, currentNameBook;
@@ -95,7 +84,6 @@ public class ShowMoreActivity extends AppCompatActivity {
         if(glm.findFirstCompletelyVisibleItemPosition()==-1) glm.scrollToPosition(glm.findFirstVisibleItemPosition());
         else glm.scrollToPosition(glm.findFirstCompletelyVisibleItemPosition());
         if(newConfig.orientation==2) {
-            //if(sugPosition!=-1) createIntentFinal(arrayList, sugPosition);
             switch(getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
                 case Configuration.SCREENLAYOUT_SIZE_LARGE: glm.setSpanCount(5);break;
                 case Configuration.SCREENLAYOUT_SIZE_NORMAL: glm.setSpanCount(4);break;
@@ -103,7 +91,6 @@ public class ShowMoreActivity extends AppCompatActivity {
                 default:
             }
         } else {
-            //if(sugPosition!=-1) createIntentFinal(arrayList, sugPosition);
             switch(getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
                 case Configuration.SCREENLAYOUT_SIZE_LARGE: glm.setSpanCount(3); break;
                 case Configuration.SCREENLAYOUT_SIZE_NORMAL: glm.setSpanCount(2); break;
@@ -138,11 +125,6 @@ public class ShowMoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_more);
         receiver = new BroadcastingInnerClass();
-        //adRequest = new AdRequest.Builder().addTestDevice("D30B2A6CEF1A8291743DA9EB38246A4A").build();
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
-//            mAdView = findViewById(R.id.adView);
-//            mAdView.loadAd(adRequest);
-//        }
         arrayList=new ArrayList<>();
         arrayListSpare = new ArrayList<>();
         spinner = findViewById(R.id.spinner);
@@ -168,8 +150,6 @@ public class ShowMoreActivity extends AppCompatActivity {
         }
         recShowMore.setLayoutManager(glm);
         recShowMore.setHasFixedSize(true);
-        //recShowMore.addItemDecoration(new TopOffsetDecoration((int) getResources().getDimension(R.dimen._36dp)));
-        //recShowMore.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_down_to_up));
         recShowMore.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recShowMore, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -240,53 +220,13 @@ public class ShowMoreActivity extends AppCompatActivity {
                 database.close();
             } catch (SQLException e) { e.printStackTrace(); }
         }
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && !detect.getBoolean("control", false) && detect.getBoolean("userChoice", true)) {
-            if (favSingleItem.size() >= 1) {
-                detect.edit().putBoolean("control", true).apply();
-                if (!detect.getBoolean("userSet", false)) Utils.scheduleJob(getApplicationContext()*//*, 25, 61, 61, 3*//*);
-                else Utils.scheduleJob(getApplicationContext()*//*, detect.getInt("hour",25), detect.getInt("minute",61), 10, detect.getInt("days",3)*//*);
-            } else {
-                detect.edit().putBoolean("control", false).apply();
-                Utils.cancelJob(ShowMoreActivity.this);
-            }
-        }*/
     }
-//    private void run(ArrayList<HashMap<String, String>> arrayList, int position) {
-//        if (arrayList.get(position).get("name") != null && favList != null && favList.contains(arrayList.get(position).get("name"))) createIntent(favSingleItem, favList.indexOf(arrayList.get(position).get("name")), "old");
-//        else {
-//            if (dialog != null) dialog.dismiss();
-//            createIntentFinal(arrayList, position);
-//        }
-//    }
     public void home(View view) {
         caseforMore("home",null,null);
         finish();
     }
-//    private class TopOffsetDecoration extends RecyclerView.ItemDecoration {
-//        private int mTopOffset;
-//        TopOffsetDecoration(int topOffset) {
-//            mTopOffset = topOffset;
-//        }
-//        @Override
-//        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-//            super.getItemOffsets(outRect, view, parent, state);
-//            int dataSize = state.getItemCount();
-//            if (dataSize > 0 ) {
-//                int count;
-//                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) count=5;
-//                else count=3;
-//                for(int t=0;t<count/*autoFit.getSpanCount()+1*/;t++){ outRect.set(0, mTopOffset, 0, -mTopOffset); }
-//            } else outRect.set(0, 0, 0, 0);
-//        }
-//    }
-    /*private void fromContentTouch(int position, ArrayList<HashMap<String, String>> arrayList) {
-        progressBar.setVisibility(View.VISIBLE);
-        createIntentFinal(arrayList, position);
-    }*/
     private void createIntentFinal(ArrayList<HashMap<String, String>> arrayList, int position, String way) {
-        //currentNameAuthor=arrayList.get(position).get("author");
         currentNameBook=arrayList.get(position).get("name");
-        //currentNamePublisher=arrayList.get(position).get("publisher");
         if (!receiver.isNetworkAvailable()) {
             if (dialog != null) dialog.dismiss();
             progressBar.setVisibility(View.GONE);
@@ -360,159 +300,6 @@ public class ShowMoreActivity extends AppCompatActivity {
             }
         }
     }
-//    private void createIntentFinal(ArrayList<HashMap<String, String>> arrayList, int position) {
-//        if(dialogDetail!=null&&dialogDetail.isShowing()) dialogDetail.dismiss();
-//        currentNameAuthor=arrayList.get(position).get("author");
-//        currentNameBook=arrayList.get(position).get("name");
-//        currentNamePublisher=arrayList.get(position).get("publisher");
-//        if (!receiver.isNetworkAvailable()) {
-//            if (dialog != null) dialog.dismiss();
-//            noInternet();
-//        } else {
-//            if (!Objects.requireNonNull(arrayList.get(position).get("name")).contains("Error")) {
-//                try {
-//                    (new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create())
-//                            .baseUrl("https://www.bkmkitap.com/").client(new OkHttpClient().newBuilder().build()).build())
-//                            .create(ApiService.class).getPrices(arrayList.get(position).get("individual")).enqueue(new Callback<String>() {
-//                        @SuppressLint("InflateParams")
-//                        @Override
-//                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-//                            if (response.isSuccessful() && response.body() != null) {
-//                                Document doc = Jsoup.parse(response.body());
-//                                StringBuilder sb = new StringBuilder();
-//                                @SuppressLint("InflateParams") View alertLayout;
-//                                if (getResources().getConfiguration().orientation==2) {
-//                                    alertLayout = getLayoutInflater().inflate(R.layout.custom_click3, null);
-//                                    coverLoading.setScaleType(ImageView.ScaleType.FIT_CENTER);
-//                                } else {
-//                                    coverLoading.setScaleType(ImageView.ScaleType.FIT_XY);
-//                                    alertLayout = getLayoutInflater().inflate(R.layout.custom_click2, null);
-//                                }
-//                                Picasso.get().load(arrayList.get(position).get("cover")).error(R.drawable.icons8error64).into((ImageView) alertLayout.findViewById(R.id.imageView));
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(ShowMoreActivity.this);
-//                                builder.setCancelable(true).setView(alertLayout);
-//                                dialogDetail = builder.create();
-//                                if (arrayList.get(position).get("name") != null && favList != null && favList.contains(arrayList.get(position).get("name"))) {
-//                                    Log.d("dialog","1");
-//                                    ((AlertDialog) dialogDetail).setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.see), (dialog, which) -> {
-//                                        if (!receiver.isNetworkAvailable()) noInternet();
-//                                        /*else if (getIntent().getStringExtra("book name") != null && getIntent().getStringExtra("book name").equals(currentNameBook)) {
-//                                            ((AlertDialog) dialogDetail).setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.see), (dialog2, which2) -> finish());
-//                                        }*/ else if (getIntent().getStringExtra("book name") != null && getIntent().getStringExtra("book name").equals(currentNameBook)) finish();
-//                                        else {
-//                                            if(dialogDetail != null) dialogDetail.dismiss();
-//                                            sugPosition=-1;
-//                                            createIntent(favSingleItem, favList.indexOf(arrayList.get(position).get("name")), "old");
-//                                        }
-//                                    });
-//                                } /*else if (getIntent().getStringExtra("book name") != null && getIntent().getStringExtra("book name").equals(currentNameBook)) {
-//                                    Log.d("dialog","2");
-//                                    ((AlertDialog) dialogDetail).setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.see), (dialog, which) -> { finish(); });
-//                                }*/ else{
-//                                    Log.d("dialog","3");
-//                                    ((AlertDialog) dialogDetail).setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.ara), (dialog, which) -> {
-//                                        if (!receiver.isNetworkAvailable()) noInternet();
-//                                        else if (arrayForSelectedSites == null || arrayForSelectedSites.isEmpty()) noSelection("ContentTouch");
-//                                        else  {
-//                                            if(dialogDetail != null) dialogDetail.dismiss();
-//                                            sugPosition=-1;
-//                                            String src = doc.select("div.fl.col-12 > iframe").attr("src");
-//                                            int index = src.indexOf("=");
-//                                            Intent intent = new Intent(ShowMoreActivity.this, PriceActivity.class);
-//                                            intent.putExtra("info", "new from Sugs");
-//                                            intent.putExtra("name", arrayList.get(position).get("name"));
-//                                            intent.putExtra("author", arrayList.get(position).get("author"));
-//                                            intent.putExtra("publisher", arrayList.get(position).get("publisher"));
-//                                            intent.putExtra("cover", arrayList.get(position).get("cover"));
-//                                            intent.putExtra("description", sb.toString());
-//                                            intent.putExtra("coverBig", arrayList.get(position).get("cover"));
-//                                            if (!src.substring(index + 1).isEmpty()) intent.putExtra("isbn", src.substring(index + 1));
-//                                            else if (!doc.select("div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(3) > span:nth-child(2)").text().isEmpty()) intent.putExtra("isbn", doc.select("div.col.col-6.centerBlock > div.col.cilt.col-12 > div:nth-child(3) > span:nth-child(2)").text());
-//                                            else intent.putExtra("isbn", doc.select("div.col.cilt.col-12 > div > span:nth-child(2)").text());
-//                                            intent.putExtra("individual", arrayList.get(position).get("individual"));
-//                                            intent.putExtra("volume", doc.select("div.col.cilt.col-12 > div:nth-child(1) > span:nth-child(2)").text());
-//                                            intent.putExtra("pages", doc.select("div.col.cilt.col-12 > div:nth-child(2) > span:nth-child(2)").text());
-//                                            startActivity(intent);
-//                                        }
-//                                    });
-//                                }
-//                                if(dialogDetail != null) dialogDetail.show();
-//                                if(dialogDetail != null) dialogDetail.setOnCancelListener(dialog -> sugPosition=-1);
-//                                final Button buttonAuthor = alertLayout.findViewById(R.id.buttonAuthor);
-//                                final Button buttonPublisher = alertLayout.findViewById(R.id.buttonPublisher);
-//                                final TextView textViewVolumeAndPage = alertLayout.findViewById(R.id.textViewVolumeAndPage);
-//                                String volume = doc.select("div.col.cilt.col-12 > div:nth-child(1) > span:nth-child(2)").text();
-//                                String pages = doc.select("div.col.cilt.col-12 > div:nth-child(2) > span:nth-child(2)").text();
-//                                if (volume.isEmpty() && pages.isEmpty()) textViewVolumeAndPage.setVisibility(View.GONE);
-//                                else if (volume.isEmpty()) textViewVolumeAndPage.setText(new StringBuilder().append(pages).append(" Sayfa"));
-//                                else if (pages.isEmpty()) textViewVolumeAndPage.setText(new StringBuilder().append(volume));
-//                                else textViewVolumeAndPage.setText(new StringBuilder().append(volume).append(", ").append(pages).append(" Sayfa"));
-//                                ((TextView) alertLayout.findViewById(R.id.textViewName)).setText(arrayList.get(position).get("name"));
-//                                if (!Objects.requireNonNull(arrayList.get(position).get("author")).isEmpty()) {
-//                                    buttonAuthor.setText(arrayList.get(position).get("author"));
-//                                    if(Objects.requireNonNull(getIntent().getStringExtra("current name")).equals(currentNameAuthor)) buttonAuthor.setTextColor(Color.GRAY);
-//                                } else buttonAuthor.setVisibility(View.GONE);
-//                                if (!Objects.requireNonNull(arrayList.get(position).get("publisher")).isEmpty()) {
-//                                    buttonPublisher.setText(arrayList.get(position).get("publisher"));
-//                                    if(Objects.requireNonNull(getIntent().getStringExtra("current name")).equals(currentNamePublisher)) buttonPublisher.setTextColor(Color.GRAY);
-//                                } else buttonPublisher.setVisibility(View.GONE);
-//                                for (Element table : doc.select("#productDetailTab")) { for (Element row : table.select("#productDetailTab > div > p")) { sb.append(row.text()).append("\n").append("\n"); }
-//                                }
-//                                TextView textDescription = alertLayout.findViewById(R.id.textDescription);
-//                                if(sb.toString().isEmpty()) {
-//                                    textDescription.setVisibility(View.GONE);
-//                                    (alertLayout.findViewById(R.id.view)).setVisibility(View.GONE);
-//                                    if(alertLayout.findViewById(R.id.layoutLeft)!=null)(alertLayout.findViewById(R.id.layoutLeft)).setLayoutParams(new LinearLayout.LayoutParams(0, -1, 2));
-//                                    if(alertLayout.findViewById(R.id.layoutRight)!=null) (alertLayout.findViewById(R.id.layoutRight)).setLayoutParams(new LinearLayout.LayoutParams(0, -1, 3));
-//                                } else {
-//                                    if(alertLayout.findViewById(R.id.layoutLeft)!=null)(alertLayout.findViewById(R.id.layoutLeft)).setLayoutParams(new LinearLayout.LayoutParams(0, -1, 1));
-//                                    if(alertLayout.findViewById(R.id.layoutRight)!=null) (alertLayout.findViewById(R.id.layoutRight)).setLayoutParams(new LinearLayout.LayoutParams(0, -1, 1));
-//                                    if(sb.toString().contains("*")) textDescription.setText(StringUtils.replace(sb.toString(),"\\*",""));
-//                                    else textDescription.setText(sb.toString());
-//                                }
-//                                ((TextView) alertLayout.findViewById(R.id.textDescription)).setMovementMethod(new ScrollingMovementMethod());
-//                                progressBar.setVisibility(View.GONE);
-//                                alertLayout.findViewById(R.id.imageView).setOnClickListener(v -> {
-//                                    Picasso.get().load(arrayList.get(position).get("cover")).error(R.drawable.icons8error64).into(coverLoading);
-//                                    coverLoading.setVisibility(View.VISIBLE);
-//                                    if(dialogDetail != null) dialogDetail.dismiss();
-//                                });
-//                                coverLoading.setOnClickListener(v -> {
-//                                    if(dialogDetail != null) dialogDetail.show();
-//                                    coverLoading.setVisibility(View.GONE);
-//                                });
-//                            } else {
-//                                Toast.makeText(ShowMoreActivity.this, "Lütfen tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
-//                                if(dialogDetail != null) dialogDetail.dismiss();
-//                                sugPosition=-1;
-//                            }
-//                        }
-//                        @Override
-//                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-//                            Toast.makeText(ShowMoreActivity.this, "Lütfen tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
-//                            if(dialogDetail != null) dialogDetail.dismiss();
-//                            sugPosition=-1;
-//                        }
-//                    });
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(ShowMoreActivity.this, "Lütfen tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
-//                    if(dialogDetail != null) dialogDetail.dismiss();
-//                    sugPosition=-1;
-//                }
-//            }
-//        }
-//    }
-
-
-//    public void more(View view) {
-//            if (!receiver.isNetworkAvailable()) noInternet();
-//            else { switch (view.getTag().toString()) {
-//                    case "moreAuthor": if(getIntent().getStringExtra("current name")!=null&&!currentNameAuthor.equals(getIntent().getStringExtra("current name"))) caseforMore("price",currentNameAuthor, "https://www.bkmkitap.com/arama?q="+currentNameAuthor); break;
-//                    case "morePublisher": if(getIntent().getStringExtra("current name")!=null&&!currentNamePublisher.equals(getIntent().getStringExtra("current name"))) caseforMore("price",currentNamePublisher, "https://www.bkmkitap.com/arama?q="+currentNamePublisher); break;
-//                }
-//            }
-//    }
     private void caseforMore(String info, String currentName, String currentLink) {
         Intent i;
         if(info.equals("home"))  {
@@ -616,9 +403,6 @@ public class ShowMoreActivity extends AppCompatActivity {
                             if (!connected) {
                                 connected = true;
                                 if (dialog != null && dialog.isShowing()) dialog.dismiss();
-//                                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
-//                                    if(!mAdView.isShown()) mAdView.loadAd(adRequest);
-//                                }
                                 if(!firstRun) load();
                             }
                             return true;
@@ -822,6 +606,7 @@ public class ShowMoreActivity extends AppCompatActivity {
                                     arrayList.remove(arrayList.size() - 1);
                                     arrayList.addAll(arrayListSpare);
                                     check("load", bookFinalAdapter);
+                                    recShowMore.getRecycledViewPool().clear();
                                     bookFinalAdapter.notifyDataChanged();
                                     arrayListSpare.clear();
                                     if (search == pages) {
@@ -839,7 +624,13 @@ public class ShowMoreActivity extends AppCompatActivity {
     private void check(String from, RecyclerView.Adapter adapter) {
         if(from.equals("text")) {
             count += 1;
-            if (count == all) adapter.notifyDataSetChanged();
-        } else adapter.notifyDataSetChanged();
+            if (count == all) {
+                recShowMore.getRecycledViewPool().clear();
+                adapter.notifyDataSetChanged();
+            }
+        } else {
+            recShowMore.getRecycledViewPool().clear();
+            adapter.notifyDataSetChanged();
+        }
     }
 }

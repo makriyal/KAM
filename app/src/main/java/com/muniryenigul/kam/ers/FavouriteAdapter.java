@@ -4,6 +4,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,53 +62,57 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
     }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder customViewHolder, int i) {
-        customViewHolder.siteText.setRotation(0);
-        customViewHolder.siteText.setText(searchedItems.get(i));
-        customViewHolder.siteText.setVisibility(View.VISIBLE);
-        customViewHolder.historyImage.setVisibility(View.GONE);
-        customViewHolder.progressBar.setVisibility(View.INVISIBLE);
-        if(from!=null&&from.equals("history")) {
-            customViewHolder.limitSpinner.setVisibility(View.GONE);
-            customViewHolder.historyImage.setVisibility(View.VISIBLE);
-            customViewHolder.switchControl.setVisibility(View.GONE);
-        } else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if(from!=null&&from.equals("control") && i==1) {
+        try {
+            customViewHolder.siteText.setRotation(0);
+            customViewHolder.siteText.setText(searchedItems.get(i));
+            customViewHolder.siteText.setVisibility(View.VISIBLE);
+            customViewHolder.historyImage.setVisibility(View.GONE);
+            customViewHolder.progressBar.setVisibility(View.INVISIBLE);
+            if(from!=null&&from.equals("history")) {
                 customViewHolder.limitSpinner.setVisibility(View.GONE);
-                customViewHolder.switchControl.setVisibility(View.VISIBLE);
-                if(favList.size() > 0  && detect.getBoolean("control", false/*true*/)) {
-                    customViewHolder.switchControl.setChecked(true);
-                    customViewHolder.switchControl.setEnabled(true);
-                    customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
-                } else {
-                    customViewHolder.switchControl.setChecked(false);
-                    customViewHolder.switchControl.setEnabled(false);
-                    customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.text_color));
-                }
-            } else if(from!=null&&from.equals("control") && i==2) {
-                customViewHolder.limitSpinner.setVisibility(View.GONE);
+                customViewHolder.historyImage.setVisibility(View.VISIBLE);
                 customViewHolder.switchControl.setVisibility(View.GONE);
-                if(favList.size() > 0 && detect.getBoolean("control", false/*true*/)) customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
-                else customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.text_color));
-            } else if(from!=null&&from.equals("control") && i==3) {
-                customViewHolder.switchControl.setVisibility(View.GONE);
-                customViewHolder.limitSpinner.setVisibility(View.VISIBLE);
-                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                customViewHolder.limitSpinner.setAdapter(spinnerAdapter);
-                customViewHolder.limitSpinner.setSelection(detect.getInt("limit", 0));
-                customViewHolder.limitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        detect.edit().putInt("limit", position).apply();
-                        detect.edit().putInt("selectedLimit", Integer.parseInt(parent.getItemAtPosition(position).toString())).apply();
+            } else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if(from!=null&&from.equals("control") && i==1) {
+                    customViewHolder.limitSpinner.setVisibility(View.GONE);
+                    customViewHolder.switchControl.setVisibility(View.VISIBLE);
+                    if(favList.size() > 0  && detect.getBoolean("control", false)) {
+                        customViewHolder.switchControl.setChecked(true);
+                        customViewHolder.switchControl.setEnabled(true);
+                        customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+                    } else {
+                        customViewHolder.switchControl.setChecked(false);
+                        customViewHolder.switchControl.setEnabled(false);
+                        customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.text_color));
                     }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) { }
-                });
-            } else {
-                customViewHolder.switchControl.setVisibility(View.GONE);
-                customViewHolder.limitSpinner.setVisibility(View.GONE);
-            }
-        } else customViewHolder.cardView.setVisibility(View.GONE);
+                } else if(from!=null&&from.equals("control") && i==2) {
+                    customViewHolder.limitSpinner.setVisibility(View.GONE);
+                    customViewHolder.switchControl.setVisibility(View.GONE);
+                    if(favList.size() > 0 && detect.getBoolean("control", false/*true*/)) customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+                    else customViewHolder.siteText.setTextColor(context.getResources().getColor(R.color.text_color));
+                } else if(from!=null&&from.equals("control") && i==3) {
+                    customViewHolder.switchControl.setVisibility(View.GONE);
+                    customViewHolder.limitSpinner.setVisibility(View.VISIBLE);
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    customViewHolder.limitSpinner.setAdapter(spinnerAdapter);
+                    customViewHolder.limitSpinner.setSelection(detect.getInt("limit", 0));
+                    customViewHolder.limitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            detect.edit().putInt("limit", position).apply();
+                            detect.edit().putInt("selectedLimit", Integer.parseInt(parent.getItemAtPosition(position).toString())).apply();
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) { }
+                    });
+                } else {
+                    customViewHolder.switchControl.setVisibility(View.GONE);
+                    customViewHolder.limitSpinner.setVisibility(View.GONE);
+                }
+            } else customViewHolder.cardView.setVisibility(View.GONE);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public int getItemCount() {

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteStatement;
@@ -173,176 +174,109 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        if (arrayListComparison != null && from == null) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comparison, null));
-        else if (feedItemList != null && feedItemList.equals(favSingleItem)) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null));
-        else if(from != null && from.equals("price")) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_sites_and_prices, null));
-        else if (from != null && from.equals("main")) {
-            if(i == 0 && favSingleItem.size() > 0) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null));
-            else return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category, viewGroup,false));
-        } else if (i == TYPE_ITEM) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_sugs, null));
-        else return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.progress_item, null));
+        try {
+            if (arrayListComparison != null && from == null) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.comparison, null));
+            else if (feedItemList != null && feedItemList.equals(favSingleItem)) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null));
+            else if(from != null && from.equals("price")) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_sites_and_prices, null));
+            else if (from != null && from.equals("main")) {
+                if(i == 0 && favSingleItem.size() > 0) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null));
+                else return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.category, viewGroup,false));
+            } else if (i == TYPE_ITEM) return new CustomViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_sugs, null));
+            else return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.progress_item, null));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.progress_item, null));
+        }
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder customViewHolder, int i) {
-        if(arrayListComparison != null && from == null) {
-            Log.d("onBindViewHolder","1");
-            if(arrayListComparison.get(i).getHowMuch()==null) {
-                ((CustomViewHolder) customViewHolder).bestSiteItem.setVisibility(View.GONE);
-                double color;
-                double min=0;
-                double max=arrayListComparison.size();
-                color=100*(i-min)/(max-min);
-                double r=(175 * color) / 100;
-                double g=(175 * (100 - color)) / 100;
-                double b=0;
-                ((CustomViewHolder) customViewHolder).textViewSite.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewPrice.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewCargo.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewTotalPrice.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewPayment.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewCreditCard.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewTransfer.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewPaypal.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewPayCash.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewPayCard.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewMore.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-                ((CustomViewHolder) customViewHolder).textViewInfo.setTextColor(Color.rgb((int)r,(int)g,(int)b));
-            } else {
-                ((CustomViewHolder) customViewHolder).bestSiteItem.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).bestSiteItem.setText(arrayListComparison.get(i).getHowMuch());
-            }
-            if(arrayListComparison.get(i).getSite()==null) ((CustomViewHolder) customViewHolder).textViewSite.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewSite.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewSite.setText(arrayListComparison.get(i).getSite());
-            }
-            if(arrayListComparison.get(i).getPrice()==null) ((CustomViewHolder) customViewHolder).textViewPrice.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewPrice.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewPrice.setText(arrayListComparison.get(i).getPrice());
-            }
-            if(arrayListComparison.get(i).getCargo()==null) ((CustomViewHolder) customViewHolder).textViewCargo.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewCargo.setVisibility(View.VISIBLE);
-                if(arrayListComparison.get(i).isFree()) ((CustomViewHolder) customViewHolder).textViewCargo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.free_shipping,0,0,0);
-                else ((CustomViewHolder) customViewHolder).textViewCargo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.truck,0,0,0);
-                String cargoText = arrayListComparison.get(i).getCargo();
-                if (cargoText.contains("Ücretsiz") && arrayListComparison.get(i).getCargo().contains("Hızlı")) ((CustomViewHolder) customViewHolder).textViewCargo.setText(StringUtils.replaceOnce(cargoText," || Hızlı Teslimat",""));
-                else if (cargoText.contains("Ücretsiz") && arrayListComparison.get(i).getCargo().contains("Express")) ((CustomViewHolder) customViewHolder).textViewCargo.setText(StringUtils.replaceOnce(cargoText," || Express Teslimat",""));
-                else ((CustomViewHolder) customViewHolder).textViewCargo.setText(cargoText);
-            }
-            if(arrayListComparison.get(i).getTotalPrice()==null) ((CustomViewHolder) customViewHolder).textViewTotalPrice.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewTotalPrice.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewTotalPrice.setText(StringUtils.join("Toplam : ",arrayListComparison.get(i).getTotalPrice()));
-            }
-            ((CustomViewHolder) customViewHolder).textViewPayment.setText(R.string.payment_methods);
-            if(!arrayListComparison.get(i).isHasCard()) ((CustomViewHolder) customViewHolder).textViewCreditCard.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewCreditCard.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewCreditCard.setText(StringUtils.join(context.getResources().getString(R.string.credit_card)," / ",context.getResources().getString(R.string.bank_card)));
-            }
-            if(!arrayListComparison.get(i).isHasTransfer()) ((CustomViewHolder) customViewHolder).textViewTransfer.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewTransfer.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewTransfer.setText(StringUtils.join(context.getResources().getString(R.string.transfer)," / ",context.getResources().getString(R.string.eft)));
-            }
-            if(!arrayListComparison.get(i).isHasPayPal()) ((CustomViewHolder) customViewHolder).textViewPaypal.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewPaypal.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewPaypal.setText(context.getResources().getString(R.string.payPal));
-            }
-            if(arrayListComparison.get(i).getPayAtTheDoorCash()==null) ((CustomViewHolder) customViewHolder).textViewPayCash.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewPayCash.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewPayCash.setText(arrayListComparison.get(i).getPayAtTheDoorCash());
-            }
-            if(arrayListComparison.get(i).getPayAtTheDoorCard()==null) ((CustomViewHolder) customViewHolder).textViewPayCard.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewPayCard.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewPayCard.setText(arrayListComparison.get(i).getPayAtTheDoorCard());
-            }
-            if(arrayListComparison.get(i).getOtherMethods()==null || arrayListComparison.get(i).getOtherMethods().equals("")|| arrayListComparison.get(i).getOtherMethods().equals("null")) ((CustomViewHolder) customViewHolder).textViewMore.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewMore.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewMore.setText(arrayListComparison.get(i).getOtherMethods());
-            }
-            if(arrayListComparison.get(i).getInfo()==null || arrayListComparison.get(i).getInfo().equals("null")|| arrayListComparison.get(i).getInfo().equals("")) ((CustomViewHolder) customViewHolder).textViewInfo.setVisibility(View.GONE); else {
-                ((CustomViewHolder) customViewHolder).textViewInfo.setVisibility(View.VISIBLE);
-                ((CustomViewHolder) customViewHolder).textViewInfo.setText(arrayListComparison.get(i).getInfo());
-            }
-        } else if(feedItemList!=null) {
-            ArrayList<HowMuchAndWhere> arrayListPrice = new ArrayList<>();
-            Picasso.get().load(feedItemList.get(i).getCover()).error(R.drawable./*error*/ic_virus).resize(/*133,200*/160, 240).into(((CustomViewHolder) customViewHolder).imageView, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
-                            ((CustomViewHolder) customViewHolder).siteText.setVisibility(View.VISIBLE);
-                            ((CustomViewHolder) customViewHolder).imageView.setVisibility(View.VISIBLE);
-                            try { database = context.openOrCreateDatabase(StringUtils.replace(feedItemList.get(i).getName(), "/", ""), MODE_PRIVATE, null);
-                                database.execSQL("CREATE TABLE IF NOT EXISTS data (site VARCHAR, price VARCHAR, url VARCHAR)");
-                                Cursor cursor = database.rawQuery("SELECT * FROM data", null);
-                                int siteIx = cursor.getColumnIndex("site");
-                                int priceIx = cursor.getColumnIndex("price");
-                                int urlIx = cursor.getColumnIndex("url");
-                                arrayListPrice.clear();
-                                if (cursor.moveToFirst()) { do { arrayListPrice.add(new HowMuchAndWhere(cursor.getString(siteIx), cursor.getString(priceIx), cursor.getString(urlIx))); } while (cursor.moveToNext()); }
-                                cursor.close();
-                                database.close();
-                            } catch (SQLException e) { e.printStackTrace(); }
-                            int same = 0;
-                            for (int s = 0; s < arrayListPrice.size(); s++) { if (arrayListPrice.get(s).getPrice().equals("¯\\_(ツ)_/¯") || arrayListPrice.get(s).getPrice().equals("ಠ_ಠ") || arrayListPrice.get(s).getPrice().equals("□")) same = same + 1; }
-                            if (same == arrayListPrice.size()) ((CustomViewHolder) customViewHolder).siteText.setText("¯\\_(ツ)_/¯");
-                            else {
-                                StringBuilder sb=new StringBuilder();
-                                sb.append(arrayListPrice.get(0).getSite());
-                                int counter=0;
-                                for (int s = 1; s < arrayListPrice.size(); s++) {
-                                    if (Integer.parseInt(arrayListPrice.get(s).getPrice().replaceAll("\\D", "0")) - Integer.parseInt(arrayListPrice.get(0).getPrice().replaceAll("\\D", "0"))==0) {
-                                        sb.append(" \n").append(arrayListPrice.get(s).getSite());
-                                        counter++;
-                                        if (counter == 2) {
-                                            sb.append(" \n").append(". . .");
-                                            break;
-                                        }
-                                    } else break;
-                                }
-                                ((CustomViewHolder) customViewHolder).siteText.setText(sb.toString());
-                                ((CustomViewHolder) customViewHolder).siteText.setMaxLines(counter+2);
-                            }
-                            if(!contextList.contains(feedItemList.get(i).getName())) ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
-                            else ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
-                            ((CustomViewHolder) customViewHolder).switchControl.setVisibility(View.GONE);
-                        }
-                        @Override
-                        public void onError(Exception e) { }
-                    });
-        } else if (arrayListInfoFinal != null && arrayListInfoFinal.size() != 0) {
-            if (arrayListInfoFinal.get(i).get("cover") != null && !arrayListInfoFinal.get(i).get("cover").isEmpty()) {
-                Picasso.get().load(arrayListInfoFinal.get(i).get("cover")).fit().centerCrop().error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView, new Callback() {
-                            @Override
-                            public void onSuccess() { ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE); }
-                            @Override
-                            public void onError(Exception e) {
-                                dismiss = false;
-                                ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
-                                ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                            }
-                        });
-            } else {
-                dismiss = false;
-                ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
-                ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                Picasso.get().load(R.drawable./*error*/ic_virus).error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView);
-            }
-        } else if(from != null & from.equals("price")) {
-            ((CustomViewHolder) customViewHolder).textSite.setText(arrayListComparison.get(i).getSite());
-            ((CustomViewHolder) customViewHolder).textPrice.setText(arrayListComparison.get(i).getPrice());
-        }  else if(from != null & from.equals("main")) {
-            if(/*i == 0 && */favSingleItem.size() > 0) {
-                for (int m = 0; m<favSingleItem.size(); m++) {
-                    ArrayList<HowMuchAndWhere> arrayListPrice = new ArrayList<>();
-                    try { Picasso.get().load(favSingleItem.get(i).
-                                getCover()).error(R.drawable./*error*/ic_virus).
-                                /*resize(*//*133,200*//*160, 240).*/
-                                into(((CustomViewHolder) customViewHolder).imageView,
-                                        new Callback() {
+        try {
+            if(arrayListComparison != null && from == null) {
+                Log.d("onBindViewHolder","1");
+                if(arrayListComparison.get(i).getHowMuch()==null) {
+                    ((CustomViewHolder) customViewHolder).bestSiteItem.setVisibility(View.GONE);
+                    double color;
+                    double min=0;
+                    double max=arrayListComparison.size();
+                    color=100*(i-min)/(max-min);
+                    double r=(175 * color) / 100;
+                    double g=(175 * (100 - color)) / 100;
+                    double b=0;
+                    ((CustomViewHolder) customViewHolder).textViewSite.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewPrice.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewCargo.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewTotalPrice.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewPayment.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewCreditCard.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewTransfer.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewPaypal.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewPayCash.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewPayCard.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewMore.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                    ((CustomViewHolder) customViewHolder).textViewInfo.setTextColor(Color.rgb((int)r,(int)g,(int)b));
+                } else {
+                    ((CustomViewHolder) customViewHolder).bestSiteItem.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).bestSiteItem.setText(arrayListComparison.get(i).getHowMuch());
+                }
+                if(arrayListComparison.get(i).getSite()==null) ((CustomViewHolder) customViewHolder).textViewSite.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewSite.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewSite.setText(arrayListComparison.get(i).getSite());
+                }
+                if(arrayListComparison.get(i).getPrice()==null) ((CustomViewHolder) customViewHolder).textViewPrice.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewPrice.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewPrice.setText(arrayListComparison.get(i).getPrice());
+                }
+                if(arrayListComparison.get(i).getCargo()==null) ((CustomViewHolder) customViewHolder).textViewCargo.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewCargo.setVisibility(View.VISIBLE);
+                    if(arrayListComparison.get(i).isFree()) ((CustomViewHolder) customViewHolder).textViewCargo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.free_shipping,0,0,0);
+                    else ((CustomViewHolder) customViewHolder).textViewCargo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.truck,0,0,0);
+                    String cargoText = arrayListComparison.get(i).getCargo();
+                    if (cargoText.contains("Ücretsiz") && arrayListComparison.get(i).getCargo().contains("Hızlı")) ((CustomViewHolder) customViewHolder).textViewCargo.setText(StringUtils.replaceOnce(cargoText," || Hızlı Teslimat",""));
+                    else if (cargoText.contains("Ücretsiz") && arrayListComparison.get(i).getCargo().contains("Express")) ((CustomViewHolder) customViewHolder).textViewCargo.setText(StringUtils.replaceOnce(cargoText," || Express Teslimat",""));
+                    else ((CustomViewHolder) customViewHolder).textViewCargo.setText(cargoText);
+                }
+                if(arrayListComparison.get(i).getTotalPrice()==null) ((CustomViewHolder) customViewHolder).textViewTotalPrice.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewTotalPrice.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewTotalPrice.setText(StringUtils.join("Toplam : ",arrayListComparison.get(i).getTotalPrice()));
+                }
+                ((CustomViewHolder) customViewHolder).textViewPayment.setText(R.string.payment_methods);
+                if(!arrayListComparison.get(i).isHasCard()) ((CustomViewHolder) customViewHolder).textViewCreditCard.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewCreditCard.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewCreditCard.setText(StringUtils.join(context.getResources().getString(R.string.credit_card)," / ",context.getResources().getString(R.string.bank_card)));
+                }
+                if(!arrayListComparison.get(i).isHasTransfer()) ((CustomViewHolder) customViewHolder).textViewTransfer.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewTransfer.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewTransfer.setText(StringUtils.join(context.getResources().getString(R.string.transfer)," / ",context.getResources().getString(R.string.eft)));
+                }
+                if(!arrayListComparison.get(i).isHasPayPal()) ((CustomViewHolder) customViewHolder).textViewPaypal.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewPaypal.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewPaypal.setText(context.getResources().getString(R.string.payPal));
+                }
+                if(arrayListComparison.get(i).getPayAtTheDoorCash()==null) ((CustomViewHolder) customViewHolder).textViewPayCash.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewPayCash.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewPayCash.setText(arrayListComparison.get(i).getPayAtTheDoorCash());
+                }
+                if(arrayListComparison.get(i).getPayAtTheDoorCard()==null) ((CustomViewHolder) customViewHolder).textViewPayCard.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewPayCard.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewPayCard.setText(arrayListComparison.get(i).getPayAtTheDoorCard());
+                }
+                if(arrayListComparison.get(i).getOtherMethods()==null || arrayListComparison.get(i).getOtherMethods().equals("")|| arrayListComparison.get(i).getOtherMethods().equals("null")) ((CustomViewHolder) customViewHolder).textViewMore.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewMore.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewMore.setText(arrayListComparison.get(i).getOtherMethods());
+                }
+                if(arrayListComparison.get(i).getInfo()==null || arrayListComparison.get(i).getInfo().equals("null")|| arrayListComparison.get(i).getInfo().equals("")) ((CustomViewHolder) customViewHolder).textViewInfo.setVisibility(View.GONE); else {
+                    ((CustomViewHolder) customViewHolder).textViewInfo.setVisibility(View.VISIBLE);
+                    ((CustomViewHolder) customViewHolder).textViewInfo.setText(arrayListComparison.get(i).getInfo());
+                }
+            } else if(feedItemList!=null) {
+                ArrayList<HowMuchAndWhere> arrayListPrice = new ArrayList<>();
+                Picasso.get().load(feedItemList.get(i).getCover()).error(R.drawable./*error*/ic_virus).resize(/*133,200*/160, 240).into(((CustomViewHolder) customViewHolder).imageView, new Callback() {
                             @Override
                             public void onSuccess() {
                                 ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
                                 ((CustomViewHolder) customViewHolder).siteText.setVisibility(View.VISIBLE);
                                 ((CustomViewHolder) customViewHolder).imageView.setVisibility(View.VISIBLE);
-                                try { database = context.openOrCreateDatabase(StringUtils.replace(favSingleItem.get(i).getName(), "/", ""), MODE_PRIVATE, null);
+                                try { database = context.openOrCreateDatabase(StringUtils.replace(feedItemList.get(i).getName(), "/", ""), MODE_PRIVATE, null);
                                     database.execSQL("CREATE TABLE IF NOT EXISTS data (site VARCHAR, price VARCHAR, url VARCHAR)");
                                     Cursor cursor = database.rawQuery("SELECT * FROM data", null);
                                     int siteIx = cursor.getColumnIndex("site");
@@ -357,42 +291,125 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                                 for (int s = 0; s < arrayListPrice.size(); s++) { if (arrayListPrice.get(s).getPrice().equals("¯\\_(ツ)_/¯") || arrayListPrice.get(s).getPrice().equals("ಠ_ಠ") || arrayListPrice.get(s).getPrice().equals("□")) same = same + 1; }
                                 if (same == arrayListPrice.size()) ((CustomViewHolder) customViewHolder).siteText.setText("¯\\_(ツ)_/¯");
                                 else {
-                                    StringBuilder sb=new StringBuilder();
-                                    sb.append(arrayListPrice.get(0).getSite());
-                                    int counter=0;
-                                    for (int s = 1; s < arrayListPrice.size(); s++) {
-                                        if (Integer.parseInt(arrayListPrice.get(s).getPrice().replaceAll("\\D", "0")) - Integer.parseInt(arrayListPrice.get(0).getPrice().replaceAll("\\D", "0"))==0) {
-                                            sb.append(" \n").append(arrayListPrice.get(s).getSite());
-                                            counter++;
-                                            if (counter == 2) {
-                                                sb.append(" \n").append(". . .");
-                                                break;
-                                            }
-                                        } else break;
+                                    try {
+                                        StringBuilder sb=new StringBuilder();
+                                        sb.append(arrayListPrice.get(0).getSite());
+                                        int counter=0;
+                                        for (int s = 1; s < arrayListPrice.size(); s++) {
+                                            if (Integer.parseInt(arrayListPrice.get(s).getPrice().replaceAll("\\D", "0")) - Integer.parseInt(arrayListPrice.get(0).getPrice().replaceAll("\\D", "0"))==0) {
+                                                sb.append(" \n").append(arrayListPrice.get(s).getSite());
+                                                counter++;
+                                                if (counter == 2) {
+                                                    sb.append(" \n").append(". . .");
+                                                    break;
+                                                }
+                                            } else break;
+                                        }
+                                        ((CustomViewHolder) customViewHolder).siteText.setText(sb.toString());
+                                        ((CustomViewHolder) customViewHolder).siteText.setMaxLines(counter+2);
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
                                     }
-                                    ((CustomViewHolder) customViewHolder).siteText.setText(sb.toString());
-                                    ((CustomViewHolder) customViewHolder).siteText.setMaxLines(counter+2);
                                 }
-                                if(contextList != null && !contextList.contains(feedItemList.get(i).getName())) ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
+                                if(!contextList.contains(feedItemList.get(i).getName())) ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
                                 else ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
                                 ((CustomViewHolder) customViewHolder).switchControl.setVisibility(View.GONE);
                             }
                             @Override
                             public void onError(Exception e) { }
                         });
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            } else if (arrayListInfoFinal != null && arrayListInfoFinal.size() != 0) {
+                if (arrayListInfoFinal.get(i).get("cover") != null && !arrayListInfoFinal.get(i).get("cover").isEmpty()) {
+                    Picasso.get().load(arrayListInfoFinal.get(i).get("cover")).fit().centerCrop().error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView, new Callback() {
+                                @Override
+                                public void onSuccess() { ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE); }
+                                @Override
+                                public void onError(Exception e) {
+                                    dismiss = false;
+                                    ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
+                                    ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                }
+                            });
+                } else {
+                    dismiss = false;
+                    ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
+                    ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    Picasso.get().load(R.drawable./*error*/ic_virus).error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView);
+                }
+            } else if(from != null & from.equals("price")) {
+                ((CustomViewHolder) customViewHolder).textSite.setText(arrayListComparison.get(i).getSite());
+                ((CustomViewHolder) customViewHolder).textPrice.setText(arrayListComparison.get(i).getPrice());
+            }  else if(from != null & from.equals("main")) {
+                if(/*i == 0 && */favSingleItem.size() > 0) {
+                    for (int m = 0; m<favSingleItem.size(); m++) {
+                        ArrayList<HowMuchAndWhere> arrayListPrice = new ArrayList<>();
+                        try { Picasso.get().load(favSingleItem.get(i).
+                                    getCover()).error(R.drawable.ic_virus).
+                                    into(((CustomViewHolder) customViewHolder).imageView,
+                                            new Callback() {
+                                @Override
+                                public void onSuccess() {
+                                    ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
+                                    ((CustomViewHolder) customViewHolder).siteText.setVisibility(View.VISIBLE);
+                                    ((CustomViewHolder) customViewHolder).imageView.setVisibility(View.VISIBLE);
+                                    try { database = context.openOrCreateDatabase(StringUtils.replace(favSingleItem.get(i).getName(), "/", ""), MODE_PRIVATE, null);
+                                        database.execSQL("CREATE TABLE IF NOT EXISTS data (site VARCHAR, price VARCHAR, url VARCHAR)");
+                                        Cursor cursor = database.rawQuery("SELECT * FROM data", null);
+                                        int siteIx = cursor.getColumnIndex("site");
+                                        int priceIx = cursor.getColumnIndex("price");
+                                        int urlIx = cursor.getColumnIndex("url");
+                                        arrayListPrice.clear();
+                                        if (cursor.moveToFirst()) { do { arrayListPrice.add(new HowMuchAndWhere(cursor.getString(siteIx), cursor.getString(priceIx), cursor.getString(urlIx))); } while (cursor.moveToNext()); }
+                                        cursor.close();
+                                        database.close();
+                                    } catch (SQLException e) { e.printStackTrace(); }
+                                    int same = 0;
+                                    for (int s = 0; s < arrayListPrice.size(); s++) { if (arrayListPrice.get(s).getPrice().equals("¯\\_(ツ)_/¯") || arrayListPrice.get(s).getPrice().equals("ಠ_ಠ") || arrayListPrice.get(s).getPrice().equals("□")) same = same + 1; }
+                                    if (same == arrayListPrice.size()) ((CustomViewHolder) customViewHolder).siteText.setText("¯\\_(ツ)_/¯");
+                                    else {
+                                        try {
+                                            StringBuilder sb=new StringBuilder();
+                                            sb.append(arrayListPrice.get(0).getSite());
+                                            int counter=0;
+                                            for (int s = 1; s < arrayListPrice.size(); s++) {
+                                                if (Integer.parseInt(arrayListPrice.get(s).getPrice().replaceAll("\\D", "0")) - Integer.parseInt(arrayListPrice.get(0).getPrice().replaceAll("\\D", "0"))==0) {
+                                                    sb.append(" \n").append(arrayListPrice.get(s).getSite());
+                                                    counter++;
+                                                    if (counter == 2) {
+                                                        sb.append(" \n").append(". . .");
+                                                        break;
+                                                    }
+                                                } else break;
+                                            }
+                                            ((CustomViewHolder) customViewHolder).siteText.setText(sb.toString());
+                                            ((CustomViewHolder) customViewHolder).siteText.setMaxLines(counter+2);
+                                        } catch (NumberFormatException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if(contextList != null && !contextList.contains(feedItemList.get(i).getName())) ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
+                                    else ((CustomViewHolder) customViewHolder).cv.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+                                    ((CustomViewHolder) customViewHolder).switchControl.setVisibility(View.GONE);
+                                }
+                                @Override
+                                public void onError(Exception e) { }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                } else {
+                    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) ((CustomViewHolder) customViewHolder).imageView.setBackgroundDrawable(categoryList.get(i).getDrawable());
+                    else ((CustomViewHolder) customViewHolder).imageView.setBackground(categoryList.get(i).getDrawable());
+                    if(((CustomViewHolder) customViewHolder).textSite != null) ((CustomViewHolder) customViewHolder).textSite.setText(categoryList.get(i).getCategoryName());
                 }
             } else {
-                if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) ((CustomViewHolder) customViewHolder).imageView.setBackgroundDrawable(categoryList.get(i).getDrawable());
-                else ((CustomViewHolder) customViewHolder).imageView.setBackground(categoryList.get(i).getDrawable());
-                if(((CustomViewHolder) customViewHolder).textSite != null) ((CustomViewHolder) customViewHolder).textSite.setText(categoryList.get(i).getCategoryName());
+                ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
+                ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                Picasso.get().load(R.drawable./*error*/ic_virus).error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView);
             }
-        } else {
-            ((CustomViewHolder) customViewHolder).progressBar.setVisibility(View.INVISIBLE);
-            ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            Picasso.get().load(R.drawable./*error*/ic_virus).error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
         }
     }
     @Override
@@ -739,7 +756,10 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (dialog != null && dialog.isShowing()) dialog.dismiss();
                 arrayListComparison.get(position).setPrice("¯\\_(ツ)_/¯");
                 sortNumeric();
-                synchronized(SuggestionAdapter.this){ SuggestionAdapter.this.notifyDataSetChanged(); }
+                synchronized(SuggestionAdapter.this){
+                    recyclerView.getRecycledViewPool().clear();
+                    SuggestionAdapter.this.notifyDataSetChanged();
+                }
                 askToUpdate = true;
                 try {
                     for(HowMuchAndWhere h : arrayListComparison) {
@@ -767,7 +787,10 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     else if(editText2.getText().length() == 1) arrayListComparison.get(position).setPrice(StringUtils.join(editText1.getText().toString(),",",editText2.getText().toString(),"0"," TL"));
                     else arrayListComparison.get(position).setPrice(StringUtils.join(editText1.getText().toString(),",",StringUtils.substring(editText2.getText().toString(),0,2)," TL"));
                     sortNumeric();
-                    synchronized(SuggestionAdapter.this){ SuggestionAdapter.this.notifyDataSetChanged(); }
+                    synchronized(SuggestionAdapter.this){
+                        recyclerView.getRecycledViewPool().clear();
+                        SuggestionAdapter.this.notifyDataSetChanged();
+                    }
                     askToUpdate = true;
                     try {
                         for(HowMuchAndWhere h : arrayListComparison) {
@@ -784,17 +807,21 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
         }
         private void sortNumeric() {
-            Collections.sort(arrayListComparison, new Comparator<HowMuchAndWhere>() {
-                @Override
-                public int compare(HowMuchAndWhere o1, HowMuchAndWhere o2) { return extractInt(o1.getPrice()) - extractInt(o2.getPrice()); }
-                int extractInt(String s) {
-                    if (s.isEmpty()) s = "9999999";
-                    else if (s.equals("ಠ_ಠ")) s = "99999999";
-                    else if (s.equals("□")) s = "999999999";
-                    else s = s.replace("¯\\_(ツ)_/¯", "999999").replaceAll("\\D", "");
-                    return s.isEmpty() ? 0 : Integer.parseInt(s);
-                }
-            });
+            try {
+                Collections.sort(arrayListComparison, new Comparator<HowMuchAndWhere>() {
+                    @Override
+                    public int compare(HowMuchAndWhere o1, HowMuchAndWhere o2) { return extractInt(o1.getPrice()) - extractInt(o2.getPrice()); }
+                    int extractInt(String s) {
+                        if (s.isEmpty()) s = "9999999";
+                        else if (s.equals("ಠ_ಠ")) s = "99999999";
+                        else if (s.equals("□")) s = "999999999";
+                        else s = s.replace("¯\\_(ツ)_/¯", "999999").replaceAll("\\D", "");
+                        return s.isEmpty() ? 0 : Integer.parseInt(s);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         private void createIntentFinalDetailFinal(ArrayList<HashMap<String, String>> arrayList, int position, String way) {
             if (arrayList != null && !arrayList.get(position).get("name").contains("Error")) {

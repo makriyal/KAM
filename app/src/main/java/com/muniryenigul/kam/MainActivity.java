@@ -470,6 +470,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case "text":
                 count += 1;
                 if (count == all) {
+                    publisherFilter.getRecycledViewPool().clear();
+                    authorFilter.getRecycledViewPool().clear();
                     publisherFilterAdapter.notifyDataChanged();
                     authorFilterAdapter.notifyDataChanged();
                     filterLine.setVisibility(View.VISIBLE);
@@ -782,8 +784,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchedRecView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         searchedRecView.scheduleLayoutAnimation();
         bookFinalAdapter = new BookFinalAdapter(this, arrayListInfoFinal);
-        publisherFilterAdapter = new BookFinalAdapter(this, publisherFilterList, publisherIDsList, "filter","filter2");
-        authorFilterAdapter = new BookFinalAdapter(this, authorFilterList, authorIDsList,"filter","filter2");
+        publisherFilterAdapter = new BookFinalAdapter(this, publisherFilterList, publisherIDsList, "filter");
+        authorFilterAdapter = new BookFinalAdapter(this, authorFilterList, authorIDsList,"filter");
         bookFinalAdapter.setLoadMoreListener(() -> listView.post(this::loadMore));
         listView.setHasFixedSize(true);
 
