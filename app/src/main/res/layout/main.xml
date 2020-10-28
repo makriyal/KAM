@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:descendantFocusability="beforeDescendants"
+    android:longClickable="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/upLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/outer_searchLayout"
+        android:layout_marginTop="-16dp"
+        android:orientation="vertical">
+        <com.muniryenigul.kam.utils.LockableNestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/linLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+
+                android:orientation="vertical"
+                android:paddingTop="16dp"
+                android:paddingBottom="4dp">
+                <LinearLayout
+                    android:id="@+id/favLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:longClickable="true"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="4dp"
+                        android:orientation="horizontal"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
+
+                        <RelativeLayout
+                            android:id="@+id/layoutFavText"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/favText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:text="@string/favoriler"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                app:fontFamily="@font/my_font_family" />
+                            <!--android:textStyle="bold|italic"-->
+                            <Button
+                                android:id="@+id/deleteAllFavs"
+                                android:layout_width="32dp"
+                                android:layout_height="38dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginEnd="12dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_toStartOf="@+id/findOptimumForAll"
+                                android:background="@drawable/deletedocument"
+                                android:onClick="deleteAllFavs" />
+
+                            <Button
+                                android:id="@+id/findOptimumForAll"
+                                android:layout_width="34dp"
+                                android:layout_height="38dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="3dp"
+                                android:background="@drawable/datasheet"
+                                android:onClick="findOptimum"
+                                android:tag="findOptimumForAll" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/horRecView"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp"
+                            android:padding="8dp"
+                            android:scrollbars="none" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutScience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreScience">
+
+                    <TextView
+                        android:id="@+id/bilimText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/bilim_muhendislik"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_bio_technology" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutSinav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreSinav">
+
+                    <TextView
+                        android:id="@+id/sinavText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/sinavlara_hazirlik"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_education" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutEdebiyat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreEdebiyat">
+
+                    <TextView
+                        android:id="@+id/edebiyatText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/edebiyat"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_reading" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutHukuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreHukuk">
+
+                    <TextView
+                        android:id="@+id/hukukText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/hukuk"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_shaking_hands" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutFelsefe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreFelsefe">
+
+                    <TextView
+                        android:id="@+id/felsefeText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/felsefe"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_personal_growth" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutEkonomi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreEkonomi">
+
+                    <TextView
+                        android:id="@+id/ekonomiText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/ekonomi"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_financial_struggle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutSanatMimarlik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreSanat">
+
+                    <TextView
+                        android:id="@+id/sanatMimarlikText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/sanat_mimarlik"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_ar" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutSosyoloji"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreSosyoloji">
+
+                    <TextView
+                        android:id="@+id/sosyolojiText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/sosyoloji"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_abstract_brainstorm" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutPolitika"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="morePolitika">
+
+                    <TextView
+                        android:id="@+id/politikaText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/politika"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_abstract_no_comments" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutTarih"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreTarih">
+
+                    <TextView
+                        android:id="@+id/tarihText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/tarih"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_library" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutBilgisayarMobil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreBilgisayarMobil">
+
+                    <TextView
+                        android:id="@+id/bilgisayarMobilText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/bilgisayar_mobil"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_abstract_working_process" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutCocuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreCocuk">
+
+                    <TextView
+                        android:id="@+id/cocukText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/cocuk"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_present" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutSaglik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreSaglik">
+
+                    <TextView
+                        android:id="@+id/saglikText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/saglik"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_hug" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutHobi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreHobi">
+
+                    <TextView
+                        android:id="@+id/hobiText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/hobi"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_hobby" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutMedya"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreMedya">
+
+                    <TextView
+                        android:id="@+id/medyaText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/medya"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_media" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutSpor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreSpor">
+
+                    <TextView
+                        android:id="@+id/sporText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/spor"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_sport" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutTurizm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_not_border"
+                    android:onClick="more"
+                    android:orientation="vertical"
+                    android:tag="moreTurizm">
+
+                    <TextView
+                        android:id="@+id/turizmText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="4dp"
+                        android:text="@string/gezi"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/my_font_family" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_travel" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.muniryenigul.kam.utils.LockableNestedScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/outer_searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_solid_colored_border"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingLeft="6dp"
+        android:paddingTop="8dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/searchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menuButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0"
+                android:background="@drawable/menu"
+                android:onClick="drawerMenu" />
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:iconifiedByDefault="false"
+                android:singleLine="true"
+                android:textSize="16sp" />
+            <!--
+            app:searchIcon="@drawable/search"-->
+
+            <!--<Button
+                android:id="@+id/closeButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0"
+                android:background="@drawable/cancel"
+                android:longClickable="true"
+                android:visibility="gone"/>-->
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0"
+                android:visibility="gone"/>
+            <Button
+                android:id="@+id/voiceButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0"
+                android:background="@drawable/microphone"
+                android:longClickable="true"
+                android:onClick="voice" />
+
+            <Button
+                android:id="@+id/barcodeButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0"
+                android:background="@drawable/barcode_2"
+                android:onClick="barcodeScan" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/outer_contextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/colorPrimaryDark"
+        android:baselineAligned="true"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:visibility="gone"
+        app:elevation="16dp">
+
+        <Button
+            android:id="@+id/backContext"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/cancel"
+            android:onClick="backContext" />
+
+        <TextView
+            android:id="@+id/howManySelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/backContext"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/selectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/howManySelected"
+            android:theme="@style/WhiteCheck"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/deleteMultiple"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/findOptimum"
+            android:background="@drawable/deletedocument"
+            android:onClick="deleteMultiple" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/deleteMultiple"
+            android:background="@drawable/update"
+            android:onClick="update"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/findOptimum"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/datasheet"
+            android:onClick="findOptimum"
+            android:tag="findOptimumForSelecteds" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/shadowImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/outer_searchLayout"
+        android:adjustViewBounds="true"
+        android:background="@color/colorWhite"
+        android:clickable="true"
+        android:contentDescription="@string/golge"
+        android:focusable="true"
+        android:onClick="shadow"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:scaleType="center"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/shadowImageForContext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/outer_searchLayout"
+        android:adjustViewBounds="true"
+        android:background="#667F7D9C"
+        android:clickable="true"
+        android:contentDescription="@string/golge"
+        android:focusable="true"
+        android:onClick="shadowForContext"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/outer_searchLayout"
+        android:background="@color/colorWhite"
+        android:visibility="gone"
+        android:paddingBottom="2dp"/>
+
+    <View
+        android:layout_below="@+id/listView"
+        android:id="@+id/filterLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:visibility="gone"
+        android:background="@color/colorPrimaryDark"
+        tools:ignore="TooManyViews" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/listView"
+        android:layout_marginTop="2dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/publisherFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite" />
+            <View
+                android:id="@+id/view2"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/authorFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/searchedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@+id/outer_searchLayout"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginEnd="6dp"
+        android:background="@color/transparent"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:elevation="8dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchedRecView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_not_border"
+            android:padding="6dp"
+            android:visibility="gone"
+            app:elevation="8dp" />
+    </LinearLayout>
+</RelativeLayout>

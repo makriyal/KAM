@@ -1,0 +1,1902 @@
+﻿{
+  "1001 KİTAP": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "PTT Kargo": 11.5
+      },
+      "pay_at_the_door_cash": 3.5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kapıda Nakit"
+      },
+      "info": "Sadece PTT Kargo ile kapıda nakit ödeme yapılabiliyor."
+    }
+  ],
+  "724kitapal": [
+    {
+      "threshold": 99,
+      "cargo": {
+        "Yurtiçi Kargo": 6.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "ADA": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "unspecified": null
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Sanal POS"
+      },
+      "info": "Sadece Sanal POS ile ödeme yapılabiliyor."
+    }
+  ],
+  "ALFA": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 8.5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "alkitap": [
+    {
+      "threshold": 70,
+      "cargo": {
+        "MNG Kargo": 5.9
+      },
+      "pay_at_the_door_cash": {
+        "MNG Kargo": 6
+      },
+      "pay_at_the_door_card": {
+        "MNG Kargo": 7
+      },
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "ALOKİTABEVİ": [
+    {
+      "threshold": {
+        "Aras Kargo": 100,
+        "Yurtiçi Kargo": 150
+      },
+      "cargo": {
+        "Aras Kargo": 6,
+        "Yurtiçi Kargo": 8
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 7.5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Kapıda ödemelerde alt limit gözetilmemektedir."
+    }
+  ],
+  "alternatifkitap": [
+    {
+      "threshold": 60,
+      "cargo": {
+        "Aras Kargo": 3.5
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "amazon": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "Standart Teslimat": 4.9,
+        "Express Teslimat": 7.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "AperatifKitap": [
+    {
+      "threshold": 60,
+      "cargo": {
+        "Aras Kargo": 3.95
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "Arkadaş Kitabevi": [
+    {
+      "threshold": 60,
+      "cargo": {
+        "unspecified": 6
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Hediye Çeki"
+      },
+      "info": null
+    }
+  ],
+  "atlaskitap": [
+    {
+      "threshold": {
+        "Bireysel Üye": 50,
+        "Ticari Üye": 139
+      },
+      "cargo": {
+        "Aras Kargo": 5,
+        "Yurtiçi Kargo": 5
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Posta Çeki"
+      },
+      "info": null
+    }
+  ],
+  "avantajkitap": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "Aras Kargo": 6
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Babil": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Banada Kitap": [
+    {
+      "threshold": 70,
+      "cargo": {
+        "Sürat Kargo": 7.9,
+        "PTT Kargo": 7.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "başarı DAĞITIM": [
+    {
+      "threshold": null,
+      "cargo": null,
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": null,
+      "info": null
+    }
+  ],
+  "Benli Kitap": [
+    {
+      "threshold": 120,
+      "cargo": {
+        "UPS Kargo": 4.9,
+        "PTT Kargo": 4.99
+      },
+      "pay_at_the_door_cash": {
+        "UPS Kargo": 4,
+        "PTT Kargo": 3
+      },
+      "pay_at_the_door_card": {
+        "UPS Kargo": 7
+      },
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "UPS Kargo'nun, Kapıda Nakit ve Kapıda Kredi Kartı ile ödeme aralığı 7 - 100 TL'dir."
+    }
+  ],
+  "bkmkitap": [
+    {
+      "threshold": 999999,
+      "cargo": {
+        "PTT Kargo": 5.99,
+        "MNG Kargo": 9.99
+      },
+      "pay_at_the_door_cash": 6.99,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express",
+        "4": "iyzico"
+      },
+      "info": "Tüm siparişlerde kargo 2 TL. \n 29,90 TL\n"
+    }
+  ],
+  "çamlıca kitap": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "unspecified": 4.99
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "çocuklara kitap": [
+    {
+      "threshold": 200,
+      "cargo": {
+        "unspecified": 8.9
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "D&R": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Standart Teslimat": 4.99,
+        "Hızlı Teslimat": 7.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express",
+        "4": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "DİLEKKİTAP": [
+    {
+      "threshold": 99,
+      "cargo": {
+        "MNG Kargo": 7
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale / EFT ile verilen siparişlerde %2 indirim! \nKapıda ödeme 30,00 TL - 5.000,00 TL aralığındaki siparişlerde geçerlidir."
+    }
+  ],
+  "eflatun KİTAP": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "50-": {
+          "PTT Kargo": 7.5,
+          "MNG Kargo": 7.5
+        },
+        "50-75": {
+          "PTT Kargo": 2.5,
+          "MNG Kargo": 2.5
+        }
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 6,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Eganba": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.99,
+        "Yurtiçi Kargo": 7.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "eğitim kitap": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "unspecified": 10
+      },
+      "pay_at_the_door_cash": 10,
+      "pay_at_the_door_card": 10,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "EĞİTİM MARKET": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Sürat Kargo": 7
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "EKİN": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": 9,
+      "pay_at_the_door_card": 9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "elitkitap": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale ile ödeme %2 indirimli."
+    }
+  ],
+  "EREN Kitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": "Uygulamada"
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": "Kargo ücreti 50 TL üzeri spiarişlerde %10, 75 TL üzeri siparişlerde %20 indirimli.\nKredi Kartıyla 3D ödeme, 100 TL üzeri alışverişlerde geçerli."
+    }
+  ],
+  "EVRENSEL KİTABEVİ": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 3.99
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express",
+        "4": "Garanti Pay"
+      },
+      "info": "Ankara Kızılay Şubesinden teslimat : 0.01TL"
+    }
+  ],
+  "fatihkitap": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "Yurtiçi Kargo": 10.99,
+        "UPS Kargo": 21.63
+      },
+      "pay_at_the_door_cash": {
+        "Yurtiçi Kargo": 10.45
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "FİDAN KİTAP": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "PTT Kargo": 1,
+        "Aras Kargo": 8.90
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Gazi Kitabevi": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 8,
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Halk Kitabevi": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aksay Dağıtım": 11
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "harmankitap": [
+    {
+      "threshold": 85,
+      "cargo": {
+        "Yurtiçi Kargo": 5
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Hazırlık Kitap": [
+    {
+      "threshold": 90,
+      "cargo": {
+        "Yurtiçi Kargo": 9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "HEMENKİTAP": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "unspecified": 8
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "hepsikitap": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "Aras Kargo": 5
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "HERMES": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "unspecified": 5
+      },
+      "pay_at_the_door_cash": 4.72,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Hipokrat Kitabevi": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 6
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 6,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %2 indirimli."
+    }
+  ],
+  "idefix": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Standart Teslimat": 4.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express"
+      },
+      "info": null
+    }
+  ],
+  "İLAHİYAT VAKFI": [
+    {
+      "threshold": 200,
+      "cargo": {
+        "unspecified": 9.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "ilkNokta": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 10
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "İMGE kitabevi": [
+    {
+      "threshold": 190,
+      "cargo": {
+        "Yurtiçi Kargo": 7
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "İNDEKSKİTAP": [
+    {
+      "threshold": 70,
+      "cargo": {
+        "PTT Kargo": 8.9,
+        "MNG Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 6.9,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "İNKILÂP": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 4.99
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Garanti Pay",
+        "3": "BKM Express"
+      },
+      "info": null
+    }
+  ],
+  "İNSANCIL": [
+    {
+      "threshold": 30,
+      "cargo": {
+        "Yurtiçi Kargo": 7
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "isemkitap": [
+    {
+      "threshold": 70,
+      "cargo": {
+        "Yurtiçi Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 7.9,
+      "pay_at_the_door_card": 7.9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "İSTANBUL KİTAPÇISI": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 7.99,
+        "Aras Kargo": 7.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "İŞLER Kitabevleri": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "unspecified": 10
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "KABALCI": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "Sürat Kargo": 5.9
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Kariyer Kitapları": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 4
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %2 indirimli."
+    }
+  ],
+  "KELEPİR": [
+    {
+      "threshold": 30,
+      "cargo": {
+        "unspecified": 5
+      },
+      "pay_at_the_door_cash": 7.5,
+      "pay_at_the_door_card": 7.5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kidega": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.9
+      },
+      "pay_at_the_door_cash": 9.9,
+      "pay_at_the_door_card": 9.9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "125 TL ve üzeri alışverişlerde 50 ml'lik el dezenfektanı hediye."
+    }
+  ],
+  "kitabevimiz": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "MNG Kargo": 6,
+        "PTT Kargo": 7
+      },
+      "pay_at_the_door_cash": {
+        "PTT Kargo": 7
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitap365": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 8.9
+      },
+      "pay_at_the_door_cash": {
+        "Aras Kargo": 7.9
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "kitapaktif": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 6.9,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "150 TL'LİK ALIŞVERİŞE NUMBERONE ENGLİSH 20 SAAT ONLİNE İNGİLİZCE EĞİTİMİ ÜRÜNÜ BEDAVA.\nSEPETİNİZE PUAN YAYINLARI KİTABI EKLEYİN KARGO ÜCRETİ ÖDEMEYİN"
+    }
+  ],
+  "kitapalalim": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 5
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapaloku": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Sürat Kargo": 9.9,
+        "Aras Kargo": 11.8
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "KİTAPAMBARI": [
+    {
+      "threshold": 125,
+      "cargo": {
+        "Aras Kargo": 6.65
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %2 indirimli"
+    }
+  ],
+  "Kitapbende": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "MNG Kargo": 10
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapbir": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "MNG Kargo": 8
+      },
+      "pay_at_the_door_cash": 8,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Kapıda Nakit Ödeme 2000 TL'ye kadar geçerlidir."
+    }
+  ],
+  "kitapbudur": [
+  {
+    "threshold": 0,
+    "cargo": {
+      "Yurtiçi Kargo": 0,
+      "Aras Kargo": 7
+    },
+    "pay_at_the_door_cash": 7,
+    "pay_at_the_door_card": null,
+    "payment_method": {
+      "1": "Kredi Kartı / Banka Kartı"
+    },
+    "info": "Sepette %5 indirim."
+  }
+],
+  "kitap bulut": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "MNG Kargo": 9.90
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapburada": [
+    {
+      "threshold": 69,
+      "cargo": {
+        "Yurtiçi Kargo": 7.1,
+        "Aras Kargo": 7.1,
+        "PTT Kargo": 9
+      },
+      "pay_at_the_door_cash": {
+        "Yurtiçi Kargo": 3.9
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "IYZICO"
+      },
+      "info": null
+    }
+  ],
+  "Kitap Denizi": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 8
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapesatis": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "UPS Kargo": 8,
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Kapıda Nakit ve Kapıda Kredi Kartı İle Ödeme, 30 TL ve üzeri alışverişlerde geçerlidir."
+    }
+  ],
+  "kitap fırsatı": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 6.9
+      },
+      "pay_at_the_door_cash": 6.9,
+      "pay_at_the_door_card": 6.9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "Kitap Koala": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 10.9,
+        "Yurtiçi Kargo": 12.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "KİTAPKOLİK": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "MNG Kargo": 5
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapmatik": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 8.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Kitap Müptelası": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "PTT Kargo": 6.80,
+        "Yurtiçi Kargo": 6.9,
+        "MNG Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 6.25,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapSAHAF": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 9.5
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "KİTAPSAN": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Kitap Sarayı": [
+    {
+      "threshold": 90,
+      "cargo": {
+        "UPS Kargo": 7.9
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 6,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "BKM Express"
+      },
+      "info": null
+    }
+  ],
+  "kitapseç": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.9,
+        "PTT Kargo": 7.9,
+        "Yurtiçi Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 7.9,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitapsepeti": [
+    {
+      "threshold": 95,
+      "cargo": {
+        "MNG Kargo": 5,
+        "Aras Kargo": 11.9,
+        "PTT Kargo": 14.9
+      },
+      "pay_at_the_door_cash": {
+        "MNG Kargo": 8.9
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitap sihirbazı": [
+    {
+      "threshold": 80,
+      "cargo": {
+        "MNG Kargo": 9
+      },
+      "pay_at_the_door_cash": 9,
+      "pay_at_the_door_card": 9,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": {
+        "1": "Havale %3 indirimli.",
+        "2": "İzmit mağazasından teslimat mevcut.",
+        "3": "Kapıda nakit ödeme 15 TL ve üzeri alışverişlerde geçerli."
+      }
+    }
+  ],
+  "KitapStore": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 7,
+        "PTT Kargo": 12
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "kitap ve kitap": [
+    {
+      "threshold": 175,
+      "cargo": {
+        "Yurtiçi Kargo": 11.99
+      },
+      "pay_at_the_door_cash": 10.45,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Kitapyurdu": [
+    {
+      "threshold": 40,
+      "cargo": {
+        "PTT Kargo": 4.91,
+        "MNG Kargo": 5.82,
+        "UPS Kargo": 7.43,
+        "Yurtiçi Kargo": 8.10,
+        "Aras Kargo": 8.10
+      },
+      "pay_at_the_door_cash": {
+        "UPS Kargo": 2.49,
+        "Yurtiçi Kargo": 5.90,
+        "MNG Kargo": 7.08
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express",
+        "4": "Posta Çeki"
+      },
+      "info": "\"Teslim Noktalarında hem kargo ücreti ödemeyin, hem de ekstra puan kazanın!\"\n\n(Ankara, Antalya, Bursa, Eskişehir, Gaziantep, İstanbul, İzmir, Sakarya, Samsun, Trabzon)"
+    }
+  ],
+  "kitapzen": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 4.49
+      },
+      "pay_at_the_door_cash": {
+        "Aras Kargo": 7
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": {
+        "1": "Havale %1 indirimli.",
+        "2": "150 TL üzeri siparişlerde %5 indirim."
+      }
+    }
+  ],
+  "kpsskitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "KPSSstore": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 8,
+        "Aras Kargo": 8
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Kapıda ödemeler 30 TL üzeri siparişlerde geçerlidir."
+    }
+  ],
+  "legalkitabevi": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "Aras Kargo": 9.5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %5 indirimli."
+    }
+  ],
+  "LİMON kitabevi": [
+    {
+      "threshold": 60,
+      "cargo": {
+        "MNG Kargo": 5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "maksimumkitap": [
+    {
+      "threshold": {
+        "Yurtiçi Kargo": 80,
+        "PTT Kargo": 85,
+        "MNG Kargo": 90
+      },
+      "cargo": {
+        "Yurtiçi Kargo": 6.9,
+        "PTT Kargo": 6.9,
+        "MNG Kargo": 6.9
+      },
+      "pay_at_the_door_cash": {
+        "Yurtiçi Kargo": 8,
+        "PTT Kargo": 8,
+        "MNG Kargo": 9
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "millet kitabevi": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Sürat Kargo": 12
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "nezih": [
+    {
+      "threshold": 95,
+      "cargo": {
+        "unspecified": 9.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express",
+        "4": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "NOBEL KİTAP": [
+    {
+      "threshold": 30,
+      "cargo": {
+        "unspecified": 5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "odakitap": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7.99,
+        "Yurtiçi Kargo": 7.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "OKUYAN BOĞA": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "MNG Kargo": 8.9,
+        "Yurtiçi Kargo": 8.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %1 indirimli."
+    }
+  ],
+  "PALME KİTABEVİ": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "MNG Kargo": 7.5,
+        "Aras Kargo": 7.5,
+        "Yurtiçi Kargo": 7.5
+      },
+      "pay_at_the_door_cash": {
+        "MNG Kargo": 7.5
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "paNdora": [
+    {
+      "threshold": 200,
+      "cargo": {
+        "MNG Kargo": 9.5,
+        "Aras Kargo": 11,
+        "Yurtiçi Kargo": 11
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "BKM Express"
+      },
+      "info": "Teslim alınabilecek şubeler\nPandora Kitabevi – Nişantaşı : Vali Konağı Cad. No: 5 (Askeri Müze karşısı)"
+    }
+  ],
+  "PEGEM": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "MNG Kargo": 7,
+        "Yurtiçi Kargo": 7
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "KKTC'ye, 100 TL ve üzeri siparişler Yurtiçi Kargo ile ücretsiz olarak gönderilmektedir."
+    }
+  ],
+  "pelikan kitabevi": [
+    {
+      "threshold": {
+        "Aras Kargo": 69.9
+      },
+      "cargo": {
+        "Aras Kargo": 6,
+        "Yurtiçi Kargo": 6.5,
+        "PTT Kargo": 7.5
+      },
+      "pay_at_the_door_cash": {
+        "Aras Kargo": 5.5,
+        "Yurtiçi Kargo": 6.5,
+        "PTT Kargo": 6.5
+      },
+      "pay_at_the_door_card": {
+        "Aras Kargo": 5.5,
+        "Yurtiçi Kargo": 6.5,
+        "PTT Kargo": 6.5
+      },
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %2 indirimli."
+    }
+  ],
+  "pirtukakurdi": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Yurtiçi Kargo": 7.9
+      },
+      "pay_at_the_door_cash": {
+        "Yurtiçi Kargo": 6
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "ravzakitap": [
+    {
+      "threshold": 59,
+      "cargo": {
+        "MNG Kargo": 8.45,
+        "PTT Kargo": 9
+
+      },
+      "pay_at_the_door_cash": {
+        "MNG Kargo": 5
+      },
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Kapıda nakit ödeme sadece MNG Kargo ile yapılabiliyor."
+    }
+  ],
+  "rob389": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "PTT Kargo": 20
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Sahaf Salih": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 12.5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "SAVAŞ Kitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 10
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Selam Kitap": [
+    {
+      "threshold": 90,
+      "cargo": {
+        "PTT Kargo": 5
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "simetrikitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Aras Kargo": 9.9,
+        "MNG Kargo": 9.9
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": 7,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "simurg": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "unspecified": "7.5 + (n-1)"
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Havale / EFT",
+        "2": "Posta Çeki"
+      },
+      "info": null
+    }
+  ],
+  "SÖZCÜ KİTABEVİ": [
+    {
+      "threshold": 74.99,
+      "cargo": {
+        "MNG Kargo": 6,
+        "Yurtiçi Kargo": 6.9
+      },
+      "pay_at_the_door_cash": 7.5,
+      "pay_at_the_door_card":  7.5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "stoktankitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 9.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "TDK Bilim": [
+    {
+      "threshold": null,
+      "cargo": {
+        "MNG Kargo": 4.99,
+        "Sürat Kargo": 4.99
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "TELE1 kitap": [
+    {
+      "threshold": 100,
+      "cargo": {
+        "Yurtiçi Kargo": 13
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "TERCİH KİTABEVİ": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "MNG Kargo": 7,
+        "Aras Kargo": 7.5
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": "Havale %1,5 indirimli."
+    }
+  ],
+  "toptanasya": [
+    {
+      "threshold": 50,
+      "cargo": {
+        "Asya Kitap": null
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "türkmen kitabevi": [
+    {
+      "threshold": 250,
+      "cargo": {
+        "unspecified": 9.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "UCUZKİTAPAL": [
+    {
+      "threshold": 60,
+      "cargo": {
+        "30": 3.95,
+        "60": 5
+      },
+      "pay_at_the_door_cash": 6,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "uygunkitapal": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7,
+        "Sürat Kargo": 7
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "Uygun Kitapçı": [
+    {
+      "threshold": 199,
+      "cargo": {
+        "MNG Kargo": 9.60
+      },
+      "pay_at_the_door_cash": 7.99,
+      "pay_at_the_door_card": 8.99,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "YARDIMCI KİTAPLAR": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "unspecified": 7.5
+      },
+      "pay_at_the_door_cash": 5,
+      "pay_at_the_door_card": 5,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "yargı yayınevi": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "Aras Kargo": 7,
+        "Sürat Kargo": 7
+      },
+      "pay_at_the_door_cash": 7,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı"
+      },
+      "info": null
+    }
+  ],
+  "YEDİİKLİM": [
+    {
+      "threshold": 75,
+      "cargo": {
+        "unspecified": 10
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT",
+        "3": "Garanti Pay"
+      },
+      "info": null
+    }
+  ],
+  "yeşil KOALA": [
+    {
+      "threshold": 99,
+      "cargo": {
+        "MNG Kargo": 9.90
+      },
+      "pay_at_the_door_cash": 9.9,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ],
+  "Yıldız Kitabevi": [
+    {
+      "threshold": 150,
+      "cargo": {
+        "Aras Kargo": 8.9
+      },
+      "pay_at_the_door_cash": null,
+      "pay_at_the_door_card": null,
+      "payment_method": {
+        "1": "Kredi Kartı / Banka Kartı",
+        "2": "Havale / EFT"
+      },
+      "info": null
+    }
+  ]
+}

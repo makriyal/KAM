@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/rounded_not_border"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginTop="4dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/coverImageCardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        app:cardCornerRadius="12dp">
+
+        <ImageView
+            android:id="@+id/coverImage"
+            android:layout_width="81dp"
+            android:layout_height="123dp"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/desc"
+            app:srcCompat="@mipmap/icon" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/coverImageCardview"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Çitlembik Fiyat Kıyaslayıcı Çitlembik Fiyat Kıyaslayıcı"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/my_font_family" />
+
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/coverImageCardview"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Çitlembik Fiyat Kıyaslayıcı Çitlembik Fiyat Kıyaslayıcı"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:fontFamily="@font/my_font_family" />
+
+    <TextView
+        android:id="@+id/publisherText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/coverImageCardview"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Çitlembik Fiyat Kıyaslayıcı Çitlembik Fiyat Kıyaslayıcı Çitlembik Fiyat Kıyaslayıcı"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:fontFamily="@font/my_font_family" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

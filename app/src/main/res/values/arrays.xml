@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<string-array name="listOptions">
+		<item>1001 KİTAP</item>
+		<item>724kitapal</item>
+		<item>ADA</item>
+		<item>ALFA</item>
+		<item>alkitap</item>
+		<item>ALOKİTABEVİ</item>
+		<item>alternatifkitap</item>
+		<item>amazon</item>
+		<item>AperatifKitap</item>
+		<item>Arkadaş Kitabevi</item>
+		<item>atlaskitap</item>
+		<item>avantajkitap</item>
+		<item>Babil</item>
+		<item>Banada Kitap</item>
+		<item>başarı DAĞITIM</item>
+		<item>Benli Kitap</item>
+		<item>bkmkitap</item>
+		<item>çamlıca kitap</item>
+		<item>çocuklara kitap</item>
+		<item>D&amp;amp;R</item>
+		<item>DİLEKKİTAP</item>
+		<item>eflatun KİTAP</item>
+		<item>Eganba</item>
+		<item>eğitim kitap</item>
+		<item>EĞİTİM MARKET</item>
+		<item>EKİN</item>
+		<item>elitkitap</item>
+		<item>EREN Kitap</item>
+		<item>EVRENSEL KİTABEVİ</item>
+		<item>fatihkitap</item>
+		<item>FİDAN KİTAP</item>
+		<item>Garanti Kitap</item>
+		<item>Gazi Kitabevi</item>
+		<item>Halk Kitabevi</item>
+		<item>harmankitap</item>
+		<item>Hazırlık Kitap</item>
+		<item>HEMENKİTAP</item>
+		<item>hepsikitap</item>
+		<item>HERMES</item>
+		<item>Hipokrat Kitabevi</item>
+		<item>idefix</item>
+		<item>İLAHİYAT VAKFI</item>
+		<item>ilkNokta</item>
+		<item>İMGE kitabevi</item>
+		<item>İNDEKSKİTAP</item>
+		<item>İNKILÂP</item>
+		<item>İNSANCIL</item>
+		<item>isemkitap</item>
+		<item>İSTANBUL KİTAPÇISI</item>
+		<item>İŞLER Kitabevleri</item>
+		<item>KABALCI</item>
+		<item>Kariyer Kitapları</item>
+		<item>KELEPİR</item>
+		<item>kidega</item>
+		<item>kitabevimiz</item>
+		<item>kitap365</item>
+		<item>kitapaktif</item>
+		<item>kitapalalim</item>
+		<item>kitapaloku</item>
+		<item>KİTAPAMBARI</item>
+		<item>Kitapbende</item>
+		<item>kitapbir</item>
+		<item>kitapbudur</item>
+		<item>kitap bulut</item>
+		<item>kitapburada</item>
+		<item>kitapesatis</item>
+		<item>kitap fırsatı</item>
+		<item>Kitap Koala</item>
+		<item>KİTAPKOLİK</item>
+		<item>kitapmatik</item>
+		<item>Kitap Müptelası</item>
+		<item>kitapSAHAF</item>
+		<item>KİTAPSAN</item>
+		<item>Kitap Sarayı</item>
+		<item>kitapseç</item>
+		<item>kitapsepeti</item>
+		<item>kitap sihirbazı</item>
+		<item>KitapStore</item>
+		<item>kitap ve kitap</item>
+		<item>Kitapyurdu</item>
+		<item>kitapzen</item>
+		<item>kpsskitap</item>
+		<item>KPSSstore</item>
+		<item>legalkitabevi</item>
+		<item>LİMON kitabevi</item>
+		<item>maksimumkitap</item>
+		<item>millet kitabevi</item>
+		<item>nezih</item>
+		<item>NOBEL KİTAP</item>
+		<item>odakitap</item>
+		<item>OKUYAN BOĞA</item>
+		<item>PALME KİTABEVİ</item>
+		<item>paNdora</item>
+		<item>PEGEM</item>
+		<item>pelikan kitabevi</item>
+		<item>pirtukakurdi</item>
+		<item>ravzakitap</item>
+		<item>rob389</item>
+		<item>Sahaf Salih</item>
+		<item>SAVAŞ Kitap</item>
+		<item>Selam Kitap</item>
+		<item>simetrikitap</item>
+		<item>simurg</item>
+		<item>SÖZCÜ KİTABEVİ</item>
+		<item>stoktankitap</item>
+		<item>TDK Bilim</item>
+		<item>TELE1 kitap</item>
+		<item>TERCİH KİTABEVİ</item>
+		<item>toptanasya</item>
+		<item>türkmen kitabevi</item>
+		<item>UCUZKİTAPAL</item>
+		<item>uygunkitapal</item>
+		<item>Uygun Kitapçı</item>
+		<item>YARDIMCI KİTAPLAR</item>
+		<item>yargı yayınevi</item>
+		<item>YEDİİKLİM</item>
+		<item>yeşil KOALA</item>
+		<item>Yıldız Kitabevi</item>
+	</string-array>
+	<string-array name="listValues" >
+		<item>www.1001kitap.com.tr</item>
+		<item>www.724kitapal.com</item>
+		<item>www.adakitap.com.tr</item>
+		<item>www.alfakitap.com</item>
+		<item>www.alkitap.com</item>
+		<item>alokitabevi.com</item>
+		<item>www.alternatifkitap.com</item>
+		<item>www.amazon.com.tr</item>
+		<item>www.aperatifkitap.com</item>
+		<item>www.arkadas.com.tr</item>
+		<item>www.atlaskitap.com</item>
+		<item>www.avantajkitap.com</item>
+		<item>www.babil.com</item>
+		<item>www.banadakitap.com</item>
+		<item>basaridagitim.com</item>
+		<item>www.benlikitap.com</item>
+		<item>www.bkmkitap.com</item>
+		<item>www.camlicakitap.com</item>
+		<item>www.cocuklarakitap.com</item>
+		<item>www.dr.com.tr</item>
+		<item>www.dilekkitap.com</item>
+		<item>www.eflatunkitap.com</item>
+		<item>www.eganba.com</item>
+		<item>www.egitimkitap.com</item>
+		<item>www.egitimmarket.com.tr</item>
+		<item>www.ekinyayinevi.com</item>
+		<item>www.elitkitap.com</item>
+		<item>www.eren.com.tr</item>
+		<item>www.dukakitap.com</item>
+		<item>www.fatihkitap.com</item>
+		<item>www.fidankitap.com</item>
+		<item>www.garantikitap.com</item>
+		<item>www.gazikitabevi.com.tr</item>
+		<item>www.halkkitabevi.com</item>
+		<item>www.harmankitap.com</item>
+		<item>www.hazirlikkitap.com</item>
+		<item>www.hemenkitap.com</item>
+		<item>www.hepsikitap.com</item>
+		<item>www.hermeskitap.com</item>
+		<item>www.hipokratkitabevi.com</item>
+		<item>www.idefix.com</item>
+		<item>www.ilahiyatvakfi.com</item>
+		<item>www.ilknokta.com</item>
+		<item>www.imge.com.tr</item>
+		<item>www.indekskitap.com</item>
+		<item>www.inkilap.com</item>
+		<item>www.insancilkitap.com</item>
+		<item>www.isemkitap.com</item>
+		<item>www.istanbulkitapcisi.com</item>
+		<item>www.kitapisler.com</item>
+		<item>www.kabalci.com.tr</item>
+		<item>www.kariyerkitaplari.com</item>
+		<item>www.kelepirkitap.com</item>
+		<item>kidega.com</item>
+		<item>www.kitabevimiz.com</item>
+		<item>www.kitap365.com</item>
+		<item>www.kitapaktif.com</item>
+		<item>www.kitapalalim.com</item>
+		<item>kitapaloku.com</item>
+		<item>www.kitapambari.com</item>
+		<item>www.kitapbende.com</item>
+		<item>www.kitapbir.com</item>
+		<item>www.kitapbudur.com</item>
+		<item>www.kitapbulut.com</item>
+		<item>www.kitapburada.com</item>
+		<item>www.kitapesatis.com</item>
+		<item>www.kitapfirsati.com.tr</item>
+		<item>www.kitapkoala.com</item>
+		<item>www.kitapkolik.com</item>
+		<item>www.kitapmatik.com.tr</item>
+		<item>www.kitapmuptelasi.com.tr</item>
+		<item>www.kitapsahaf.net</item>
+		<item>www.kitapsan.com.tr</item>
+		<item>www.kitapsarayi.com</item>
+		<item>www.kitapsec.com</item>
+		<item>www.kitapsepeti.com</item>
+		<item>www.kitapsihirbazi.com</item>
+		<item>www.kitapstore.com</item>
+		<item>www.kitapvekitap.com</item>
+		<item>www.kitapyurdu.com</item>
+		<item>www.kitapzen.com</item>
+		<item>www.kpsskitap.net</item>
+		<item>www.kpssstore.com</item>
+		<item>www.legalkitabevi.com</item>
+		<item>www.limonkitabevi.com</item>
+		<item>www.maksimumkitap.com</item>
+		<item>www.milletkitabevi.com</item>
+		<item>www.nezih.com.tr</item>
+		<item>www.nobelkitap.com</item>
+		<item>www.odakitap.com</item>
+		<item>www.okuyanboga.com</item>
+		<item>palmekitabevi.com</item>
+		<item>www.pandora.com.tr</item>
+		<item>www.pegem.net</item>
+		<item>www.pelikankitabevi.com.tr</item>
+		<item>www.pirtukakurdi.com</item>
+		<item>www.ravzakitap.com</item>
+		<item>www.rob389.com</item>
+		<item>www.sahafsalih.com</item>
+		<item>www.savaskitap.com</item>
+		<item>www.selamkitap.com</item>
+		<item>www.simetrikitap.com</item>
+		<item>www.simurg.com.tr</item>
+		<item>www.sozcukitabevi.com</item>
+		<item>www.stoktankitap.com</item>
+		<item>www.tdk.com.tr</item>
+		<item>www.tele1kitap.com</item>
+		<item>www.tercihkitabevi.com</item>
+		<item>www.toptanasya.com</item>
+		<item>www.turkmenkitabevi.com.tr</item>
+		<item>www.ucuzkitapal.com</item>
+		<item>www.uygunkitapal.com</item>
+		<item>www.uygunkitapci.com</item>
+		<item>www.yardimcikitaplar.com</item>
+		<item>www.yargiyayinevi.com</item>
+		<item>www.yediiklim.com.tr</item>
+		<item>www.yesilkoala.com</item>
+		<item>www.yildizkitabevi.com</item>
+	</string-array>
+	<string-array name="bilim">
+		<item>Bilim Tarihi</item>
+		<item>Astronomi</item>
+		<item>Coğrafya</item>
+		<item>Doğa Bilimleri</item>
+		<item>Elektrik - Elektronik Kitapları</item>
+		<item>Fizik</item>
+		<item>İstatistik Bilimi</item>
+		<item>Jeoloji</item>
+		<item>Kimya</item>
+		<item>Makine</item>
+		<item>Matematik Kitapları</item>
+		<item>Mühendislik</item>
+		<item>Popüler Bilim</item>
+		<item>Sosyal Bilimler</item>
+		<item>Tıp Bilimleri</item>
+		<item>Ziraat</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="bilim_link"  tools:ignore="Typos">
+		<item>https://www.bkmkitap.com/bilim-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/astronomi-kitaplari</item>
+		<item>https://www.bkmkitap.com/cografya-kitaplari</item>
+		<item>https://www.bkmkitap.com/doga-bilimleri-kitaplari</item>
+		<item>https://www.bkmkitap.com/elektrik-elektronik-kitaplari-1131</item>
+		<item>https://www.bkmkitap.com/fizik-kitaplari?ps=3</item>
+		<item>https://www.bkmkitap.com/istatistik-bilimi-kitaplari</item>
+		<item>https://www.bkmkitap.com/jeoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/kimya-kitaplari</item>
+		<item>https://www.bkmkitap.com/makine-kitaplari</item>
+		<item>https://www.bkmkitap.com/matematik-kitaplari</item>
+		<item>https://www.bkmkitap.com/muhendislik-kitaplari</item>
+		<item>https://www.bkmkitap.com/populer-bilim-kitaplari</item>
+		<item>https://www.bkmkitap.com/sosyal-bilimler-kitaplari</item>
+		<item>https://www.bkmkitap.com/tip-bilimleri-kitaplari</item>
+		<item>https://www.bkmkitap.com/ziraat-kitaplari</item>
+		<item>https://www.bkmkitap.com/muhendislik-diger-kitaplari</item>
+	</string-array>
+	<string-array name="sinavlara_hazirlik">
+		<item>TYT - AYT</item>
+		<item>TYT - AYT Biyoloji</item>
+		<item>TYT - AYT Coğrafya</item>
+		<item>TYT - AYT Deneme</item>
+		<item>TYT - AYT Felsefe</item>
+		<item>TYT - AYT Fizik</item>
+		<item>TYT - AYT Geometri</item>
+		<item>TYT - AYT Kimya</item>
+		<item>TYT - AYT Matematik</item>
+		<item>TYT - AYT Paragraf</item>
+		<item>TYT - AYT Tarih</item>
+		<item>TYT - AYT Türkçe</item>
+		<item>AYT</item>
+		<item>LGS Deneme</item>
+		<item>LGS Paragraf</item>
+		<item>EKPSS</item>
+		<item>KPSS A Grubu</item>
+		<item>KPSS B Grubu</item>
+		<item>KPSS Eğitim Bilimleri</item>
+		<item>KPSS Genel Yetenek Genel Kültür</item>
+		<item>KPSS Lisans</item>
+		<item>KPSS Lise</item>
+		<item>KPSS Lise Önlisans</item>
+		<item>KPSS Öğretmen Alan Sınavı</item>
+		<item>KPSS Önlisans</item>
+		<item>AKS</item>
+		<item>DGS</item>
+		<item>DHBT</item>
+		<item>GYS</item>
+		<item>KGK</item>
+		<item>MBSTS</item>
+		<item>Mülakat</item>
+		<item>SMMM</item>
+		<item>SPK</item>
+		<item>YDS - TOEFL - IELTS</item>
+		<item>YGS - LYS</item>
+		<item>İşletme</item>
+		<item>Kamu Yönetimi</item>
+		<item>Maliye</item>
+		<item>Muhasebe</item>
+		<item>Askeri Okullar</item>
+		<item>Polis Okulları</item>
+		<item>Uzmanlık Sınavları</item>
+		<item>AÖF</item>
+		<item>1. Sınıf</item>
+		<item>2. Sınıf</item>
+		<item>3. Sınıf</item>
+		<item>4. Sınıf</item>
+		<item>5. Sınıf</item>
+		<item>6. Sınıf</item>
+		<item>7. Sınıf</item>
+		<item>8. Sınıf</item>
+		<item>9. Sınıf</item>
+		<item>10. Sınıf</item>
+		<item>11. Sınıf</item>
+		<item>12. Sınıf</item>
+	</string-array>
+	<string-array name="sinavlara_hazirlik_link">
+		<item>https://www.bkmkitap.com/tyt-ayt-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-biyoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-cografya-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-deneme-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-felsefe-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-fizik-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-geometri-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-kimya-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-matematik-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-paragraf-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-tarih-kitaplari</item>
+		<item>https://www.bkmkitap.com/tyt-ayt-turkce-kitaplari</item>
+		<item>https://www.bkmkitap.com/ayt-kitaplari</item>
+		<item>https://www.bkmkitap.com/lgs-deneme-kitaplari</item>
+		<item>https://www.bkmkitap.com/lgs-paragraf-kitaplari</item>
+		<item>https://www.bkmkitap.com/ekpss-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-a-grubu-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-b-grubu-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-egitim-bilimleri-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-genel-yetenek-genel-kultur-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-lisans-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-lise-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-lise-onlisans-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-ogretmen-alan-bilgisi-kitaplari</item>
+		<item>https://www.bkmkitap.com/kpss-onlisans-kitaplari</item>
+		<item>https://www.bkmkitap.com/aks-kitaplari</item>
+		<item>https://www.bkmkitap.com/dgs-kitaplari</item>
+		<item>https://www.bkmkitap.com/dhbt-kitaplari</item>
+		<item>https://www.bkmkitap.com/gys-kitaplari</item>
+		<item>https://www.bkmkitap.com/kgk-kitaplari</item>
+		<item>https://www.bkmkitap.com/mbstssinavi-kitaplari</item>
+		<item>https://www.bkmkitap.com/mulakat-kitaplari</item>
+		<item>https://www.bkmkitap.com/smmm-kitaplari</item>
+		<item>https://www.bkmkitap.com/spk-kitaplari</item>
+		<item>https://www.bkmkitap.com/yds-toefl-ielts-kitaplari</item>
+		<item>https://www.bkmkitap.com/ygs-lys-hazirlik-kitaplari</item>
+		<item>https://www.bkmkitap.com/isletme-kitaplari</item>
+		<item>https://www.bkmkitap.com/kamu-yonetimi-kitaplari</item>
+		<item>https://www.bkmkitap.com/maliye-kitaplari</item>
+		<item>https://www.bkmkitap.com/muhasebe-kitaplari</item>
+		<item>https://www.bkmkitap.com/askeri-okullar-kitaplari</item>
+		<item>https://www.bkmkitap.com/polis-okullari-kitaplari</item>
+		<item>https://www.bkmkitap.com/uzmanlik-sinavlari-kitaplari</item>
+		<item>https://www.bkmkitap.com/acikogretim-kitaplari</item>
+		<item>https://www.bkmkitap.com/1sinif-ilkokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/2sinif-ilkokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/3sinif-ilkokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/4sinif-ilkokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/5sinif-ortaokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/6sinif-ortaokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/7sinif-ortaokul-kitaplari</item>
+		<item>https://www.bkmkitap.com/8-sinif-ortaogretim-kitaplari</item>
+		<item>https://www.bkmkitap.com/9sinif-ortaogretim-kitaplari</item>
+		<item>https://www.bkmkitap.com/10sinif-ortaogretim-kitaplari</item>
+		<item>https://www.bkmkitap.com/11sinif-ortaogretim-kitaplari</item>
+		<item>https://www.bkmkitap.com/12sinif-ortaogretim-kitaplari</item>
+	</string-array>
+	<string-array name="edebiyat">
+		<item>Klasikler</item>
+		<item>100 Temel Eser</item>
+		<item>Aksiyon - Macera</item>
+		<item>Alman Edebiyatı</item>
+		<item>Amerika Edebiyatı</item>
+		<item>Anı - Mektup - Günlük</item>
+		<item>Anlatı</item>
+		<item>Antoloji</item>
+		<item>Araştırma - İnceleme - Referans</item>
+		<item>Aşk</item>
+		<item>Bilim-Kurgu</item>
+		<item>Biyografi - Otobiyografi</item>
+		<item>Çizgi-Roman</item>
+		<item>Deneme</item>
+		<item>Derleme</item>
+		<item>Diğer Ülke Edebiyatları</item>
+		<item>Dilbilim</item>
+		<item>Divan / Halk Edebiyatı</item>
+		<item>Referans Kitaplar</item>
+		<item>Efsane - Destan</item>
+		<item>Eleştiri - İnceleme - Kuram</item>
+		<item>Fantastik</item>
+		<item>Fransız Edebiyatı</item>
+		<item>Gençlik Edebiyatı</item>
+		<item>Genel</item>
+		<item>İngiliz Edebiyatı</item>
+		<item>İskandinav Edebiyatı</item>
+		<item>İspanyol Edebiyatı</item>
+		<item>İtalyan Edebiyatı</item>
+		<item>Karikatür</item>
+		<item>Korku - Gerilim</item>
+		<item>Kürt Edebiyatı</item>
+		<item>Latin Edebiyatı</item>
+		<item>Masal</item>
+		<item>Mizah</item>
+		<item>Ortadoğu - Arap Edebiyatı</item>
+		<item>Öykü</item>
+		<item>Oyun Kitapları</item>
+		<item>Periyodik Yayınlar</item>
+		<item>Polisiye</item>
+		<item>Politik Kurgu</item>
+		<item>Roman</item>
+		<item>Romantik - Macera</item>
+		<item>Rus Edebiyatı</item>
+		<item>Senaryo</item>
+		<item>Seyahatname</item>
+		<item>Şiir</item>
+		<item>Söyleşi</item>
+		<item>Tarihsel Romanlar</item>
+		<item>Tiyatro - Piyes</item>
+		<item>Türk Edebiyatı</item>
+		<item>Uzakdoğu Edebiyatı</item>
+		<item>Yabancı Dilde Kitaplar</item>
+	</string-array>
+	<string-array name="edebiyat_link">
+		<item>https://www.bkmkitap.com/klasikler-kitaplari</item>
+		<item>https://www.bkmkitap.com/100-temel-eserr-kitaplari</item>
+		<item>https://www.bkmkitap.com/aksiyon-macera-kitaplari</item>
+		<item>https://www.bkmkitap.com/alman-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/amerikan-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/ani-mektup-gunluk-kitaplari</item>
+		<item>https://www.bkmkitap.com/anlati-kitaplari</item>
+		<item>https://www.bkmkitap.com/antoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/arastima-inceleme-referans-kitaplari</item>
+		<item>https://www.bkmkitap.com/ask-kitaplari</item>
+		<item>https://www.bkmkitap.com/bilimkurgu-kitaplari</item>
+		<item>https://www.bkmkitap.com/biyografi-otobiyogafi-kitaplari</item>
+		<item>https://www.bkmkitap.com/cizgi-roman-1212-kitaplari</item>
+		<item>https://www.bkmkitap.com/deneme</item>
+		<item>https://www.bkmkitap.com/derleme</item>
+		<item>https://www.bkmkitap.com/diger-ulke-edebiyatlari-kitaplari</item>
+		<item>https://www.bkmkitap.com/dil-bilim-kitaplari</item>
+		<item>https://www.bkmkitap.com/divan-edebiyati-halk-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/edebiyat-referans-kitaplar</item>
+		<item>https://www.bkmkitap.com/efsane-destan-kitaplari</item>
+		<item>https://www.bkmkitap.com/elestiri-inceleme-kuram-kitaplari</item>
+		<item>https://www.bkmkitap.com/fantastikk-kitaplar</item>
+		<item>https://www.bkmkitap.com/fransiz-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/genclik-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/genel-kitaplar</item>
+		<item>https://www.bkmkitap.com/ingiliz-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/iskandinav-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/ispanyol-edebiyat-kitaplari</item>
+		<item>https://www.bkmkitap.com/italyan-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/karikatur-kitaplari</item>
+		<item>https://www.bkmkitap.com/korku-gerilim-kitaplari</item>
+		<item>https://www.bkmkitap.com/kurt-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/latin-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/masal-1057-kitaplari</item>
+		<item>https://www.bkmkitap.com/mizah-2-kitaplari</item>
+		<item>https://www.bkmkitap.com/ortadogu-arap-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/oyku-kitaplari</item>
+		<item>https://www.bkmkitap.com/oyun-kitaplari</item>
+		<item>https://www.bkmkitap.com/periyodik-yayinlari-kitaplari</item>
+		<item>https://www.bkmkitap.com/polisiye-kitaplari</item>
+		<item>https://www.bkmkitap.com/politik-kurgu-kitaplari</item>
+		<item>https://www.bkmkitap.com/roman-kitaplari</item>
+		<item>https://www.bkmkitap.com/romantikmacera-kitaplari</item>
+		<item>https://www.bkmkitap.com/rus-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/senaryo-kitaplari</item>
+		<item>https://www.bkmkitap.com/seyahatname-kitaplari</item>
+		<item>https://www.bkmkitap.com/siir-2-kitaplari</item>
+		<item>https://www.bkmkitap.com/soylesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/tarihsel-romanlar-kitaplari</item>
+		<item>https://www.bkmkitap.com/tiyatro-piyes-kitaplari</item>
+		<item>https://www.bkmkitap.com/turk-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/uzakdogu-edebiyati-kitaplari</item>
+		<item>https://www.bkmkitap.com/yabanci-dilde-edebiyat-kitaplari</item>
+	</string-array>
+	<string-array name="universite">
+		<item>Mühendislik Fakültesi</item>
+		<item>Tıp - Eczacılık</item>
+		<item>Hukuk Fakültesi</item>
+		<item>İşletme Fakültesi</item>
+		<item>İktisat</item>
+		<item>Fen Edebiyat</item>
+		<item>Eğitim Bilimleri</item>
+		<item>İletişim</item>
+		<item>Mimarlık</item>
+		<item>Ziraat</item>
+		<item>Güzel Sanatlar</item>
+		<item>İlahiyat</item>
+		<item>MYO</item>
+	</string-array>
+	<string-array name="universite_link">
+		<item>https://www.bkmkitap.com/muhendislik-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/tip-eczacilik-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/universite-hukuk-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/isletme-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/iktisat-finans-kitaplari</item>
+		<item>https://www.bkmkitap.com/fen-edebiyat-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/egitim-bilimleri-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/iletisim-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/mimarlik-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/ziraat-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/guzel-sanatlar-kitaplari</item>
+		<item>https://www.bkmkitap.com/universite-ilahiyat-fakultesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/meslek-yuksek-okulu-kitaplari</item>
+	</string-array>
+	<string-array name="hukuk">
+		<item>Anayasa Hukuku</item>
+		<item>Borçlar Hukuku</item>
+		<item>Ceza Hukuku</item>
+		<item>Ders Kitapları</item>
+		<item>Haklar ve Özgürlükler Hukuku</item>
+		<item>Hukuk - Araştırma - İnceleme</item>
+		<item>Hukuk Üzerine</item>
+		<item>İdare Hukuku</item>
+		<item>İş Hukuku</item>
+		<item>Kanun ve Uygulama Kitapları</item>
+		<item>Medeni Hukuk</item>
+		<item>Mülkiyet ve Kira Hukuku</item>
+		<item>Şirketler Hukuku</item>
+		<item>Ticaret / e-ticaret Hukuku</item>
+		<item>Trafik Hukuku</item>
+		<item>Uluslararası Hukuk</item>
+		<item>Vergi Hukuku</item>
+	</string-array>
+	<string-array name="hukuk_link">
+		<item>https://www.bkmkitap.com/anayasa-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/borclar-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/ceza-hukuku-1062-kitaplari</item>
+		<item>https://www.bkmkitap.com/ders-kitaplari</item>
+		<item>https://www.bkmkitap.com/haklar-ve-ozgurlukler-kitaplari</item>
+		<item>https://www.bkmkitap.com/hukuk-arastirma-inceleme-kitaplari</item>
+		<item>https://www.bkmkitap.com/hukuk-uzerine-kitaplari</item>
+		<item>https://www.bkmkitap.com/idare-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/is-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/kanun-ve-uygulama-kitaplari</item>
+		<item>https://www.bkmkitap.com/medeni-hukuk-1026-kitaplari</item>
+		<item>https://www.bkmkitap.com/mulkiyet-ve-kira-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/sirketler-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/ticaret-e-ticaret-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/trafik-hukuku-kitaplari</item>
+		<item>https://www.bkmkitap.com/uluslararasi-hukuk-kitaplari</item>
+		<item>https://www.bkmkitap.com/vergi-hukuku-kitaplari</item>
+	</string-array>
+	<string-array name="ekonomi">
+		<item>Araştırma - İnceleme - Kuram</item>
+		<item>Borsa - Finans</item>
+		<item>Dünya Ekonomisi</item>
+		<item>e-ticaret</item>
+		<item>Ekonomik Doktrinler</item>
+		<item>Girişimcilik</item>
+		<item>Halkla İlişkiler - İnsan Kaynakları</item>
+		<item>İktisat Kitapları</item>
+		<item>İktisat Tarihi</item>
+		<item>İnsan Kaynakları</item>
+		<item>İş Dünyası</item>
+		<item>İşletme - Muhasebe - Maliye</item>
+		<item>Küreselleşme</item>
+		<item>Pazarlama Satış Reklam</item>
+		<item>Referans Kitaplar</item>
+		<item>Sayısal Yöntemler</item>
+		<item>Türkiye Ekonomisi</item>
+		<item>Yönetim</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="ekonomi_link">
+		<item>https://www.bkmkitap.com/arastirma-inceleme-kuram</item>
+		<item>https://www.bkmkitap.com/borsa-finans</item>
+		<item>https://www.bkmkitap.com/dunya-ekonomisi</item>
+		<item>https://www.bkmkitap.com/e-ticaret</item>
+		<item>https://www.bkmkitap.com/ekonomik-doktrinler</item>
+		<item>https://www.bkmkitap.com/girisimcilik-1049</item>
+		<item>https://www.bkmkitap.com/halkla-iliskiler-insan-kaynaklari</item>
+		<item>https://www.bkmkitap.com/iktisat-kitaplari</item>
+		<item>https://www.bkmkitap.com/iktisat-tarihi-1047</item>
+		<item>https://www.bkmkitap.com/insan-kaynaklari-1048</item>
+		<item>https://www.bkmkitap.com/is-dunyasi</item>
+		<item>https://www.bkmkitap.com/isletme-muhasebe-maliye</item>
+		<item>https://www.bkmkitap.com/kuresellesme</item>
+		<item>https://www.bkmkitap.com/pazarlama-satis-reklam</item>
+		<item>https://www.bkmkitap.com/referans-kitaplar-129</item>
+		<item>https://www.bkmkitap.com/sayisal-yontemler-1044</item>
+		<item>https://www.bkmkitap.com/turkiye-ekonomisi</item>
+		<item>https://www.bkmkitap.com/yonetim</item>
+		<item>https://www.bkmkitap.com/diger-123</item>
+	</string-array>
+	<string-array name="sanat_mimarlik">
+		<item>Fotoğraf - Sinema - Tiyatro</item>
+		<item>Geleneksel Sanatlar</item>
+		<item>Grafik Sanatlar</item>
+		<item>Kuram</item>
+		<item>Mimarlık</item>
+		<item>Referans Kitaplar</item>
+		<item>Resim</item>
+		<item>Sahne Sanatları</item>
+		<item>Sanat Tarihi</item>
+		<item>Sanatçılar</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="sanat_mimarlik_link">
+		<item>https://www.bkmkitap.com/fotograf-sinema-tiyatro</item>
+		<item>https://www.bkmkitap.com/geleneksel-sanatlar</item>
+		<item>https://www.bkmkitap.com/grafik-sanatlar-kitaplari</item>
+		<item>https://www.bkmkitap.com/kuram</item>
+		<item>https://www.bkmkitap.com/mimarlik-kitaplari</item>
+		<item>https://www.bkmkitap.com/referans-kitaplar-603</item>
+		<item>https://www.bkmkitap.com/resim</item>
+		<item>https://www.bkmkitap.com/sahne-sanatlari</item>
+		<item>https://www.bkmkitap.com/sanat-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/sanatcilar-1088</item>
+		<item>https://www.bkmkitap.com/diger-597</item>
+	</string-array>
+	<string-array name="sosyoloji">
+		<item>Antropoloji - Etnoloji</item>
+		<item>Aile ve Çocuk</item>
+		<item>Din Sosyolojisi</item>
+		<item>Ekoloji - Çevre</item>
+		<item>Etnik</item>
+		<item>Folklor</item>
+		<item>Genel Sosyoloji</item>
+		<item>Kadın / Erkek</item>
+		<item>Kadın Çalışmaları</item>
+		<item>Kentleşme - Modernleşme</item>
+		<item>Kültür ve Bilim</item>
+		<item>Sivil Toplum Kuruluşları</item>
+		<item>Siyaset Sosyolojisi</item>
+		<item>Sosyoloji Bilimi ve Kavramlar</item>
+		<item>Sosyolojik Araştırmalar</item>
+		<item>Sosyolojiye Giriş</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="sosyoloji_link">
+		<item>https://www.bkmkitap.com/antropoloji-etnoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/aile-ve-cocuk-kitaplari</item>
+		<item>https://www.bkmkitap.com/din-sosyolojisi-kitaplari</item>
+		<item>https://www.bkmkitap.com/ekoloji-cevre-kitaplari</item>
+		<item>https://www.bkmkitap.com/etnik-kitaplar</item>
+		<item>https://www.bkmkitap.com/folklor-kitaplari</item>
+		<item>https://www.bkmkitap.com/genel-sosyoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/kadin-erkek-kitaplari</item>
+		<item>https://www.bkmkitap.com/kadin-calismalari-kitaplari</item>
+		<item>https://www.bkmkitap.com/kentlesme-modernlesme</item>
+		<item>https://www.bkmkitap.com/kultur-ve-bilim-kitaplari</item>
+		<item>https://www.bkmkitap.com/sivil-toplum-kuruluslari-kitaplari</item>
+		<item>https://www.bkmkitap.com/siyaset-sosyolojisi</item>
+		<item>https://www.bkmkitap.com/sosyoloji-bilimi-ve-kavramlar</item>
+		<item>https://www.bkmkitap.com/sosyolojik-arastirmalar-kitaplari</item>
+		<item>https://www.bkmkitap.com/sosyolojiye-giris</item>
+		<item>https://www.bkmkitap.com/diger-621</item>
+	</string-array>
+	<string-array name="felsefe">
+		<item>Felsefe Tarihi</item>
+		<item>Araştıma - İnceleme - Referans</item>
+		<item>Din Felsefesi</item>
+		<item>Doğu Felsefesi</item>
+		<item>Düşünce</item>
+		<item>Estetik</item>
+		<item>Etik</item>
+		<item>Felsefi Akımlar</item>
+		<item>Filozoflar (Biyografiler)</item>
+		<item>Genel Felsefe</item>
+		<item>İslam Felsefesi</item>
+		<item>Marksizm - Sosyalizm</item>
+		<item>Siyaset Felsefesi</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="felsefe_link">
+		<item>https://www.bkmkitap.com/felsefe-tarihi</item>
+		<item>https://www.bkmkitap.com/arastima-inceleme-referans-224</item>
+		<item>https://www.bkmkitap.com/din-felsefesi</item>
+		<item>https://www.bkmkitap.com/dogu-felsefeleri</item>
+		<item>https://www.bkmkitap.com/dusunce</item>
+		<item>https://www.bkmkitap.com/estetik</item>
+		<item>https://www.bkmkitap.com/etik</item>
+		<item>https://www.bkmkitap.com/felsefi-akimlar</item>
+		<item>https://www.bkmkitap.com/filozoflar-biyografiler</item>
+		<item>https://www.bkmkitap.com/genel-felsefe</item>
+		<item>https://www.bkmkitap.com/islam-felsefesi-989</item>
+		<item>https://www.bkmkitap.com/marksizm-sosyalizm</item>
+		<item>https://www.bkmkitap.com/siyaset-felsefesi</item>
+		<item>https://www.bkmkitap.com/diger-felsefe-kitaplari</item>
+	</string-array>
+	<string-array name="politika">
+		<item>Araştırma - İnceleme</item>
+		<item>Avrupa Birliği</item>
+		<item>Azınlıklar - Etnik Sorunlar</item>
+		<item>Derin Siyaset - Komplo Teorileri</item>
+		<item>Devlet Yönetimi</item>
+		<item>Dünya Siyaseti ve Politikası</item>
+		<item>Genel Politika - Siyaset Bilim - Siyaset Tarihi</item>
+		<item>Güncel Siyaset</item>
+		<item>Hatıralar</item>
+		<item>İslam - Ortadoğu</item>
+		<item>Kurumlar - Örgütler</item>
+		<item>Politik Akımlar - Hareketler</item>
+		<item>Siyaset Bilimi</item>
+		<item>Siyasi Düşünceler</item>
+		<item>Siyasi Tarih</item>
+		<item>Sol Hareketler</item>
+		<item>Türkiye Siyaseti ve Politikası</item>
+		<item>Uluslararası İlişkiler - Dış Politika</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="politika_link">
+		<item>https://www.bkmkitap.com/arastirma-inceleme</item>
+		<item>https://www.bkmkitap.com/avrupa-birligi-kitaplari</item>
+		<item>https://www.bkmkitap.com/azinliklar-etnik-sorunlar</item>
+		<item>https://www.bkmkitap.com/derin-siyaset-komplo-teorileri-kitaplari</item>
+		<item>https://www.bkmkitap.com/devlet-yonetim-kitaplari</item>
+		<item>https://www.bkmkitap.com/dunya-siyaseti-ve-politikasi</item>
+		<item>https://www.bkmkitap.com/genel-politika-siyaset-bilim-siyaset-tarihi</item>
+		<item>https://www.bkmkitap.com/guncel-siyaset-kitaplari</item>
+		<item>https://www.bkmkitap.com/hatiralar-1035</item>
+		<item>https://www.bkmkitap.com/islam-ortadogu-kitaplari</item>
+		<item>https://www.bkmkitap.com/kurumlar-orgutler-kitaplari</item>
+		<item>https://www.bkmkitap.com/politik-akimlar-hareketler-kitaplari</item>
+		<item>https://www.bkmkitap.com/siyaset-bilimi</item>
+		<item>https://www.bkmkitap.com/siyasi-dusunceler-kitaplari</item>
+		<item>https://www.bkmkitap.com/siyasi-tarih-1021</item>
+		<item>https://www.bkmkitap.com/sol-hareketler</item>
+		<item>https://www.bkmkitap.com/turkiye-siyaseti-ve-politikasi</item>
+		<item>https://www.bkmkitap.com/uluslararasi-iliskiler-dis-politika</item>
+		<item>https://www.bkmkitap.com/diger-577</item>
+	</string-array>
+	<string-array name="tarih">
+		<item>Mustafa Kemal Atatürk</item>
+		<item>Dünya Tarihi</item>
+		<item>Milletler Tarihi</item>
+		<item>Bölgeler Tarihi</item>
+		<item>Arkeoloji</item>
+		<item>Araştırma - İnceleme</item>
+		<item>Anadolu Tarihi</item>
+		<item>Amerika Tarihi</item>
+		<item>Osmanlı Tarihi</item>
+		<item>Referans Kitaplar</item>
+		<item>Seyahatname</item>
+		<item>Sosyal Tarih</item>
+		<item>Tarih - Mitoloji</item>
+		<item>Tarih Felsefesi</item>
+		<item>Tarihi Belgeler</item>
+		<item>Tarihi Kişilikler</item>
+		<item>Türk Tarihi Araştırmaları</item>
+		<item>Türkiye Yakın Tarih</item>
+		<item>Türkiye ve Cumhuriyet Tarihi</item>
+		<item>Ülkeler Tarihi</item>
+		<item>Yabancı Dilde Tarih Kitapları</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="tarih_link">
+		<item>https://www.bkmkitap.com/mustafa-kemal-ataturk</item>
+		<item>https://www.bkmkitap.com/dunya-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/milletler-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/bolgeler-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/arkeoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/arastirma-inceleme-629</item>
+		<item>https://www.bkmkitap.com/anadolu-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/amerika-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/osmanli-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/referans-kitaplar-634</item>
+		<item>https://www.bkmkitap.com/seyahatname-1158-kitaplari</item>
+		<item>https://www.bkmkitap.com/sosyal-tarih-kitaplari</item>
+		<item>https://www.bkmkitap.com/tarih-mitoloji-kitaplari</item>
+		<item>https://www.bkmkitap.com/tarih-felsefesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/tarihi-belgeler</item>
+		<item>https://www.bkmkitap.com/tarihi-kisilikler-kitaplari</item>
+		<item>https://www.bkmkitap.com/turk-tarihi-arastirmalari</item>
+		<item>https://www.bkmkitap.com/turkiye-yakin-tarih-kitaplari</item>
+		<item>https://www.bkmkitap.com/turkiye-ve-cumhuriyet-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/ulkeler-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/yabanci-dilde-tarih-kitaplari</item>
+		<item>https://www.bkmkitap.com/diger-630</item>
+	</string-array>
+	<string-array name="bilgisayar_mobil">
+		<item>Ağ - Network</item>
+		<item>Apple</item>
+		<item>Bilgisayar Teknolojisi</item>
+		<item>Dijital Medya Yönetimi</item>
+		<item>Donanım - Hardware</item>
+		<item>Elektronik Ticaret Kitapları</item>
+		<item>Grafik ve Tasarım</item>
+		<item>Güvenlik</item>
+		<item>İnternet ve İnternet Kültürü</item>
+		<item>İşletim Sistemleri</item>
+		<item>Microsoft</item>
+		<item>Mobil ve Mobil Uygulamalar</item>
+		<item>Oyunlar</item>
+		<item>Programlama</item>
+		<item>Veritabanı - Database</item>
+		<item>Web Geliştirme ve Tasarım</item>
+		<item>Yeni Başlayanlar İçin</item>
+		<item>Yönetim Bilgi Sistemleri</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="bilgisayar_mobil_link">
+		<item>https://www.bkmkitap.com/ag-networking</item>
+		<item>https://www.bkmkitap.com/apple</item>
+		<item>https://www.bkmkitap.com/bilgisayar-teknolojisi</item>
+		<item>https://www.bkmkitap.com/dijital-medya-yonetimi</item>
+		<item>https://www.bkmkitap.com/donanim-hardware</item>
+		<item>https://www.bkmkitap.com/elektronik-ticaret-kitaplari</item>
+		<item>https://www.bkmkitap.com/grafik-ve-tasarim</item>
+		<item>https://www.bkmkitap.com/guvenlik-security</item>
+		<item>https://www.bkmkitap.com/internet-ve-internet-kulturu-kitaplari</item>
+		<item>https://www.bkmkitap.com/isletim-sistemleri</item>
+		<item>https://www.bkmkitap.com/microsoft</item>
+		<item>https://www.bkmkitap.com/mobil-ve-mobil-uygulamalar</item>
+		<item>https://www.bkmkitap.com/oyunlar</item>
+		<item>https://www.bkmkitap.com/programlama</item>
+		<item>https://www.bkmkitap.com/veritabani-database</item>
+		<item>https://www.bkmkitap.com/web-gelistirme-ve-tasarim</item>
+		<item>https://www.bkmkitap.com/yeni-baslayanlar-icin</item>
+		<item>https://www.bkmkitap.com/yonetim-bilgi-sistemleri-1152</item>
+		<item>https://www.bkmkitap.com/diger-97</item>
+	</string-array>
+	<string-array name="cocuk">
+		<item>Dünya Klasikleri</item>
+		<item>Bilim-Kurgu</item>
+		<item>Bilimsel Kitaplar</item>
+		<item>Bilmece - Bulmaca</item>
+		<item>Boyama Kitapları</item>
+		<item>Çıkartmalı Kitaplar</item>
+		<item>Çizgi-Roman</item>
+		<item>Çocuk Oyun Kitapları</item>
+		<item>Dil Eğitimi Kitapları</item>
+		<item>Din Eğitimi Kitapları</item>
+		<item>Fantastik</item>
+		<item>Hikayeler</item>
+		<item>Hobi - Müzik</item>
+		<item>Masallar</item>
+		<item>Okul Öncesi Resimli Kitaplar</item>
+		<item>Özel Eğitim Kitapları</item>
+		<item>Referans Kitaplar</item>
+		<item>Roman - Öykü</item>
+		<item>Şiir Kitapları</item>
+		<item>Türk Klasikleri</item>
+		<item>Yabancı Dilde Çocuk Kitapları</item>
+		<item>Yapbozlu Kitaplar</item>
+		<item>Zeka Gelişimi</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="cocuk_link">
+		<item>https://www.bkmkitap.com/dunya-klasikleri</item>
+		<item>https://www.bkmkitap.com/bilimkurgu-1208</item>
+		<item>https://www.bkmkitap.com/bilimsel-kitaplari</item>
+		<item>https://www.bkmkitap.com/bilmece-bulmaca</item>
+		<item>https://www.bkmkitap.com/boyama-kitaplari</item>
+		<item>https://www.bkmkitap.com/cikartmali-kitaplar</item>
+		<item>https://www.bkmkitap.com/cizgi-roman-90</item>
+		<item>https://www.bkmkitap.com/cocuk-oyun-kitaplari</item>
+		<item>https://www.bkmkitap.com/dil-egitimi-kitaplari</item>
+		<item>https://www.bkmkitap.com/din-egitimi-kitaplari</item>
+		<item>https://www.bkmkitap.com/fantastik-1207</item>
+		<item>https://www.bkmkitap.com/hikayeler-78</item>
+		<item>https://www.bkmkitap.com/hobi-muzik</item>
+		<item>https://www.bkmkitap.com/masallar-80</item>
+		<item>https://www.bkmkitap.com/okul-oncesi-resimli-kitaplar</item>
+		<item>https://www.bkmkitap.com/ozel-egitim-kitaplari-1202</item>
+		<item>https://www.bkmkitap.com/referans-kitaplar</item>
+		<item>https://www.bkmkitap.com/roman-oyku</item>
+		<item>https://www.bkmkitap.com/siir-kitaplari</item>
+		<item>https://www.bkmkitap.com/turk-klasikleri</item>
+		<item>https://www.bkmkitap.com/yabanci-dilde-cocuk-kitaplari</item>
+		<item>https://www.bkmkitap.com/yapbozlu-kitaplar</item>
+		<item>https://www.bkmkitap.com/zeka-gelisimi</item>
+		<item>https://www.bkmkitap.com/diger</item>
+	</string-array>
+	<string-array name="saglik">
+		<item>Histoloji ve Embriyoloji</item>
+		<item>İlaç Rehberleri</item>
+		<item>Kadın Hastalıkları ve Doğum</item>
+		<item>Nöroloji</item>
+		<item>Aile Sağlığı</item>
+		<item>Alternatif Tıp - Şifalı Bitkiler</item>
+		<item>Anatomi</item>
+		<item>Annelik ve Çocuk Bakımı</item>
+		<item>Başvuru Kitapları</item>
+		<item>Beslenme ve Diyet</item>
+		<item>Biyoloji ve Genetik</item>
+		<item>Cinsellik</item>
+		<item>Çocuk Gelişimi</item>
+		<item>Fizik Tedavi ve Rehabilitasyon</item>
+		<item>Genel Sağlık Kitapları</item>
+		<item>Hamilelik ve Doğum</item>
+		<item>Sağlık İletişimi</item>
+		<item>Yoga - Meditasyon</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="saglik_link"  tools:ignore="Typos">
+		<item>https://www.bkmkitap.com/histoloji-ve-embriyoloji</item>
+		<item>https://www.bkmkitap.com/ilac-rehberleri</item>
+		<item>https://www.bkmkitap.com/kadin-hastaliklari-ve-dogum</item>
+		<item>https://www.bkmkitap.com/noroloji</item>
+		<item>https://www.bkmkitap.com/aile-sagligi</item>
+		<item>https://www.bkmkitap.com/alternatif-tip-sifali-bitkiler</item>
+		<item>https://www.bkmkitap.com/anatomi-1175</item>
+		<item>https://www.bkmkitap.com/annelik-ve-cocuk-bakimi</item>
+		<item>https://www.bkmkitap.com/basvuru-kitaplari-610</item>
+		<item>https://www.bkmkitap.com/beslenme-ve-diyet</item>
+		<item>https://www.bkmkitap.com/biyoloji-genetik</item>
+		<item>https://www.bkmkitap.com/cinsellik</item>
+		<item>https://www.bkmkitap.com/cocuk-gelisimi</item>
+		<item>https://www.bkmkitap.com/fizik-tedavi-rehabilitasyon</item>
+		<item>https://www.bkmkitap.com/genel-saglik-kitaplari</item>
+		<item>https://www.bkmkitap.com/hamilelik-ve-dogum</item>
+		<item>https://www.bkmkitap.com/saglik-iletisimi</item>
+		<item>https://www.bkmkitap.com/yoga-meditasyon</item>
+		<item>https://www.bkmkitap.com/diger-613</item>
+	</string-array>
+	<string-array name="hobi">
+		<item>Bahçe Düzenlemesi</item>
+		<item>Bulmacalar - Bilmeceler</item>
+		<item>El Sanatları</item>
+		<item>Dekorasyon</item>
+		<item>Mandala - Yetişkinler İçin Boyama</item>
+		<item>Satranç</item>
+		<item>Astroloji - Fal - Rüya</item>
+		<item>Denizcilik</item>
+		<item>Moda</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="hobi_link">
+		<item>https://www.bkmkitap.com/bahce-duzenlemesi-kitaplari</item>
+		<item>https://www.bkmkitap.com/bilmeceler-bulmacalar-kitaplari</item>
+		<item>https://www.bkmkitap.com/el-sanatlari-kitaplari</item>
+		<item>https://www.bkmkitap.com/dekorasyon-kitaplari</item>
+		<item>https://www.bkmkitap.com/buyukler-icin-boyama-mandala-kitaplari</item>
+		<item>https://www.bkmkitap.com/satranc-kitaplari</item>
+		<item>https://www.bkmkitap.com/astroloji-fal-ruya-kitaplari</item>
+		<item>https://www.bkmkitap.com/denizcilik-kitaplari</item>
+		<item>https://www.bkmkitap.com/moda-kitaplari</item>
+		<item>https://www.bkmkitap.com/diger-271</item>
+	</string-array>
+	<string-array name="spor">
+		<item>Bireysel Sporlar</item>
+		<item>Eğitmenlik - Antrenörlük</item>
+		<item>Basketbol</item>
+		<item>Futbol</item>
+		<item>Spor Tarihi</item>
+		<item>Doğa Sporları</item>
+		<item>Diğer</item>
+	</string-array>
+	<string-array name="spor_link">
+		<item>https://www.bkmkitap.com/bireysel-sporlar-kitaplari</item>
+		<item>https://www.bkmkitap.com/egitmenlik-antrenorluk-kitaplari</item>
+		<item>https://www.bkmkitap.com/basketbol-kitaplari</item>
+		<item>https://www.bkmkitap.com/futbol-kitaplari</item>
+		<item>https://www.bkmkitap.com/spor-tarihi-kitaplari</item>
+		<item>https://www.bkmkitap.com/doga-sporlari-kitaplari</item>
+		<item>https://www.bkmkitap.com/diger-1259</item>
+	</string-array>
+	<string-array name="turizm">
+	<item>Gezgin Kitapları</item>
+	<item>Gezi Kitapları</item>
+	<item>Rehber Kitapları</item>
+	<item>Kent Rehberleri</item>
+	<item>Referans Kitaplar</item>
+	<item>Türkiye Rehberleri</item>
+	<item>Ülke Rehberleri</item>
+</string-array>
+	<string-array name="turizm_link">
+		<item>https://www.bkmkitap.com/gezgin-kitaplari</item>
+		<item>https://www.bkmkitap.com/gezi-kitaplari-2785</item>
+		<item>https://www.bkmkitap.com/gezi-rehber-kitaplari</item>
+		<item>https://www.bkmkitap.com/kent-rehberleri</item>
+		<item>https://www.bkmkitap.com/referans-kitaplari</item>
+		<item>https://www.bkmkitap.com/turkiye-rehberi-kitaplari</item>
+		<item>https://www.bkmkitap.com/ulke-rehberi-kitaplari</item>
+	</string-array>
+	<string-array name="media">
+		<item>Gazetecilik Kitapları</item>
+		<item>Genel İletişim Kitapları</item>
+		<item>Halkla İlişkiler Kitapları</item>
+		<item>İletişim Bilimi Kitapları</item>
+		<item>İnternet Yayıncılığı Kitapları</item>
+		<item>Radyo - TV Kitapları</item>
+	</string-array>
+	<string-array name="media_link">
+		<item>https://www.bkmkitap.com/gazetecilik-kitaplari</item>
+		<item>https://www.bkmkitap.com/genel-iletisim-kitaplari</item>
+		<item>https://www.bkmkitap.com/halkla-iliskiler-kitaplari</item>
+		<item>https://www.bkmkitap.com/iletisim-bilimi-kitaplari</item>
+		<item>https://www.bkmkitap.com/internet-yayinciligi-kitaplari</item>
+		<item>https://www.bkmkitap.com/radyo-tv-kitaplari</item>
+	</string-array>
+</resources>
+
+
+
+
+
+
+

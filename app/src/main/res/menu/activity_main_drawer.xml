@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+  <group
+      android:id="@+id/menu_top"
+      android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/Settings"
+        app:fontFamily="@font/my_font_family" />
+  </group>
+  <group
+      android:id="@+id/menu_bottom"
+      android:checkableBehavior="none">
+    <item
+        android:id="@+id/nav_privacy"
+        android:icon="@drawable/privacy"
+        android:title="@string/Privacy"
+        app:fontFamily="@font/my_font_family" />
+    <item
+        android:id="@+id/nav_terms"
+        android:icon="@drawable/ic_action_assignment"
+        android:title="@string/terms"
+        app:fontFamily="@font/my_font_family" />
+  </group>
+  <group
+      android:id="@+id/menu_third"
+      android:checkableBehavior="none">
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/share"
+        android:title="@string/share"
+        app:fontFamily="@font/my_font_family" />
+    <item
+        android:id="@+id/nav_rate"
+        android:icon="@drawable/rate"
+        android:title="@string/rate"
+        app:fontFamily="@font/my_font_family" />
+  </group>
+</menu>

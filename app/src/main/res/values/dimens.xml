@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">275dp</dimen>
+    <dimen name="_10dp">10dp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+    <dimen name="_55dp">55dp</dimen>
+    <dimen name="_36dp">36dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_115dp">115dp</dimen>
+
+</resources>
