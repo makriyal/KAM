@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void register(BroadcastingInnerClass receiver) { registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)); }
     @Override
     public void onBackPressed() {
-        //shadow(searchView);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             Log.d("onBackPressed","isDrawerOpen");
             drawer.closeDrawer(GravityCompat.START);
@@ -219,7 +219,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             horizontalScrollView.setVisibility(View.GONE);
             closeButton.setVisibility(View.GONE);
             searchView.setQuery("", true);
-            searchedLayout.setVisibility(View.GONE);
+            bringSearched();
+            searchView.requestFocus();
+            //searchedLayout.setVisibility(View.GONE);
+        }
+        else if (searchedRecView.getVisibility() == View.VISIBLE) {
+            Log.d("onBackPressed","searchedRecView");
+            shadow(searchView);
         }
         else {
             Log.d("onBackPressed","moveTaskToBack");

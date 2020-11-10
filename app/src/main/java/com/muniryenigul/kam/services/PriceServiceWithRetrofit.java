@@ -37,6 +37,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -52,6 +55,7 @@ public class PriceServiceWithRetrofit extends IntentService {
     private Document doc;
     private ResultReceiver resultReceiver;
     private ArrayList<HowMuchAndWhere> arrayListPrice = new ArrayList<>();
+
     public PriceServiceWithRetrofit() {
         super("PriceServiceWithRetrofit");
     }
@@ -364,7 +368,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                 check();
             }
             if (stillSearch && selections != null && selections.contains("www.dilekkitap.com")) {
-                String dilek = StringUtils.join("https://www.dilekkitap.com/arama?tip=1&word=", isbn,"&kat=0&submit=Ara");
+                String dilek = StringUtils.join("https://www.dilekkitap.com/arama?kat=0&tip=1&word=", isbn,"&submit=");
                 try {
                     builder.baseUrl("https://www.dilekkitap.com/").build().create(ApiService.class).getPrices(dilek).enqueue(new Callback<String>() {
                         @Override
@@ -407,87 +411,130 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 /////////////////////////07.03.2020///////////////////
             if (stillSearch && selections != null && selections.contains("www.atlaskitap.com")) {
-                String atlas = StringUtils.join("https://www.google.com/search?q=atlaskitap+", isbn);
-                String atlasNull = StringUtils.join("https://www.atlaskitap.com/arama?q=", isbn);
+                String atlas = StringUtils.join("https://www.atlaskitap.com/arama?q=", isbn);
                 try {
-                    final HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> {
-                        Platform.get().log(message,INFO, null);
-                        logs = LogsUtil.readLogs();
-                    });
-                    logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-                    final OkHttpClient okHttpClientRob = new OkHttpClient()
-                            .newBuilder()
-                            .addInterceptor(logging)
-                            .build();
-                    retrofit = new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.google.com/").client(okHttpClientRob).build();
-                    apiService = retrofit.create(ApiService.class);
-                    stringCall = apiService.getPrices(atlas);
-                    stringCall.enqueue(new Callback<String>() {
+                    builder.baseUrl("https://www.atlaskitap.com/").build().create(ApiService.class).getPrices(atlas).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
-                                    String atlas2 = StringUtils.substringBetween(response.body(), "<a href=\"/url?q=", "&amp");
-                                    if(!atlas2.contains("https://www.atlaskitap.com/")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+                                    doc = Jsoup.parse(response.body());
+                                    String str = doc.select("span.nobel_newbook_y.nobel_greenlink").first().text();
+                                    if (doc.select("div.nobel_newbook_item_rw.nobel_newbook_item_button > div").text().contains("Tükendi") || str.isEmpty()) {
+                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas));
                                         check();
                                     } else {
-                                        builder.baseUrl("https://www.atlaskitap.com/").build().create(ApiService.class).getPrices(atlas2).enqueue(new Callback<String>() {
-                                            @Override
-                                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                                                if (response.isSuccessful() && response.body() != null) {
-                                                    try {
-                                                        doc = Jsoup.parse(response.body());
-                                                        String str = doc.select("span.nobel_i_ifiyat").first().text();
-                                                        if (doc.select("a[class=nobel_item_spt nobel_btn_norm5 tukendiDugme]").text().contains("Tükendi") || str.isEmpty()) {
-                                                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
-                                                            check();
-                                                        } else {
-                                                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", str, atlas2));
-                                                            check();
-                                                        }
-                                                    } catch (Exception e) {
-                                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
-                                                        check();
-                                                        e.printStackTrace();
-                                                    }
-                                                } else {
-                                                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
-                                                    check();
-                                                }
-                                            }
-                                            @Override
-                                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                                                arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
-                                                check();
-                                            }
-                                        });
+                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", str, atlas));
+                                        check();
                                     }
                                 } catch (Exception e) {
-                                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+                                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas));
                                     check();
                                     e.printStackTrace();
                                 }
                             } else {
-                                arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+                                arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas));
                                 check();
                             }
                         }
                         @Override
                         public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "ಠ_ಠ", atlas));
                             check();
                         }
                     });
                 } catch (Exception e) {
-                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "ಠ_ಠ", atlas));
                     check();
                     e.printStackTrace();
                 }
             } else {
-                //arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "□", ""));
                 check();
             }
+//            if (stillSearch && selections != null && selections.contains("www.atlaskitap.com")) {
+//                String atlas = StringUtils.join("https://www.google.com/search?q=atlaskitap+", isbn);
+//                String atlasNull = StringUtils.join("https://www.atlaskitap.com/arama?q=", isbn);
+//                try {
+//                    final HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> {
+//                        Platform.get().log(message,INFO, null);
+//                        logs = LogsUtil.readLogs();
+//                    });
+//                    logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//                    final OkHttpClient okHttpClientRob = new OkHttpClient()
+//                            .newBuilder()
+//                            .addInterceptor(logging)
+//                            .build();
+//                    retrofit = new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.google.com/").client(okHttpClientRob).build();
+//                    apiService = retrofit.create(ApiService.class);
+//                    stringCall = apiService.getPrices(atlas);
+//                    stringCall.enqueue(new Callback<String>() {
+//                        @Override
+//                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+//                            if (response.isSuccessful() && response.body() != null) {
+//                                try {
+//                                    String atlas2 = StringUtils.substringBetween(response.body(), "<a href=\"/url?q=", "&amp");
+//                                    if(!atlas2.contains("https://www.atlaskitap.com/")) {
+//                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+//                                        check();
+//                                    } else {
+//                                        builder.baseUrl("https://www.atlaskitap.com/").build().create(ApiService.class).getPrices(atlas2).enqueue(new Callback<String>() {
+//                                            @Override
+//                                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+//                                                if (response.isSuccessful() && response.body() != null) {
+//                                                    try {
+//                                                        doc = Jsoup.parse(response.body());
+//                                                        //String str = doc.select("span.nobel_i_ifiyat").first().text();
+//                                                        String str = doc.select("span.nobel_newbook_y.nobel_greenlink").first().text();
+//                                                        if (doc.select("a[class=nobel_item_spt nobel_btn_norm5 tukendiDugme]").text().contains("Tükendi") || str.isEmpty()) {
+//                                                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
+//                                                            check();
+//                                                        } else {
+//                                                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", str, atlas2));
+//                                                            check();
+//                                                        }
+//                                                    } catch (Exception e) {
+//                                                        arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
+//                                                        check();
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                } else {
+//                                                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
+//                                                    check();
+//                                                }
+//                                            }
+//                                            @Override
+//                                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+//                                                arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlas2));
+//                                                check();
+//                                            }
+//                                        });
+//                                    }
+//                                } catch (Exception e) {
+//                                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+//                                    check();
+//                                    e.printStackTrace();
+//                                }
+//                            } else {
+//                                arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+//                                check();
+//                            }
+//                        }
+//                        @Override
+//                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+//                            arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+//                            check();
+//                        }
+//                    });
+//                } catch (Exception e) {
+//                    arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "¯\\_(ツ)_/¯", atlasNull));
+//                    check();
+//                    e.printStackTrace();
+//                }
+//            } else {
+//                //arrayListPrice.add(new HowMuchAndWhere("atlaskitap", "□", ""));
+//                check();
+//            }
+
             if (stillSearch && selections != null && selections.contains("www.isemkitap.com")) {
                 String isem = StringUtils.join("https://www.google.com/search?q=isemkitap+", isbn);
                 String isemNull = StringUtils.join("https://www.isemkitap.com/arama?s=", isbn);
@@ -914,8 +961,9 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select(/*"div.price > div.last-price"22.04.2020*/"div.discount-price").first().text();
-                                    if (doc.select("div.row > div > ul > div > img").attr("src").contains("not-found") || str.isEmpty()) {
+                                    String str = doc.select("div.price > div.discount-price").first().text();
+                                    if (doc.select("div.row > div > ul > div > img").attr("src").contains("not-found") ||
+                                            str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("ADA", "¯\\_(ツ)_/¯", adakitap));
                                         check();
                                     } else {
@@ -923,16 +971,28 @@ public class PriceServiceWithRetrofit extends IntentService {
                                         check();
                                     }
                                 } catch (Exception e) {
-                                    arrayListPrice.add(new HowMuchAndWhere("ADA", "¯\\_(ツ)_/¯", adakitap));
-                                    check();
-                                    e.printStackTrace();
+                                    try {
+                                        doc = Jsoup.parse(response.body());
+                                        String str = doc.select("div.price > div.last-price").first().text();
+                                        if (doc.select("div.row > div > ul > div > img").attr("src").contains("not-found") ||
+                                                str.isEmpty()) {
+                                            arrayListPrice.add(new HowMuchAndWhere("ADA", "¯\\_(ツ)_/¯", adakitap));
+                                            check();
+                                        } else {
+                                            arrayListPrice.add(new HowMuchAndWhere("ADA", StringUtils.join(str, " TL"), adakitap));
+                                            check();
+                                        }
+                                    } catch (Exception ee) {
+                                        arrayListPrice.add(new HowMuchAndWhere("ADA", "¯\\_(ツ)_/¯", adakitap));
+                                        check();
+                                        ee.printStackTrace();
+                                    }
                                 }
                             } else {
                                 arrayListPrice.add(new HowMuchAndWhere("ADA", "¯\\_(ツ)_/¯", adakitap));
                                 check();
                             }
                         }
-
                         @Override
                         public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                             arrayListPrice.add(new HowMuchAndWhere("ADA", "ಠ_ಠ", adakitap));
@@ -949,7 +1009,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                 check();
             }
             if (stillSearch && selections != null && selections.contains("www.yesilkoala.com")) {
-                String yesilkoala = StringUtils.join("https://www.yesilkoala.com/index.php?route=product/search&search=", isbn);
+                String yesilkoala = StringUtils.join("https://www.yesilkoala.com/arama/", isbn);
                 try {
                     builder.baseUrl("https://www.yesilkoala.com/").build().create(ApiService.class).getPrices(yesilkoala).enqueue(new Callback<String>() {
                         @Override
@@ -957,12 +1017,17 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("div.right > div.price > span.price-new").first().text();
-                                    if (doc.select("div.col-sm-6.text-right").text().isEmpty() || str.isEmpty()) {
+                                    String str = doc.select("div.showcase-price").first().text();
+                                    if (doc.select("#results-page > div > div > span").text().contains("bulunamamıştır") ||
+                                            doc.select("div.sold-out-label").text().contains("TÜKENDİ") ||
+                                            str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("yeşil KOALA", "¯\\_(ツ)_/¯", yesilkoala));
                                         check();
-                                    } else {
+                                    } else if (!str.contains("TL")) {
                                         arrayListPrice.add(new HowMuchAndWhere("yeşil KOALA", StringUtils.join(StringUtils.replace(str, "₺", ""), "TL"), yesilkoala));
+                                        check();
+                                    } else{
+                                        arrayListPrice.add(new HowMuchAndWhere("yeşil KOALA", str, yesilkoala));
                                         check();
                                     }
                                 } catch (Exception e) {
@@ -992,7 +1057,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                 check();
             }
             if (stillSearch && selections != null && selections.contains("www.ilahiyatvakfi.com")) {
-                String ilahiyat = StringUtils.join("https://www.ilahiyatvakfi.com/product/search?q=", isbn);
+                String ilahiyat = StringUtils.join("https://www.ilahiyatvakfi.com//product/search?q=", isbn);
                 try { builder.baseUrl("https://www.ilahiyatvakfi.com/").build().create(ApiService.class).getPrices(ilahiyat).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1000,7 +1065,9 @@ public class PriceServiceWithRetrofit extends IntentService {
                             try {
                                 doc = Jsoup.parse(response.body());
                                 String str = doc.select("span.urun-item-fiyat-1").first().text();
-                                if (doc.select("#sf-resetcontent > h1").text().contains("Whoops") || doc.select("div.urun-item-button > span").text().contains("Tükendi") || str.isEmpty()) {
+                                if (doc.select("div.kibo-mess-danger > div").text().contains("Bulunamadı") ||
+                                        doc.select("div.urun-item-button").text().contains("Tükendi") ||
+                                        str.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("İLAHİYAT VAKFI", "¯\\_(ツ)_/¯", ilahiyat));
                                     check();
                                 } else {
@@ -1144,6 +1211,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                                 doc = Jsoup.parse(response.body());
                                 String str = doc.select("div.showcasePriceOne").first().text();
                                 if (doc.select("div.alertContent > div").text().contains("bulunamamıştır") ||
+                                        doc.select("div.alertContent > div").text().contains("bulunamadı") ||
                                         doc.select("img.borderNone.globalNoStockButton").attr("src").contains("nostock") ||
                                         str.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("kpsskitap", "¯\\_(ツ)_/¯", kpsskitap));
@@ -1180,21 +1248,28 @@ public class PriceServiceWithRetrofit extends IntentService {
 
             //////////////////////////////////////07.05.2019
             if (stillSearch && selections != null && selections.contains("www.kitapkolik.com")) {
-                String kitapkolik = StringUtils.join("https://www.kitapkolik.com/Arama?1&kelime=", isbn);
+                //String kitapkolik = StringUtils.join("https://www.kitapkolik.com/Arama?1&kelime=", isbn);
+                String kitapkolik = StringUtils.join("https://www.kitapkolik.com/arama?q=", isbn);
                 try { builder.baseUrl("https://www.kitapkolik.com/").build().create(ApiService.class).getPrices(kitapkolik).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             try {
                                 doc = Jsoup.parse(response.body());
-                                String str = doc.select("div.discountPrice").first().text();
+                                //String str = doc.select("div.discountPrice").first().text();
+                                String str = doc.select("div.text-custom-pink.text-bold.currentPrice").first().text();
                                 if (doc.select("#divUrunYok > img").attr("src").contains("urunyok") ||
-                                        doc.select("a.TukendiIco > span").text().contains("Tükendi") ||
+                                        doc.select("div.fl.col-12.mb > div:nth-child(1) > div > div > div > span").text().contains("bulunamadı") ||
+                                        doc.select(/*"a.TukendiIco > span"*/"div.fl.pt.col-12 > span").text().contains("Tükendi") ||
+                                        doc.select("div.fl.pt.col-12 > span").text().contains("Stokta Yok") ||
                                         str.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("KİTAPKOLİK", "¯\\_(ツ)_/¯", kitapkolik));
                                     check();
-                                } else {
+                                } else if(!str.contains("TL")){
                                     arrayListPrice.add(new HowMuchAndWhere("KİTAPKOLİK", StringUtils.join(StringUtils.replace(str, "₺", ""), " TL"), kitapkolik));
+                                    check();
+                                } else {
+                                    arrayListPrice.add(new HowMuchAndWhere("KİTAPKOLİK", StringUtils.replace(str, "₺", ""), kitapkolik));
                                     check();
                                 }
                             } catch (Exception e) {
@@ -1355,7 +1430,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.tercihkitabevi.com")) {
-                String tercih = StringUtils.join("https://www.tercihkitabevi.com/arama?tip=1&word=", isbn);
+                String tercih = StringUtils.join("https://www.tercihkitabevi.com/arama?tip=1&word=", isbn,"&kat=0&submit=Ara");
                 try { builder.baseUrl("https://www.tercihkitabevi.com/").build().create(ApiService.class).getPrices(tercih).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1446,24 +1521,25 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.kitabevimiz.com")) {
-                String kitabevimiz = StringUtils.join("https://www.kitabevimiz.com/index.php?p=Products&q=", isbn);
+                //String kitabevimiz = StringUtils.join("https://www.kitabevimiz.com/index.php?p=Products&q=", isbn);
+                String kitabevimiz = StringUtils.join("https://www.kitabevimiz.com/arama?q=", isbn);
                 try { builder.baseUrl("https://www.kitabevimiz.com/").build().create(ApiService.class).getPrices(kitabevimiz).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                         if (response.isSuccessful() && response.body() != null) {
                             try {
                                 doc = Jsoup.parse(response.body());
-                                String str = doc.select("#prd_final_price_display").first().text();
-                                if (doc.select("div.no_product_found > div:nth-child(1)").text().contains("bulunamadı") ||
-                                        doc.select("div.col3 > div > div.prd_no_sell").text().contains("yok") ||
+                                String str = doc.select("div.fl.col-12.currentPrice").first().text();
+                                if (doc.select("div.fl.col-12.toplamsonuc").text().contains("bulunamadı") ||
+                                        doc.select("span.pos-a.text-upper.text-bold.text-center.darkFluBg.out-of-stock").text().contains("yok") ||
                                         str.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("kitabevimiz", "¯\\_(ツ)_/¯", kitabevimiz));
                                     check();
-                                } else if(StringUtils.contains(str,"TL")){
+                                } /*else if(StringUtils.contains(str,"TL")){
                                     arrayListPrice.add(new HowMuchAndWhere("kitabevimiz", StringUtils.replace(str, "TL", " TL"), kitabevimiz));
                                     check();
-                                } else {
-                                    arrayListPrice.add(new HowMuchAndWhere("kitabevimiz", StringUtils.join(str, " TL"), kitabevimiz));
+                                } */else {
+                                    arrayListPrice.add(new HowMuchAndWhere("kitabevimiz", /*StringUtils.join(str, " TL")*/str, kitabevimiz));
                                     check();
                                 }
                             } catch (Exception e) {
@@ -1543,9 +1619,6 @@ public class PriceServiceWithRetrofit extends IntentService {
             if (stillSearch && selections != null && selections.contains("www.alfakitap.com")) {
                 String alfa = StringUtils.join("https://www.alfakitap.com/kitaplar.php?a=", isbn, "&n=arama");
                 try {
-//        retrofit=new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.alfakitap.com/").build();
-//        apiService=retrofit.create(ApiService.class);
-//        stringCall = apiService.getPrices(alfa);
                     builder.baseUrl("https://www.alfakitap.com/").build().create(ApiService.class).getPrices(alfa).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1553,8 +1626,8 @@ public class PriceServiceWithRetrofit extends IntentService {
                                 try {
                                     doc = Jsoup.parse(response.body());
                                     String str = doc.select("div.hbook-last > div.hbook-price").first().text();
-                                    if (doc.select("div.hbook-cargo").text().contains("Yok") ||
-                                            !doc.select("a").attr("").contains("Arama") ||
+                                    if (doc.select("div.el-text").text().contains("Bulunamadı") ||
+                                            doc.select("div.hbook-cargo").text().contains("Yok") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("ALFA", "¯\\_(ツ)_/¯", alfa));
                                         check();
@@ -1643,7 +1716,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                 e.printStackTrace();
             }
             if (stillSearch && selections != null && selections.contains("www.eflatunkitap.com")) {
-                String eflatun = StringUtils.join("https://www.eflatunkitap.com/index.php?p=Products&q_field_active=0&ctg_id=&q=", isbn, "&search=&q_field=");
+                String eflatun = StringUtils.join("https://www.eflatunkitap.com/index.php?route=product/search&search=", isbn);
                 try {
                     builder.baseUrl("https://www.eflatunkitap.com/").build().create(ApiService.class).getPrices(eflatun).enqueue(new Callback<String>() {
                         @Override
@@ -1651,14 +1724,14 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("#prd_final_price_display").first().text();
-                                    if (doc.select("div.no_product_found > div:nth-child(1)").text().contains("bulunamadı") ||
+                                    String str = doc.select("span.price-new").first().text();
+                                    if (doc.select("p:nth-child(7)").text().contains("bulunamadı") ||
                                             doc.select("div.prd_no_sell").text().contains("Yok") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("eflatun KİTAP", "¯\\_(ツ)_/¯", eflatun));
                                         check();
                                     } else {
-                                        arrayListPrice.add(new HowMuchAndWhere("eflatun KİTAP", StringUtils.replace(str, "TL", " TL"), eflatun));
+                                        arrayListPrice.add(new HowMuchAndWhere("eflatun KİTAP", StringUtils.replace(str, "₺", " TL"), eflatun));
                                         check();
                                     }
                                 } catch (Exception e) {
@@ -1919,7 +1992,8 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.fatihkitap.com")) {
-                String fatihkitap = StringUtils.join("https://www.fatihkitap.com/index.php?p=Products&q_field_active=0&ctg_id=&q=", isbn, "&search=&q_field=");
+                String fatihkitap = StringUtils.join("https://www.fatihkitap.com/index.php?p=Products&ctg_id=&sub_ctg_id=&q=&prd_name=&prd_barcode=",
+                        isbn, "&wrt_name=&price1=&price2=&pub_id=&prd_press_date=&sort_type=rel-desc&search=Ara");
                 try {
                     builder.baseUrl("https://www.fatihkitap.com/").build().create(ApiService.class).getPrices(fatihkitap).enqueue(new Callback<String>() {
                         @Override
@@ -1927,8 +2001,9 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("#prd_final_price_display").first().text();
-                                    if (doc.select("div.no_product_found > div:nth-child(1)").text().contains("bulunamadı") ||
+                                    String str = doc.select("#layout_style > div.main_content > div > div.prd_list_container_box > div > ul > " +
+                                            "li > div > div.prd_info > div.price_box > span.price.price_sale.convert_cur").first().text();
+                                    if (doc.select("div.no_product_found").text().contains("bulunamadı") ||
                                             doc.select("div.prd_no_sell").text().equals("Stokta yok") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("fatihkitap", "¯\\_(ツ)_/¯", fatihkitap));
@@ -2242,7 +2317,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("alokitabevi.com")) {
-                String alo = StringUtils.join("https://alokitabevi.com/index.php?route=product/isearch&search=", isbn);
+                String alo = StringUtils.join("https://www.alokitabevi.com/page.php?act=arama&str=", isbn);
                 try {
                     builder.baseUrl("https://www.alokitabevi.com/").build().create(ApiService.class).getPrices(alo).enqueue(new Callback<String>() {
                         @Override
@@ -2250,14 +2325,14 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("div:nth-child(3) > div > p > span").first().text();
-                                    if (doc.select("#content > p:nth-child(10)").text().contains("bulunamadı") ||
-                                            doc.select("div:nth-child(3) > div > div").text().contains("Yok") ||
+                                    String str = doc.select("#shopPHPUrunFiyatOrg").first().text();
+                                    if (doc.select("li:nth-child(11) > input").attr("value").contains("ara") ||
+                                            doc.select("div.stockerdetayd").text().contains("Tükendi") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("ALOKİTABEVİ", "¯\\_(ツ)_/¯", alo));
                                         check();
                                     } else {
-                                        arrayListPrice.add(new HowMuchAndWhere("ALOKİTABEVİ", StringUtils.replace(str, "TL", " TL"), alo));
+                                        arrayListPrice.add(new HowMuchAndWhere("ALOKİTABEVİ", StringUtils.replace(StringUtils.join(str, " TL"),".",","), alo));
                                         check();
                                     }
                                 } catch (Exception e) {
@@ -2492,7 +2567,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                                     doc = Jsoup.parse(response.body());
                                     String str = doc.select("div.showcasePriceTwo").first().text();
                                     if (doc.select("div.alertContent > div").text().contains("bulunamamıştır") ||
-                                            !doc.select("img[class=borderNone globalAddtoCartButton]").attr("src").contains("addtocart") ||
+                                            doc.select("img[class=borderNone globalNoStockButton]").attr("src").contains("nostock") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("alkitap", "¯\\_(ツ)_/¯", alkitap));
                                         check();
@@ -3263,7 +3338,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.kitapkoala.com")) {
-                String koala = StringUtils.join("https://www.kitapkoala.com/product/search?q=", isbn);
+                String koala = StringUtils.join("https://www.kitapkoala.com/index.php?p=Products&q_field_active=0&ctg_id=&q=", isbn,"&search=&q_field=");
                 try {
                     builder.baseUrl("https://www.kitapkoala.com/").build().create(ApiService.class).getPrices(koala).enqueue(new Callback<String>() {
                         @Override
@@ -3271,27 +3346,15 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String s = doc.select("span[class=urun-item-fiyat-1]").first().text();
-                                    if (doc.select("#sf-resetcontent > h1").text().contains("Whoops")
-                                            || doc.select("div.urun-item-button > span").text().equals("Tükendi")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", "¯\\_(ツ)_/¯", koala));
-                                        check();
-                                    } else if (s.isEmpty()) {
+                                    String s = doc.select("#prd_final_price_display").first().text();
+                                    if (doc.select("div.no_product_found").text().contains("bulunamadı")
+                                            || doc.select("div.prd_no_sell").text().equals("Tükendi") ||
+                                            s.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", "¯\\_(ツ)_/¯", koala));
                                         check();
                                     } else {
-                                        int ixTL = s.indexOf("TL.");
-                                        int ixDot = s.indexOf(".");
-                                        if (ixDot > ixTL) {
-                                            arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", StringUtils.replace(s, " TL.", ",00 TL"), koala));
-                                            check();
-                                        } else if (ixTL - ixDot == 3) {
-                                            arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", StringUtils.replace(StringUtils.replace(s, " TL.", "0 TL"), ".", ","), koala));
-                                            check();
-                                        } else {
-                                            arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", StringUtils.replace(StringUtils.replace(s, " TL.", " TL"), ".", ","), koala));
-                                            check();
-                                        }
+                                        arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", StringUtils.join(s," TL"), koala));
+                                        check();
                                     }
                                 } catch (Exception e) {
                                     arrayListPrice.add(new HowMuchAndWhere("Kitap Koala", "¯\\_(ツ)_/¯", koala));
@@ -3589,8 +3652,29 @@ public class PriceServiceWithRetrofit extends IntentService {
                                         check();
                                     }
                                 } catch (Exception e) {
-                                    arrayListPrice.add(new HowMuchAndWhere("amazon", "¯\\_(ツ)_/¯", amazon));
-                                    check();
+                                    try {
+                                        doc = Jsoup.parse(response.body());
+                                        String str = doc.select("span[class=a-color-base]").first().text();
+                                        if (doc.select("#noResultsTitle").text().contains("eşleşmedi")
+                                                || doc.select("div.a-column.a-span7 > div > span").text().contains("mevcut değil")
+                                                || doc.select("div.a-section.a-spacing-none.a-spacing-top-micro > div > span").text().contains("değil")
+                                                || str.isEmpty()) {
+                                            arrayListPrice.add(new HowMuchAndWhere("amazon", "¯\\_(ツ)_/¯", amazon));
+                                            check();
+                                        } else if (!str.contains("TL")) {
+                                            arrayListPrice.add(new HowMuchAndWhere("amazon", StringUtils.join(StringUtils.replace(str, "₺", ""), " TL"), amazon));
+                                            check();
+                                        } else {
+                                            arrayListPrice.add(new HowMuchAndWhere("amazon", str, amazon));
+                                            check();
+                                        }
+                                    } catch (Exception ex) {
+                                        arrayListPrice.add(new HowMuchAndWhere("amazon", "¯\\_(ツ)_/¯", amazon));
+                                        check();
+                                        ex.printStackTrace();
+                                    }
+//                                    arrayListPrice.add(new HowMuchAndWhere("amazon", "¯\\_(ツ)_/¯", amazon));
+//                                    check();
                                     e.printStackTrace();
                                 }
                             } else {
@@ -3598,7 +3682,6 @@ public class PriceServiceWithRetrofit extends IntentService {
                                 check();
                             }
                         }
-
                         @Override
                         public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                             arrayListPrice.add(new HowMuchAndWhere("amazon", "ಠ_ಠ", amazon));
@@ -3614,9 +3697,92 @@ public class PriceServiceWithRetrofit extends IntentService {
                 //arrayListPrice.add(new HowMuchAndWhere("amazon", "□", ""));
                 check();
             }
-
+/*if (stillSearch && selections != null && selections.contains("www.kitapisler.com")) {
+                String kitapisler = StringUtils.join("https://www.google.com/search?q=kitapisler+", isbn);
+                String kitapislerNull = StringUtils.join("https://www.kitapisler.com/index.php?p=search&search=", isbn);
+                try {
+                    final HttpLoggingInterceptor logging = new HttpLoggingInterceptor(message -> {
+                        Platform.get().log(message,INFO, null);
+                        logs = LogsUtil.readLogs();
+                    });
+                    logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+                    final OkHttpClient okHttpClientRob = new OkHttpClient()
+                            .newBuilder()
+                            .addInterceptor(logging)
+                            .build();
+                    retrofit = new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.google.com/").client(okHttpClientRob).build();
+                    apiService = retrofit.create(ApiService.class);
+                    stringCall = apiService.getPrices(kitapisler);
+                    stringCall.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                try {
+                                    String kitap3652 = StringUtils.substringBetween(response.body(), "<a href=\"/url?q=", *//*"\"><div class=\""*//*"&amp");
+                                    Log.d("kitap3652",kitap3652);
+                                    if(!kitap3652.contains("https://www.kitapisler.com/")) {
+                                        arrayListPrice.add(new HowMuchAndWhere("İŞLER Kitabevleri", "¯\\_(ツ)_/¯", kitap365Null));
+                                        check();
+                                    } else {
+                                        builder.baseUrl("https://www.kitapisler.com/").build().create(ApiService.class).getPrices(kitap3652).enqueue(new Callback<String>() {
+                                            @Override
+                                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                                                if (response.isSuccessful() && response.body() != null) {
+                                                    try {
+                                                        doc = Jsoup.parse(response.body());
+                                                        String str = doc.select("p.pdprice").first().text();
+                                                        if (doc.select("#booklistempty > p:nth-child(2)").text().contains("Bulunamadı") ||
+                                                                doc.select("a.btn.btn-basket3").text().contains("yok") || str.isEmpty()) {
+                                                            arrayListPrice.add(new HowMuchAndWhere("İŞLER Kitabevleri", "¯\\_(ツ)_/¯", kitap3652));
+                                                            check();
+                                                        } else {
+                                                            arrayListPrice.add(new HowMuchAndWhere("kitap365", StringUtils.join(StringUtils.substring(str,0,str.indexOf("TL")),"TL"), kitap3652));
+                                                            check();
+                                                        }
+                                                    } catch (Exception e) {
+                                                        arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap3652));
+                                                        check();
+                                                        e.printStackTrace();
+                                                    }
+                                                } else {
+                                                    arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap3652));
+                                                    check();
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                                                arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap3652));
+                                                check();
+                                            }
+                                        });
+                                    }
+                                } catch (Exception e) {
+                                    arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap365Null));
+                                    check();
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap365Null));
+                                check();
+                            }
+                        }
+                        @Override
+                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                            arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap365Null));
+                            check();
+                        }
+                    });
+                } catch (Exception e) {
+                    arrayListPrice.add(new HowMuchAndWhere("kitap365", "¯\\_(ツ)_/¯", kitap365Null));
+                    check();
+                    e.printStackTrace();
+                }
+            } else {
+                //arrayListPrice.add(new HowMuchAndWhere("kitap365", "□", ""));
+                check();
+            }*/
             if (stillSearch && selections != null && selections.contains("www.kitapisler.com")) {
-                String isler = StringUtils.join("https://www.kitapisler.com/index.php?p=search&search=+", isbn);
+                String isler = StringUtils.join("https://www.kitapisler.com/index.php?p=search&search=", isbn);
                 try {
                     builder.baseUrl("https://www.kitapisler.com/").build().create(ApiService.class).getPrices(isler).enqueue(new Callback<String>() {
                         @Override
@@ -3950,7 +4116,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.yargiyayinevi.com")) {
-                String yargi = StringUtils.join("https://www.yargiyayinevi.com/?s=", isbn, "&post_type=product");
+                String yargi = StringUtils.join("https://www.yargiyayinevi.com/arama?q=", isbn);
                 try {
                     builder.baseUrl("https://www.yargiyayinevi.com/").build().create(ApiService.class).getPrices(yargi).enqueue(new Callback<String>() {
                         @Override
@@ -3958,15 +4124,10 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("div.col-lg-8.col-12.col-md-6.summary.entry-summary > div > p.price > ins > span").first().text();
-                                    if (doc.select("div.premmerce-filter-ajax-container > p").text().contains("bulunamadı")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("yargı yayınevi", "¯\\_(ツ)_/¯", yargi));
-                                        check();
-                                    } else if (doc.select("div.col-lg-8.col-12.col-md-6.summary.entry-summary > div > p.stock.out-of-stock")
-                                            .text().equals("Stokta yok")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("yargı yayınevi", "¯\\_(ツ)_/¯", yargi));
-                                        check();
-                                    } else if (str.isEmpty()) {
+                                    String str = doc.select("div.text-bold.currentPrice.priceColor").first().text();
+                                    if (doc.select("span.pos-a.text-upper.text-bold.text-center.darkFluBg.out-of-stock").text().contains("Yok") ||
+                                            doc.select("div.fl.col-12.mb > div:nth-child(1) > div > div > div > span").text().contains("bulunamadı") ||
+                                            str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("yargı yayınevi", "¯\\_(ツ)_/¯", yargi));
                                         check();
                                     } else {
@@ -4009,14 +4170,10 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("div[class=showcasePriceOne]").first().text();
-                                    if (doc.select("div.alertContent > div").text().contains("bulunamamıştır")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("avantajkitap", "¯\\_(ツ)_/¯", avantaj));
-                                        check();
-                                    } else if (doc.select("img[class=borderNone globalNoStockButton]").attr("src").contains("nostock")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("avantajkitap", "¯\\_(ツ)_/¯", avantaj));
-                                        check();
-                                    } else if (str.isEmpty()) {
+                                    String str = doc.select("div.showcase-price-new").first().text();
+                                    if (doc.select("#results-page > div > div > span").text().contains("bulunamamıştır")
+                                    || doc.select("div.showcase-inside").attr("src").contains("Tükendi")
+                                    || str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("avantajkitap", "¯\\_(ツ)_/¯", avantaj));
                                         check();
                                     } else {
@@ -4033,7 +4190,6 @@ public class PriceServiceWithRetrofit extends IntentService {
                                 check();
                             }
                         }
-
                         @Override
                         public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                             arrayListPrice.add(new HowMuchAndWhere("avantajkitap", "ಠ_ಠ", avantaj));
@@ -4142,7 +4298,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.tele1kitap.com")) {
-                String tele1 = StringUtils.join("https://www.tele1kitap.com/arama/", isbn, "/");
+                String tele1 = StringUtils.join("https://tele1kitap.com/?s=", isbn, "/");
                 try {
                     builder.baseUrl("https://www.tele1kitap.com/").build().create(ApiService.class).getPrices(tele1).enqueue(new Callback<String>() {
                         @Override
@@ -4150,17 +4306,26 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String str = doc.select("div.SFiyat > span").first().text();
-                                    if (doc.select("div.IBaslik").text().contains("bulunamadı") ||
-                                            doc.select("div.Durum").text().contains("Satış Dışı") ||
-                                            doc.select("div.Durum").text().contains("Tükenmiş") ||
-                                            doc.select("div.Durum").text().contains("Tükendi") ||
+                                    String str = doc.select("div.product-item-price > span.price").first().text();
+                                    if (doc.select("div > div > button > span").text().contains("Satış Dışı") ||
+                                            doc.select("div > div > button > span").text().contains("Tükenmiş") ||
+                                            doc.select("div > div > button > span").text().contains("Tükendi") ||
                                             str.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", "¯\\_(ツ)_/¯", tele1));
                                         check();
-                                    } else {
-                                        arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", str, tele1));
+                                    } else if(!str.contains(".")) {
+                                        arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", StringUtils.replace(str," TL",",00 TL"), tele1));
                                         check();
+                                    } else {
+                                        int ixTL = str.indexOf("TL");
+                                        int ixDot = str.indexOf(".");
+                                        if (ixTL - ixDot == 3) {
+                                            arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", StringUtils.replace(StringUtils.replace(str, " TL", "0 TL"), ".", ","), tele1));
+                                            check();
+                                        } else {
+                                            arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", StringUtils.replace(str, ".", ","), tele1));
+                                            check();
+                                        }
                                     }
                                 } catch (Exception e) {
                                     arrayListPrice.add(new HowMuchAndWhere("TELE1 kitap", "¯\\_(ツ)_/¯", tele1));
@@ -4491,7 +4656,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.alternatifkitap.com")) {
-                String URL3 = StringUtils.join("https://www.alternatifkitap.com/ara/?search_performed=Y&q=", isbn);
+                String URL3 = StringUtils.join("https://www.alternatifkitap.com/ara/?search_performed=Y&pcode=N&q=", isbn);
                 builder.baseUrl("https://www.alternatifkitap.com/").build().create(ApiService.class).getPrices(URL3).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -4499,8 +4664,7 @@ public class PriceServiceWithRetrofit extends IntentService {
                             try {
                                 doc = Jsoup.parse(response.body());
                                 String strAlt = doc.select("span.ty-price-bloklar").first().text();
-                                if (doc.select("p.ty-no-items").text().contains("bulunamadı") ||
-                                        doc.select("span[class=ty-qty-out-of-stock ty-control-group__item]").text().contains("yok") ||
+                                if (doc.select("div.ty-mainbox-body").text().contains("bulunamadı") ||
                                         strAlt.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("alternatifkitap", "¯\\_(ツ)_/¯", URL3));
                                     check();
@@ -4531,7 +4695,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.arkadas.com.tr")) {
-                String URL4 = StringUtils.join("https://www.arkadas.com.tr/PageSearchProductNew.aspx?text=", isbn, "&field=0&category=0");
+                String URL4 = StringUtils.join("https://www.arkadas.com.tr/PageSearchProductNew.aspx?text=", isbn, "&field=0&category=Tüm%20Kategoriler");
                 builder.baseUrl("https://www.arkadas.com.tr/").build().create(ApiService.class).getPrices(URL4).enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -4540,30 +4704,26 @@ public class PriceServiceWithRetrofit extends IntentService {
                                 doc = Jsoup.parse(response.body());
                                 String strArk = doc.select("[itemprop=price]").first().text();
                                 if (doc.select("td:nth-child(2) > div > div:nth-child(1)").text().contains("bulunamamıştır") ||
-                                        doc.select("#ctl00_ContentPlaceHolder1_RadListView1_ctrl0_ProductTemplateChooser_ctl00_LabelNoPress").text().equals("Tükendi")) {
+                                        doc.select("#ctl00_ContentPlaceHolder1_RadListView1_ctrl0_ProductTemplateChooser_ctl00_LabelNoPress").text().equals("Tükendi")||
+                                        strArk.isEmpty()) {
                                     arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", "¯\\_(ツ)_/¯", URL4));
                                     check();
                                 } else {
-                                    if (strArk.isEmpty()) {
-                                        arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", "¯\\_(ツ)_/¯", URL4));
-                                        check();
-                                    } else {
-                                        if (strArk.contains(",")) {
-                                            int index1 = strArk.indexOf(",");
-                                            int index2 = strArk.indexOf(" ");
-                                            if (index1 != -1 && index2 != -1) {
-                                                if (index2 - index1 == 2) {
-                                                    arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", StringUtils.replace(strArk, " TL", "0 TL"), URL4));
-                                                    check();
-                                                } else if (index2 - index1 == 3) {
-                                                    arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", strArk, URL4));
-                                                    check();
-                                                }
+                                    if (strArk.contains(",")) {
+                                        int index1 = strArk.indexOf(",");
+                                        int index2 = strArk.indexOf(" ");
+                                        if (index1 != -1 && index2 != -1) {
+                                            if (index2 - index1 == 2) {
+                                                arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", StringUtils.replace(strArk, " TL", "0 TL"), URL4));
+                                                check();
+                                            } else if (index2 - index1 == 3) {
+                                                arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", strArk, URL4));
+                                                check();
                                             }
-                                        } else {
-                                            arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", StringUtils.replace(strArk, " TL", ",00 TL"), URL4));
-                                            check();
                                         }
+                                    } else {
+                                        arrayListPrice.add(new HowMuchAndWhere("Arkadaş Kitabevi", StringUtils.replace(strArk, " TL", ",00 TL"), URL4));
+                                        check();
                                     }
                                 }
                             } catch (Exception e) {
@@ -4779,7 +4939,7 @@ public class PriceServiceWithRetrofit extends IntentService {
             }
 
             if (stillSearch && selections != null && selections.contains("www.benlikitap.com")) {
-                String URL7_1 = StringUtils.join("https://www.benlikitap.com/arama/", isbn);
+                String URL7_1 = StringUtils.join("https://www.benlikitap.com/index.php?p=Products&q_field_active=0&ctg_id=&q=", isbn, "&search=&q_field=");
                 try {
                     builder.baseUrl("https://www.benlikitap.com/").build().create(ApiService.class).getPrices(URL7_1).enqueue(new Callback<String>() {
                         @Override
@@ -4787,19 +4947,15 @@ public class PriceServiceWithRetrofit extends IntentService {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
                                     doc = Jsoup.parse(response.body());
-                                    String strBenli = doc.select("div.showcasePriceTwo").first().text();
-                                    if (doc.select("div[class=alertContentInside _textAlignCenter]").text()
-                                            .contains("bulunamamıştır")) {
+                                    String strBenli = doc.select("#prd_final_price_display").first().text();
+                                    if (doc.select("div.no_product_found").text().contains("bulunamadı") ||
+                                            doc.select("div.prd_no_sell").text().contains("yok") ||
+                                            strBenli.isEmpty()) {
                                         arrayListPrice.add(new HowMuchAndWhere("Benli Kitap", "¯\\_(ツ)_/¯", URL7_1));
                                         check();
                                     } else {
-                                        if (strBenli.isEmpty()) {
-                                            arrayListPrice.add(new HowMuchAndWhere("Benli Kitap", "¯\\_(ツ)_/¯", URL7_1));
-                                            check();
-                                        } else {
-                                            arrayListPrice.add(new HowMuchAndWhere("Benli Kitap", strBenli, URL7_1));
-                                            check();
-                                        }
+                                        arrayListPrice.add(new HowMuchAndWhere("Benli Kitap", StringUtils.replace(strBenli,"TL"," TL"), URL7_1));
+                                        check();
                                     }
                                 } catch (Exception e) {
                                     arrayListPrice.add(new HowMuchAndWhere("Benli Kitap", "¯\\_(ツ)_/¯", URL7_1));
@@ -5156,41 +5312,41 @@ public class PriceServiceWithRetrofit extends IntentService {
                                             "#prd_final_price_display").first().text();
                                     if (doc.select("#search").attr("value").equals("Ara") || doc.select("div.prd_no_sell").text().equals("Tükendi") ||
                                             doc.select("div.prd_no_sell").text().equals("TÜKENDİ")) {
-                                        arrayListPrice.add(new HowMuchAndWhere("ilknokta", "¯\\_(ツ)_/¯", URL18));
+                                        arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "¯\\_(ツ)_/¯", URL18));
                                         check();
                                     } else {
                                         if (strIlk.isEmpty()) {
-                                            arrayListPrice.add(new HowMuchAndWhere("ilknokta", "¯\\_(ツ)_/¯", URL18));
+                                            arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "¯\\_(ツ)_/¯", URL18));
                                             check();
                                         } else {
-                                            arrayListPrice.add(new HowMuchAndWhere("ilknokta", StringUtils.join(strIlk," TL"), URL18));
+                                            arrayListPrice.add(new HowMuchAndWhere("ilkNokta", StringUtils.join(strIlk," TL"), URL18));
                                             check();
                                         }
                                     }
                                 } catch (Exception e) {
-                                    arrayListPrice.add(new HowMuchAndWhere("ilknokta", "¯\\_(ツ)_/¯", URL18));
+                                    arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "¯\\_(ツ)_/¯", URL18));
                                     check();
                                     e.printStackTrace();
                                 }
                             } else {
-                                arrayListPrice.add(new HowMuchAndWhere("ilknokta", "ಠ_ಠ", URL18));
+                                arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "ಠ_ಠ", URL18));
                                 check();
                             }
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                            arrayListPrice.add(new HowMuchAndWhere("ilknokta", "ಠ_ಠ", URL18));
+                            arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "ಠ_ಠ", URL18));
                             check();
                         }
                     });
                 } catch (Exception e) {
-                    arrayListPrice.add(new HowMuchAndWhere("ilknokta", "ಠ_ಠ", URL18));
+                    arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "ಠ_ಠ", URL18));
                     check();
                     e.printStackTrace();
                 }
             } else {
-                //arrayListPrice.add(new HowMuchAndWhere("ilknokta", "□", ""));
+                //arrayListPrice.add(new HowMuchAndWhere("ilkNokta", "□", ""));
                 check();
             }
 
@@ -5895,7 +6051,8 @@ public class PriceServiceWithRetrofit extends IntentService {
                                         check();
                                     } else {
                                         String strKsec = doc.select("font.satis").first().text();
-                                        if (strKsec.isEmpty()) {
+                                        if (doc.select("div.KargoImg > img")
+                                                .attr("src").contains("stokyok") || strKsec.isEmpty() ) {
                                             arrayListPrice.add(new HowMuchAndWhere("kitapseç", "¯\\_(ツ)_/¯", URL34));
                                             check();
                                         } else {
@@ -6105,38 +6262,40 @@ public class PriceServiceWithRetrofit extends IntentService {
                 check();
             }
             if (stillSearch && selections != null && selections.contains("www.nezih.com.tr")) {
-                String URL44 = StringUtils.join("https://www.nezih.com.tr/urunler/ara?q=", isbn, "&page=1&s=true");
+                String URL44 = StringUtils.join("https://www.nezih.com.tr/arama?q=", isbn);
                 try {
                     builder.baseUrl("https://www.nezih.com.tr/").build().create(ApiService.class).getPrices(URL44).enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                             if (response.isSuccessful() && response.body() != null) {
                                 try {
-                                    boolean contains = false;
-                                    doc = Jsoup.parse(response.body());
-                                    for (Element table : doc.select("[class=fl col-12 catalogWrapper]")) {
-                                        for (Element row : table.select("[class=col col-12 productItem]")) {
-                                            if(row.select("a.fl.col-12.productBrand").text().contains(publisher) || row.select("a.fl.col-12.productBrand").text().equals(publisher)) {
-                                                arrayListPrice.add(new HowMuchAndWhere("nezih", row.select("div.currentPrice").text(), URL44));
-                                                check();
-                                                contains = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (!contains) {
-                                        arrayListPrice.add(new HowMuchAndWhere("nezih", "¯\\_(ツ)_/¯", URL44));
-                                        check();
-                                    }
+//                                    boolean contains = false;
 //                                    doc = Jsoup.parse(response.body());
-//                                    String strKnzh = doc.select("span.price").first().text();
-//                                    if (doc.select("div.container.m-top20 > div > div > div > div > h3").text().contains("bulunamamıştır") || strKnzh.isEmpty()) {
+//                                    for (Element table : doc.select("[class=fl col-12 catalogWrapper]")) {
+//                                        for (Element row : table.select("[class=col col-12 productItem]")) {
+//                                            if(row.select("a.fl.col-12.productBrand").text().contains(publisher) || row.select("a.fl.col-12.productBrand").text().equals(publisher)) {
+//                                                arrayListPrice.add(new HowMuchAndWhere("nezih", row.select("div.currentPrice").text(), URL44));
+//                                                check();
+//                                                contains = true;
+//                                                break;
+//                                            }
+//                                        }
+//                                    }
+//                                    if (!contains) {
 //                                        arrayListPrice.add(new HowMuchAndWhere("nezih", "¯\\_(ツ)_/¯", URL44));
 //                                        check();
-//                                    } else {
-//                                        arrayListPrice.add(new HowMuchAndWhere("nezih", strKnzh, URL44));
-//                                        check();
 //                                    }
+                                    doc = Jsoup.parse(response.body());
+                                    String strKnzh = doc.select("div.currentPrice").first().text();
+                                    if (doc.select("div.col.col-5.categoryTotal.forDesktop > div").text().contains("bulunamadı") ||
+                                            doc.select("div.productCart > a").text().contains("YOK") ||
+                                            strKnzh.isEmpty()) {
+                                        arrayListPrice.add(new HowMuchAndWhere("nezih", "¯\\_(ツ)_/¯", URL44));
+                                        check();
+                                    } else {
+                                        arrayListPrice.add(new HowMuchAndWhere("nezih", strKnzh, URL44));
+                                        check();
+                                    }
                                 } catch (Exception e) {
                                     arrayListPrice.add(new HowMuchAndWhere("nezih", "¯\\_(ツ)_/¯", URL44));
                                     check();
@@ -6462,7 +6621,22 @@ public class PriceServiceWithRetrofit extends IntentService {
         if (pages != null) bundle.putString("pages", pages);
         if (code != null && code.equals("3")) bundle.putString("code", code);
         resultReceiver.send(1, bundle);
-        if (count == all) resultReceiver.send(2, bundle);
+        if (count == all) {
+            /*if(arrayListPrice.size() != all) {
+                ArrayList<HowMuchAndWhere> arrayListPriceSpare = new ArrayList<>();
+                for(int f = 0 ; f < all; f++ ) {
+                    for(HowMuchAndWhere howMuchAndWhere : arrayListPrice) {
+                        if(!howMuchAndWhere.getSite().equals(Arrays.asList(getResources().getStringArray(R.array.listOptions)).get(f).toString())) {
+                            arrayListPriceSpare.add(new HowMuchAndWhere(Arrays.asList(getResources().getStringArray(R.array.listOptions)).get(f).toString(), "□", ""));
+                        }
+                    }
+
+                }
+                arrayListPrice.addAll(arrayListPriceSpare);
+            }
+            bundle.putParcelableArrayList("arrayListPrice", arrayListPrice);*/
+            resultReceiver.send(2, bundle);
+        }
     }
     //    private void check() {
 //        count += 1;

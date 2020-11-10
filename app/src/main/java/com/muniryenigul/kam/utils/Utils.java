@@ -24,39 +24,32 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.muniryenigul.kam.MainActivity;
 import com.muniryenigul.kam.R;
 import com.muniryenigul.kam.ers.BookFinalAdapter;
 import com.muniryenigul.kam.interfaces.ApiService;
-//import com.muniryenigul.kam.services.ControlJobService;
-
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-//import static com.muniryenigul.kam.MainActivity.isLoadMoreFinished;
 import static android.content.Context.MODE_PRIVATE;
 public class Utils {
 
     private static AlertDialog dialog;
-    private static int /*search=1, */all, count, pages;
+    private static int all, count, pages;
     private static HashMap<String, String> mapInfoFinal = null;
     private static ArrayList<HashMap<String, String>> arrayListSpare = new ArrayList<>();
 
@@ -71,6 +64,8 @@ public class Utils {
                                    ArrayList<String> authorIDsList,
                                    HorizontalScrollView horizontalScrollView, View filterLine,
                                    ArrayList<String> searchedList, ProgressBar progressBar, int search) {
+        horizontalScrollView.setVisibility(View.GONE);
+        filterLine.setVisibility(View.GONE);
         Log.d("searchURL",searchURL);
         if(from.equals("load")) {
             Log.d("from","load");
@@ -244,10 +239,14 @@ public class Utils {
         switch (from) {
             case "load":
             case "text":
+                Log.d("count",""+count);
+                Log.d("all",""+all);
                 count += 1;
                 if (count == all) {
-                    filterLine.setVisibility(View.VISIBLE);
-                    horizontalScrollView.setVisibility(View.VISIBLE);
+                    Log.d("count ==",""+count);
+                    Log.d("all ==",""+all);
+                    if(all != 1) filterLine.setVisibility(View.VISIBLE);
+                    if(all != 1) horizontalScrollView.setVisibility(View.VISIBLE);
                     adapter.notifyDataChanged();
                     adapter2.notifyDataChanged();
                     adapter3.notifyDataChanged();

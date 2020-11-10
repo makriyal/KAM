@@ -637,8 +637,12 @@ public class PriceActivity extends AppCompatActivity {
         else isbn = isbnFinal;
         try {
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            snackbar = Snackbar.make(linear2, "Lütfen bekleyiniz...", Snackbar.LENGTH_INDEFINITE);
-            snackbar.show();
+            try {
+                snackbar = Snackbar.make(linear2, "Lütfen bekleyiniz...", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if(intentInfo.equals("detail")||intentInfo.equals("new from Sugs")) {
                 afterDetailSearch=true;
                 fab2.setImageDrawable(ContextCompat.getDrawable(PriceActivity.this,R.drawable.addtofavorites));
@@ -772,8 +776,12 @@ private void situations() {
             int result = localAll -notFound - error;
             message = +result+" sitede fiyat bulundu :)";
         }
-        snackbar = Snackbar.make(linear2, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
+        try {
+            snackbar = Snackbar.make(linear2, message, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
     public void ofAdapter() {

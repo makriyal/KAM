@@ -209,6 +209,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
             cols = new ArrayList<>();
             cols.add(list.get(p));
             ArrayList<HowMuchAndWhere> arrayListComparison = new ArrayList<>();
+            ArrayList<String> arraylistSpare = new ArrayList<>();
             try {
                 database = openOrCreateDatabase(StringUtils.replace(list.get(p), "/", ""), MODE_PRIVATE, null);
                 database.execSQL("CREATE TABLE IF NOT EXISTS data (site VARCHAR, price VARCHAR, url VARCHAR)");
@@ -218,14 +219,22 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 int urlIx = cursor.getColumnIndex("url");
                 if (cursor.moveToFirst()) {
                     do {
+                        arraylistSpare.add(cursor.getString(siteIx));
                         arrayListComparison.add(new HowMuchAndWhere(cursor.getString(siteIx), cursor.getString(priceIx), cursor.getString(urlIx)));
                     } while (cursor.moveToNext());
                 }
                 cursor.close();
                 database.close();
+                for(String site : getResources().getStringArray(R.array.listOptions)) {
+                    if(!arraylistSpare.contains(StringUtils.replace(site,"amp;",""))) {
+                        arrayListComparison.add(new HowMuchAndWhere(StringUtils.replace(site,"amp;",""), "□", ""));
+                        Log.d("!contains",site);
+                    }
+                }
             } catch (Exception e) {
                 catchAndSend("getBody "+e.getLocalizedMessage());
             }
+
             Collections.sort(arrayListComparison, (o1, o2) -> {
                 Collator collator = Collator.getInstance(new Locale("tr", "TR"));
                 return collator.compare(StringUtils.replace(o1.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""), StringUtils.replace(o2.getSite().toLowerCase(new Locale("tr", "TR")), " ", ""));
@@ -236,6 +245,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 if (!arrayListComparison.get(s).getPrice().equals("ಠ_ಠ") && !arrayListComparison.get(s).getPrice().equals("¯\\_(ツ)_/¯") && !arrayListComparison.get(s).getPrice().equals("□"))
                     spare.add(Double.parseDouble(StringUtils.replace(StringUtils.replace(arrayListComparison.get(s).getPrice(), ",", "."), " TL", "")));
             }
+            Log.d("cols",cols.toString());
             try {
                 arrayListMaxs.add(Collections.max(spare));
             } catch (Exception e) {
@@ -340,6 +350,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             catchAndSend("getBody2 "+e.getLocalizedMessage());
         }
         cols = new ArrayList<>();
@@ -1685,6 +1696,7 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
         Intent intent = new Intent(TableAndBestPriceActivity.this, MainActivity.class);
         intent.putExtra("from", "tableError");
         intent.putExtra("info", e);
+        Log.d("getLocalizedMessage",e);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         TableAndBestPriceActivity.this.finish();

@@ -20,7 +20,7 @@
 		<item>bkmkitap</item>
 		<item>çamlıca kitap</item>
 		<item>çocuklara kitap</item>
-		<item>D&amp;amp;R</item>
+		<item>D&amp;R</item>
 		<item>DİLEKKİTAP</item>
 		<item>eflatun KİTAP</item>
 		<item>Eganba</item>
@@ -120,29 +120,29 @@
 		<item>yeşil KOALA</item>
 		<item>Yıldız Kitabevi</item>
 	</string-array>
-	<string-array name="listValues" >
-		<item>www.1001kitap.com.tr</item>
-		<item>www.724kitapal.com</item>
-		<item>www.adakitap.com.tr</item>
-		<item>www.alfakitap.com</item>
-		<item>www.alkitap.com</item>
-		<item>alokitabevi.com</item>
-		<item>www.alternatifkitap.com</item>
-		<item>www.amazon.com.tr</item>
-		<item>www.aperatifkitap.com</item>
-		<item>www.arkadas.com.tr</item>
-		<item>www.atlaskitap.com</item>
-		<item>www.avantajkitap.com</item>
+	<string-array name="listValues" >  <!--30.10.2020-->
+		<item>www.1001kitap.com.tr</item> <!--ulaşılamıyor-->
+		<item>www.724kitapal.com</item> <!--domain el değiştirmiş-->
+		<item>www.adakitap.com.tr</item> <!--düzeltildi-->
+		<item>www.alfakitap.com</item> <!--düzeltildi-->
+		<item>www.alkitap.com</item><!--düzeltildi-->
+		<item>alokitabevi.com</item><!--düzeltildi-->
+		<item>www.alternatifkitap.com</item><!--düzeltildi-->
+		<item>www.amazon.com.tr</item><!--düzeltildi-->
+		<item>www.aperatifkitap.com</item><!--kontrol edildi-->
+		<item>www.arkadas.com.tr</item><!--düzeltildi-->
+		<item>www.atlaskitap.com</item><!--düzeltildi-->
+		<item>www.avantajkitap.com</item><!--düzeltildi-->
 		<item>www.babil.com</item>
-		<item>www.banadakitap.com</item>
-		<item>basaridagitim.com</item>
-		<item>www.benlikitap.com</item>
+		<item>www.banadakitap.com</item><!--kitapcenter-->
+		<item>basaridagitim.com</item><!--kontrol edildi-->
+		<item>www.benlikitap.com</item><!--düzeltildi-->
 		<item>www.bkmkitap.com</item>
 		<item>www.camlicakitap.com</item>
 		<item>www.cocuklarakitap.com</item>
 		<item>www.dr.com.tr</item>
-		<item>www.dilekkitap.com</item>
-		<item>www.eflatunkitap.com</item>
+		<item>www.dilekkitap.com</item><!--kontrol edildi-->
+		<item>www.eflatunkitap.com</item><!--düzeltildi-->
 		<item>www.eganba.com</item>
 		<item>www.egitimkitap.com</item>
 		<item>www.egitimmarket.com.tr</item>
@@ -150,7 +150,7 @@
 		<item>www.elitkitap.com</item>
 		<item>www.eren.com.tr</item>
 		<item>www.dukakitap.com</item>
-		<item>www.fatihkitap.com</item>
+		<item>www.fatihkitap.com</item><!--düzeltildi-->
 		<item>www.fidankitap.com</item>
 		<item>www.garantikitap.com</item>
 		<item>www.gazikitabevi.com.tr</item>
@@ -160,9 +160,9 @@
 		<item>www.hemenkitap.com</item>
 		<item>www.hepsikitap.com</item>
 		<item>www.hermeskitap.com</item>
-		<item>www.hipokratkitabevi.com</item>
+		<item>www.hipokratkitabevi.com</item><!--kontrol edildi-->
 		<item>www.idefix.com</item>
-		<item>www.ilahiyatvakfi.com</item>
+		<item>www.ilahiyatvakfi.com</item><!--düzeltildi-->
 		<item>www.ilknokta.com</item>
 		<item>www.imge.com.tr</item>
 		<item>www.indekskitap.com</item>
@@ -175,7 +175,7 @@
 		<item>www.kariyerkitaplari.com</item>
 		<item>www.kelepirkitap.com</item>
 		<item>kidega.com</item>
-		<item>www.kitabevimiz.com</item>
+		<item>www.kitabevimiz.com</item><!--düzeltildi-->
 		<item>www.kitap365.com</item>
 		<item>www.kitapaktif.com</item>
 		<item>www.kitapalalim.com</item>
@@ -188,8 +188,8 @@
 		<item>www.kitapburada.com</item>
 		<item>www.kitapesatis.com</item>
 		<item>www.kitapfirsati.com.tr</item>
-		<item>www.kitapkoala.com</item>
-		<item>www.kitapkolik.com</item>
+		<item>www.kitapkoala.com</item><!--düzeltildi-->
+		<item>www.kitapkolik.com</item><!--düzeltildi-->
 		<item>www.kitapmatik.com.tr</item>
 		<item>www.kitapmuptelasi.com.tr</item>
 		<item>www.kitapsahaf.net</item>
@@ -202,13 +202,13 @@
 		<item>www.kitapvekitap.com</item>
 		<item>www.kitapyurdu.com</item>
 		<item>www.kitapzen.com</item>
-		<item>www.kpsskitap.net</item>
+		<item>www.kpsskitap.net</item><!--kontrol edildi-->
 		<item>www.kpssstore.com</item>
-		<item>www.legalkitabevi.com</item>
+		<item>www.legalkitabevi.com</item><!--kontrol edildi-->
 		<item>www.limonkitabevi.com</item>
 		<item>www.maksimumkitap.com</item>
 		<item>www.milletkitabevi.com</item>
-		<item>www.nezih.com.tr</item>
+		<item>www.nezih.com.tr</item><!--düzeltildi-->
 		<item>www.nobelkitap.com</item>
 		<item>www.odakitap.com</item>
 		<item>www.okuyanboga.com</item>
@@ -222,22 +222,22 @@
 		<item>www.sahafsalih.com</item>
 		<item>www.savaskitap.com</item>
 		<item>www.selamkitap.com</item>
-		<item>www.simetrikitap.com</item>
+		<item>www.simetrikitap.com</item><!--kontrol edildi-->
 		<item>www.simurg.com.tr</item>
 		<item>www.sozcukitabevi.com</item>
 		<item>www.stoktankitap.com</item>
-		<item>www.tdk.com.tr</item>
-		<item>www.tele1kitap.com</item>
-		<item>www.tercihkitabevi.com</item>
+		<item>www.tdk.com.tr</item><!--kontrol edildi-->
+		<item>www.tele1kitap.com</item><!--düzeltildi-->
+		<item>www.tercihkitabevi.com</item><!--kontrol edildi-->
 		<item>www.toptanasya.com</item>
 		<item>www.turkmenkitabevi.com.tr</item>
 		<item>www.ucuzkitapal.com</item>
 		<item>www.uygunkitapal.com</item>
 		<item>www.uygunkitapci.com</item>
-		<item>www.yardimcikitaplar.com</item>
-		<item>www.yargiyayinevi.com</item>
+		<item>www.yardimcikitaplar.com</item><!--kontrol edildi-->
+		<item>www.yargiyayinevi.com</item><!--düzeltildi-->
 		<item>www.yediiklim.com.tr</item>
-		<item>www.yesilkoala.com</item>
+		<item>www.yesilkoala.com</item><!--düzeltildi-->
 		<item>www.yildizkitabevi.com</item>
 	</string-array>
 	<string-array name="bilim">

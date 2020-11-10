@@ -336,7 +336,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     ((CustomViewHolder) customViewHolder).imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     Picasso.get().load(R.drawable./*error*/ic_virus).error(R.drawable./*error*/ic_virus).into(((CustomViewHolder) customViewHolder).imageView);
                 }
-            } else if(from != null & from.equals("price")) {
+            } else if(from != null && from.equals("price")/* && arrayListComparison.get(i).getPrice() != "□"*/) {
                 ((CustomViewHolder) customViewHolder).textSite.setText(arrayListComparison.get(i).getSite());
                 ((CustomViewHolder) customViewHolder).textPrice.setText(arrayListComparison.get(i).getPrice());
             }  else if(from != null & from.equals("main")) {
