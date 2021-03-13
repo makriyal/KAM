@@ -1,21 +1,19 @@
 package com.muniryenigul.kam.services;
-
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.muniryenigul.kam.interfaces.ApiService;
 import static com.muniryenigul.kam.activities.ShowMoreActivity.pages;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -49,15 +47,17 @@ public class ServiceWithRetrofit extends IntentService {
                                 if (!s.substring(lastIndexOf + 1).isEmpty()) pages = Integer.parseInt(s.substring(lastIndexOf + 1));
                                 else pages=0;
                                 for (Element table : doc.select("div.fl.col-12.catalogWrapper")) {
-                                    all = table.select("div.col.col-2.col-md-4.col-sm-6.col-xs-6.p-right.mb.productItem.zoom.ease").size();
-                                    for (Element row : table.select("div.col.col-2.col-md-4.col-sm-6.col-xs-6.p-right.mb.productItem.zoom.ease")) {
+                                    all = table.select("div[class=col col-12 drop-down hover lightBg]").size();
+                                    for (Element row : table.select("div[class=col col-12 drop-down hover lightBg]")) {
                                         map = new HashMap<>();
-                                        if (!map.containsValue(row.select("a.fl.col-12.text-description.detailLink").text()) && !map.containsValue(row.select("#productModelText").text()) && !map.containsValue(row.select("a.col.col-12.text-title.mt").text())) {
-                                            map.put("name", row.select("a.fl.col-12.text-description.detailLink").text());
+                                        if (!map.containsValue(row.select("div.box.col-12.text-center > div > a.fl.col-12.text-description.detailLink").text())
+                                                && !map.containsValue(row.select("#productModelText").text())
+                                                && !map.containsValue(row.select("div > a.col.col-12.text-title.mt").text())) {
+                                            map.put("name", row.select("div.box.col-12.text-center > div > a.fl.col-12.text-description.detailLink").text());
                                             map.put("author", row.select("#productModelText").text());
-                                            map.put("publisher", row.select("a.col.col-12.text-title.mt").text());
-                                            map.put("cover", row.select("div:nth-child(1) > a > span > img").attr("src"));
-                                            map.put("individual", "https://www.bkmkitap.com" + row.select("a.fl.col-12.text-description.detailLink").attr("href"));
+                                            map.put("publisher", row.select("div > a.col.col-12.text-title.mt").text());
+                                            map.put("cover", row.select("div > div:nth-child(1) > a > span > img").attr(/*"src"*/"data-src").replace("K.jpg","O.jpg"));
+                                            map.put("individual", "https://www.bkmkitap.com" + row.select("div > div > a.image-wrapper.fl.detailLink").attr("href"));
                                             arrayList.add(map);
                                         }
                                         checkSug(" ");
@@ -75,6 +75,7 @@ public class ServiceWithRetrofit extends IntentService {
             }
         } else checkSug("error");
     }
+
     private void checkSug(String what) {
         switch (what) {
             case " ":

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
 public class LockableNestedScrollView extends NestedScrollView {
     private boolean scrollable = true;
     public LockableNestedScrollView(@NonNull Context context) {

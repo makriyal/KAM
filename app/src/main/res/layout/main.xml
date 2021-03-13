@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-
                 android:orientation="vertical"
                 android:paddingTop="16dp"
                 android:paddingBottom="4dp">
@@ -48,7 +47,6 @@
                         android:orientation="horizontal"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="0dp">
-
                         <RelativeLayout
                             android:id="@+id/layoutFavText"
                             android:layout_width="match_parent"
@@ -56,7 +54,6 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="horizontal">
-
                             <TextView
                                 android:id="@+id/favText"
                                 android:layout_width="match_parent"
@@ -80,7 +77,8 @@
                                 android:layout_marginBottom="3dp"
                                 android:layout_toStartOf="@+id/findOptimumForAll"
                                 android:background="@drawable/deletedocument"
-                                android:onClick="deleteAllFavs" />
+                                android:onClick="deleteAllFavs"
+                                tools:ignore="UsingOnClickInXml" />
 
                             <Button
                                 android:id="@+id/findOptimumForAll"
@@ -92,7 +90,8 @@
                                 android:layout_marginBottom="3dp"
                                 android:background="@drawable/datasheet"
                                 android:onClick="findOptimum"
-                                android:tag="findOptimumForAll" />
+                                android:tag="findOptimumForAll"
+                                tools:ignore="UsingOnClickInXml" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -123,7 +122,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreScience">
+                    android:tag="moreScience"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/bilimText"
@@ -152,7 +152,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreSinav">
+                    android:tag="moreSinav"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/sinavText"
@@ -181,7 +182,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreEdebiyat">
+                    android:tag="moreEdebiyat"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/edebiyatText"
@@ -210,7 +212,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreHukuk">
+                    android:tag="moreHukuk"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/hukukText"
@@ -239,7 +242,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreFelsefe">
+                    android:tag="moreFelsefe"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/felsefeText"
@@ -268,7 +272,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreEkonomi">
+                    android:tag="moreEkonomi"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/ekonomiText"
@@ -297,7 +302,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreSanat">
+                    android:tag="moreSanat"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/sanatMimarlikText"
@@ -326,7 +332,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreSosyoloji">
+                    android:tag="moreSosyoloji"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/sosyolojiText"
@@ -355,7 +362,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="morePolitika">
+                    android:tag="morePolitika"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/politikaText"
@@ -384,7 +392,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreTarih">
+                    android:tag="moreTarih"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/tarihText"
@@ -413,7 +422,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreBilgisayarMobil">
+                    android:tag="moreBilgisayarMobil"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/bilgisayarMobilText"
@@ -442,7 +452,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreCocuk">
+                    android:tag="moreCocuk"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/cocukText"
@@ -471,7 +482,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreSaglik">
+                    android:tag="moreSaglik"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/saglikText"
@@ -500,7 +512,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreHobi">
+                    android:tag="moreHobi"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/hobiText"
@@ -529,7 +542,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreMedya">
+                    android:tag="moreMedya"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/medyaText"
@@ -558,7 +572,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreSpor">
+                    android:tag="moreSpor"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/sporText"
@@ -587,7 +602,8 @@
                     android:background="@drawable/rounded_not_border"
                     android:onClick="more"
                     android:orientation="vertical"
-                    android:tag="moreTurizm">
+                    android:tag="moreTurizm"
+                    tools:ignore="UsingOnClickInXml">
 
                     <TextView
                         android:id="@+id/turizmText"
@@ -639,7 +655,8 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="0"
                 android:background="@drawable/menu"
-                android:onClick="drawerMenu" />
+                android:onClick="drawerMenu"
+                tools:ignore="UsingOnClickInXml" />
 
             <SearchView
                 android:id="@+id/searchView"
@@ -683,9 +700,10 @@
                 android:layout_weight="0"
                 android:background="@drawable/microphone"
                 android:longClickable="true"
-                android:onClick="voice" />
+                android:onClick="voice"
+                tools:ignore="UsingOnClickInXml" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/barcodeButton"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -693,7 +711,9 @@
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0"
                 android:background="@drawable/barcode_2"
-                android:onClick="barcodeScan" />
+                android:onClick="barcodeScan"
+                android:visibility="gone"
+                tools:ignore="UsingOnClickInXml" />-->
         </LinearLayout>
     </LinearLayout>
 
@@ -715,7 +735,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:background="@drawable/cancel"
-            android:onClick="backContext" />
+            android:onClick="backContext"
+            tools:ignore="UsingOnClickInXml" />
 
         <TextView
             android:id="@+id/howManySelected"
@@ -747,7 +768,8 @@
             android:layout_marginEnd="16dp"
             android:layout_toStartOf="@+id/findOptimum"
             android:background="@drawable/deletedocument"
-            android:onClick="deleteMultiple" />
+            android:onClick="deleteMultiple"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/update"
@@ -758,7 +780,8 @@
             android:layout_toStartOf="@+id/deleteMultiple"
             android:background="@drawable/update"
             android:onClick="update"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="UsingOnClickInXml" />
 
         <Button
             android:id="@+id/findOptimum"
@@ -770,7 +793,8 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/datasheet"
             android:onClick="findOptimum"
-            android:tag="findOptimumForSelecteds" />
+            android:tag="findOptimumForSelecteds"
+            tools:ignore="UsingOnClickInXml" />
     </RelativeLayout>
 
     <ImageView
@@ -787,7 +811,8 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:scaleType="center"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="UsingOnClickInXml" />
 
     <ImageView
         android:id="@+id/shadowImageForContext"
@@ -801,57 +826,66 @@
         android:focusable="true"
         android:onClick="shadowForContext"
         android:scaleType="fitXY"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="UsingOnClickInXml" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listView"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:fitsSystemWindows="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/outer_searchLayout"
-        android:background="@color/colorWhite"
+        tools:ignore="TooManyViews"
         android:visibility="gone"
-        android:paddingBottom="2dp"/>
+        android:background="@drawable/rounded_not_border"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="-16dp"
+        android:padding="2.5dp"
+        android:layout_below="@+id/outer_searchLayout">
 
-    <View
-        android:layout_below="@+id/listView"
-        android:id="@+id/filterLine"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:visibility="gone"
-        android:background="@color/colorPrimaryDark"
-        tools:ignore="TooManyViews" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_border"
+            app:elevation="0dp">
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/listView"
-        android:layout_marginTop="2dp"
-        android:visibility="gone">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:cardCornerRadius="14.5dp"
+                android:background="@drawable/rounded_border"
+                app:cardElevation="0dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="-12dp"
+                    app:tabBackground="@drawable/tab_background"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="#00FFFFFF"
+                    app:tabMode="fixed" />
+            </androidx.cardview.widget.CardView>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginTop="-20dp"
+            android:paddingTop="2dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/publisherFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite" />
-            <View
-                android:id="@+id/view2"
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="68dp"
+            android:background="@color/colorPrimaryDark" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/authorFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite" />
-        </LinearLayout>
-    </HorizontalScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
         android:id="@+id/searchedLayout"

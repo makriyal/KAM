@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
 public class Settings2Activity extends AppCompatActivity {
     private String[] sitesAddresses, sitesNames;
     private boolean[] checkedItems;
@@ -46,6 +47,7 @@ public class Settings2Activity extends AppCompatActivity {
         checkedItems = new boolean[sitesAddresses.length];
         arrayForSelectedSites = new ArrayList<>();
         if (string != null && !string.equals("drawer")) try { click(0); } catch (Exception e) { e.printStackTrace(); }
+
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(Settings2Activity.this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -59,6 +61,7 @@ public class Settings2Activity extends AppCompatActivity {
             public void onLongClick(View view, int position) { }
         }));
     }
+
     private void click(int position) {
         if(position==0){
             none=true;
@@ -101,6 +104,7 @@ public class Settings2Activity extends AppCompatActivity {
             cancelButton.setOnClickListener(new CustomListener(mDialog, "Cancel"));
         }
     }
+
     private class CustomListener implements View.OnClickListener {
         private final Dialog dialog;
         private final String from;
@@ -130,6 +134,7 @@ public class Settings2Activity extends AppCompatActivity {
             }
         }
     }
+
     private void check() {
         if(string != null) {
             if (string.equals("ShowMore") ||string.equals("ContentTouch") || string.equals("detail"))  finish();
@@ -142,6 +147,7 @@ public class Settings2Activity extends AppCompatActivity {
             }
         }
     }
+
     private void storeArray(boolean[] array, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences("preference", 0);
         SharedPreferences.Editor editor = prefs.edit();
@@ -149,6 +155,7 @@ public class Settings2Activity extends AppCompatActivity {
         for (int i = 0; i < array.length; i++) editor.putBoolean("checkedItems" + "_" + i, array[i]);
         editor.apply();
     }
+
     private void storeArrayList(ArrayList<String> arrayList, Context mContext) {
         Set<String> set = new HashSet<>(arrayList);
         arrayList.clear();
@@ -159,12 +166,14 @@ public class Settings2Activity extends AppCompatActivity {
         for (int i = 0; i < arrayList.size(); i++) editor.putString("arrayForSelectedSites" + "_" + i, arrayList.get(i));
         editor.apply();
     }
+
     private void loadArray(boolean[] array, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences("preference", 0);
         int size = prefs.getInt("checkedItems" + "_size", 0);
         for (int i = 0; i < size; i++) { array[i] = prefs.getBoolean("checkedItems" + "_" + i, false); }
         firstLoad=false;
     }
+
     private void loadArrayList(ArrayList<String> arrayList, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences("preference2", 0);
         int size = prefs.getInt("arrayForSelectedSites" + "_size", 0);

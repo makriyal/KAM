@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="15dp">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/siteImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/kitapsec"
+        android:layout_weight="2"/>
+    <TextView
+        android:id="@+id/siteName"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center|top"
+        android:textColor="@color/colorWhite"
+        android:text="@string/kitapsec"
+        app:fontFamily="@font/my_font_family"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_weight="1"/>
+</LinearLayout>

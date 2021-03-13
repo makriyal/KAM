@@ -18,15 +18,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import static com.muniryenigul.kam.MainActivity.filteredList;
+
 public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int TYPE_ITEM = 0;
-    private Context context;
+    private final Context context;
     private ArrayList<HashMap<String, String>> feedItemList;
     private ArrayList<String> filter, filter2;
     private OnLoadMoreFinalListener loadMoreListener;
     private boolean isLoading = false, isMoreDataAvailable = true;
-    private String type;
-    private String str;
+    private String type, str;
 
     public interface OnLoadMoreFinalListener {
         void onLoadMore();
@@ -66,6 +66,7 @@ public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return new LoadHolder(inflater.inflate(R.layout.progress_item, viewGroup, false));
         }
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         try {
@@ -75,14 +76,13 @@ public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             if(str != null) {
                 ((ItemHolder) viewHolder).filterName.setText(filter.get(i));
-                if(!filteredList.contains(filter2.get(i))) ((ItemHolder) viewHolder).filterCheckBox.setChecked(false);
-                else ((ItemHolder) viewHolder).filterCheckBox.setChecked(true);
+                ((ItemHolder) viewHolder).filterCheckBox.setChecked(filteredList.contains(filter2.get(i)));
             } else if (getItemViewType(i) == TYPE_ITEM) ((ItemHolder) viewHolder).bindData(feedItemList.get(i));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
     @Override
     public int getItemViewType(int position) {
         try {
@@ -93,15 +93,17 @@ public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return 1;
         }
     }
+
     @Override
     public int getItemCount() {
         if(str != null) return filter.size();
         else return feedItemList.size();
     }
+
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnLongClickListener {
         private TextView filterName, name, author, publisher;
         private ImageView cover;
-        private String type;
+        private final String type;
         private ProgressBar progressBar;
         private CheckBox filterCheckBox;
 
@@ -161,7 +163,7 @@ public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     author.setText(resultp.get("author"));
                     publisher.setText(resultp.get("publisher"));
                     try {
-                        Picasso.get().load(resultp.get("cover")).fit().centerCrop().error(R.drawable./*error*/ic_virus).into(cover, new Callback() {
+                        Picasso.get().load(resultp.get("cover")).fit().centerCrop().error(R.drawable.ic_virus).into(cover, new Callback() {
                                     @Override public void onSuccess() { progressBar.setVisibility(View.INVISIBLE); }
                                     @Override public void onError(Exception e) { }
                                 });
@@ -181,14 +183,17 @@ public class BookFinalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return false;
         }
     }
+
     static class LoadHolder extends RecyclerView.ViewHolder {
         LoadHolder(View itemView) {
             super(itemView);
         }
     }
+
     public void setMoreDataAvailable(boolean moreDataAvailable) {
         isMoreDataAvailable = moreDataAvailable;
     }
+
     public void notifyDataChanged() {
         notifyDataSetChanged();
         isLoading = false;

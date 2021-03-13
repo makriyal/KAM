@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.muniryenigul.kam"
     android:installLocation="internalOnly">
-    <uses-sdk tools:overrideLibrary="com.google.android.gms.ads_base,
-    com.google.android.gms.ads.impl, com.google.android.gms.gass, com.google.android.gms.ads" />
-    <!--<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />-->
-    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+
+    <uses-sdk tools:overrideLibrary="com.google.android.gms.ads_base,     com.google.android.gms.ads.impl, com.google.android.gms.gass, com.google.android.gms.ads" />
+    <!-- <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> -->
+    <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name="androidx.multidex.MultiDexApplication"
-        android:icon="@mipmap/icon"
         android:allowBackup="false"
         android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".activities.TableAndBestPriceActivity"
             android:configChanges="screenSize|orientation|screenLayout|layoutDirection|density|smallestScreenSize" />
@@ -37,6 +37,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,10 +46,7 @@
             android:configChanges="screenSize|orientation|screenLayout|layoutDirection|density|smallestScreenSize"
             android:label="Ayarlar"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.ScanActivity"
-            android:configChanges="screenSize|orientation|screenLayout|layoutDirection|density|smallestScreenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.gms.ads.AD_MANAGER_APP"
             android:value="true" />
@@ -67,27 +65,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <service android:name=".services.PriceServiceWithRetrofit" />
         <service android:name=".services.ServiceWithRetrofit" />
-        <!--<service android:name=".services.SinavServiceWithRetrofit" />
-        <service android:name=".services.HukukServiceWithRetrofit" />
-        <service android:name=".services.FelsefeServiceWithRetrofit" />
-        <service android:name=".services.EkonomiServiceWithRetrofit" />
-        <service android:name=".services.SanatMimarlikServiceWithRetrofit" />
-        <service android:name=".services.SosyolojiServiceWithRetrofit" />
-        <service android:name=".services.TarihServiceWithRetrofit" />
-        <service android:name=".services.PolitikaServiceWithRetrofit" />
-        <service android:name=".services.BilgisayarMobilServiceWithRetrofit" />
-        <service android:name=".services.SaglikServiceWithRetrofit" />
-        <service android:name=".services.ControlJobService"
-            android:label="Price Control Service"
-            android:permission="android.permission.BIND_JOB_SERVICE" >
-        </service>
-        <receiver android:name=".ers.AlarmReceiver"/>
-        <receiver android:name=".ers.AutoStart">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>-->
     </application>
+
 </manifest>

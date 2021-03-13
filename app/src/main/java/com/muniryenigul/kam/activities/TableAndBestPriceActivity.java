@@ -2,80 +2,43 @@ package com.muniryenigul.kam.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.gms.ads.RequestConfiguration;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebStorage;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.muniryenigul.kam.MainActivity;
 import com.muniryenigul.kam.R;
-import com.muniryenigul.kam.ers.RecyclerTouchListener;
 import com.muniryenigul.kam.ers.SuggestionAdapter;
-import com.muniryenigul.kam.interfaces.ApiService;
 import com.muniryenigul.kam.models.HowMuchAndWhere;
-import com.muniryenigul.kam.utils.Utils;
-
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import static com.muniryenigul.kam.MainActivity.favList;
-import static com.muniryenigul.kam.MainActivity.favSingleItem;
 import static com.muniryenigul.kam.activities.PriceActivity.database;
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,19 +47,12 @@ import java.text.Collator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import miguelbcr.ui.tableFixHeadesWrapper.TableFixHeaderAdapter;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class TableAndBestPriceActivity extends AppCompatActivity {
     private Context context;
@@ -107,39 +63,22 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
     private ArrayList<Integer> arrayListPresence;
     private ArrayList<ArrayList<HowMuchAndWhere>> arrayListAll;
     private ArrayList<ArrayList<Boolean>> arrayListBooleans;
-    //private AdRequest adRequest;
-    //private AdView mAdView;
     private Dialog dialog;
-    //private Utils.BroadcastingInnerClass receiver;
     private Intent i;
-    private String from;
     private BottomSheetBehavior behavior;
     private LinearLayout linear;
     private SuggestionAdapter comparisonAdapter;
     private ArrayList<HowMuchAndWhere> arrayListComparison;
     private TextView bestSite;
     private RecyclerView recViewComparison;
-//    private WebView webView;
-//    private ProgressBar progressBar;
-//    private AppBarLayout appBarLayout;
-    private String baseSite, baseURL;
-    private List sites;
-
+    private String from;
 
     @Override
     public void onBackPressed() {
         if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         else super.onBackPressed();
     }
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,7 +167,6 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 for(String site : getResources().getStringArray(R.array.listOptions)) {
                     if(!arraylistSpare.contains(StringUtils.replace(site,"amp;",""))) {
                         arrayListComparison.add(new HowMuchAndWhere(StringUtils.replace(site,"amp;",""), "□", ""));
-                        Log.d("!contains",site);
                     }
                 }
             } catch (Exception e) {
@@ -245,7 +183,6 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 if (!arrayListComparison.get(s).getPrice().equals("ಠ_ಠ") && !arrayListComparison.get(s).getPrice().equals("¯\\_(ツ)_/¯") && !arrayListComparison.get(s).getPrice().equals("□"))
                     spare.add(Double.parseDouble(StringUtils.replace(StringUtils.replace(arrayListComparison.get(s).getPrice(), ",", "."), " TL", "")));
             }
-            Log.d("cols",cols.toString());
             try {
                 arrayListMaxs.add(Collections.max(spare));
             } catch (Exception e) {
@@ -300,12 +237,10 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 if (max != favList.size()) {
                     StringBuilder stringBuilder = null;
                     if(max == 0) {
-                        Log.d("max","== 0");
                         linear.setVisibility(View.GONE);
                         Toast.makeText(this, ":(", Toast.LENGTH_LONG).show();
                         Toast.makeText(this, "Ne yazık ki, favorilerdeki tüm kitapların alınabileceği bir site şu an için bulunamadı.", Toast.LENGTH_LONG).show();
                     } else {
-                        Log.d("max","!= 0");
                         while (max>0) {
                             for (int i = 0; i < arrayListPresence.size(); i++) {
                                 stringBuilder = new StringBuilder();
@@ -324,7 +259,6 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                     }
                 } else {
                     arrayListComparison.clear();
-                    Log.d("max","== favList.size()");
                     for (int i = 0; i < arrayListPresence.size(); i++) {
                         if (arrayListPresence.get(i).equals(Collections.max(arrayListPresence))) {
                              createBody(null, formatter, siteLink, siteList, json, i);
@@ -1431,10 +1365,6 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
                 }
             }
         } catch (JSONException e) {
-            //linear.setVisibility(View.GONE);
-//            Toast.makeText(this, ":(", Toast.LENGTH_LONG).show();
-//            Toast.makeText(this, "Lütfen favorileri güncelleyiniz.", Toast.LENGTH_LONG).show();
-            Log.d("createBody","catch");
             e.printStackTrace();
         }
     }
@@ -1696,7 +1626,6 @@ public class TableAndBestPriceActivity extends AppCompatActivity {
         Intent intent = new Intent(TableAndBestPriceActivity.this, MainActivity.class);
         intent.putExtra("from", "tableError");
         intent.putExtra("info", e);
-        Log.d("getLocalizedMessage",e);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         TableAndBestPriceActivity.this.finish();

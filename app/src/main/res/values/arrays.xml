@@ -1,8 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+	<string-array name="baseURLs">
+		<item>https://www.kitapsec.com/</item>
+		<item>https://www.kitapyurdu.com/</item>
+		<item>https://www.halkkitabevi.com/</item>
+		<!--<item>https://www.bkmkitap.com/</item>-->
+	</string-array>
+	<string-array name="queriesTable">
+		<item>div.Ks_ContentUrunList.urunListeleDiv > table:nth-child(1) > tbody</item>
+		<item>#product-table</item>
+		<item>div.prd_list_container_box</item>
+		<!--<item>div.fl.col-12.catalogWrapper</item>-->
+	</string-array>
+	<string-array name="queriesAll">
+		<item>tr > td > div.Ks_UrunSatir</item>
+		<item>div.product-cr</item>
+		<item>div.prd_list_container_box > div > ul > li</item>
+		<!--<item>div</item>-->
+	</string-array>
+	<string-array name="queriesName">
+		<item>a.text</item>
+		<item>div.name</item>
+		<item>div.name</item>
+		<!--<item>a.fl.col-12.text-description.detailLink</item>-->
+	</string-array>
+	<string-array name="queriesAuthor">
+		<item>div > span > a</item>
+		<item>div.author.compact.ellipsis</item>
+		<item>div.writer</item>
+		<!--<item>#productModelText</item>-->
+	</string-array>
+	<string-array name="queriesPublisher">
+		<item>span.yynImg</item>
+		<item>div.publisher</item>
+		<item>div.publisher</item>
+		<!--<item>a.col.col-12.text-title.mt</item>-->
+	</string-array>
+	<string-array name="queriesCover">
+		<item>a > img</item>
+		<item>div.image > div > a > img</item>
+		<item>div.image_container > div > a > img</item>
+		<!--<item>a > span > img</item>-->
+	</string-array>
+	<string-array name="queriesCoverHref">
+		<item>data-src</item>
+		<item>src</item>
+		<item>data-src</item>
+		<!--<item>data-src</item>-->
+	</string-array>
+	<string-array name="queriesIndividual">
+		<item>a.img</item>
+		<item>div.name > a</item>
+		<item>div.image_container > div > a</item>
+		<!--<item>a.fl.col-12.text-description.detailLink</item>-->
+	</string-array>
+	<string-array name="queriesIndividualHref">
+		<item>href</item>
+		<item>href</item>
+		<item>href</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherIDTable">
+		<item />
+		<item>href</item>
+		<item>#search_filter_form > ul > li:nth-child(2) > ul</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherIDall">
+		<item>href</item>
+		<item>href</item>
+		<item>input[class=filters_checkbox]</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherIDs">
+		<item>href</item>
+		<item>href</item>
+		<item>input</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherIDattr">
+		<item>href</item>
+		<item>href</item>
+		<item>name</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorIDTable">
+		<item>href</item>
+		<item>href</item>
+		<item>#search_filter_form > ul > li:nth-child(3) > ul</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorIDall">
+		<item>href</item>
+		<item>href</item>
+		<item>input[class=filters_checkbox]</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorIDs">
+		<item>href</item>
+		<item>href</item>
+		<item>input</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorIDattr">
+		<item>href</item>
+		<item>href</item>
+		<item>name</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherFilterTable">
+		<item>href</item>
+		<item>href</item>
+		<item>#search_filter_form > ul > li:nth-child(2) > ul</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherFilterall">
+		<item>href</item>
+		<item>href</item>
+		<item>li</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesPublisherFilters">
+		<item>href</item>
+		<item>href</item>
+		<item>label</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorFilterTable">
+		<item>href</item>
+		<item>href</item>
+		<item>#search_filter_form > ul > li:nth-child(3) > ul</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorFilterall">
+		<item>href</item>
+		<item>href</item>
+		<item>li</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesAuthorFilters">
+		<item>href</item>
+		<item>href</item>
+		<item>label</item>
+		<!--<item>href</item>-->
+	</string-array>
+	<string-array name="queriesDigitName">
+		<item>a.text > span</item>
+		<item>a.text > span</item>
+		<item>h1.contentHeader.prdHeader</item>
+	</string-array>
+	<string-array name="queriesDigitAuthor">
+		<item>tr > td > div.Ks_UrunSatir > div > span > a</item>
+		<item>tr > td > div.Ks_UrunSatir > div > span > a</item>
+		<item>div.prd_brand_box > a.writer > span</item>
+	</string-array>
+	<string-array name="queriesDigitPublisher">
+		<item>span.yynImg > div > a</item>
+		<item>span.yynImg > div > a</item>
+		<item>div.prd_brand_box > a.publisher > span</item>
+	</string-array>
+	<string-array name="queriesDigitCover">
+		<item>a.img > img</item>
+		<item>a.img > img</item>
+		<item>#main_img</item>
+	</string-array>
+	<string-array name="queriesDigitCoverAttr">
+		<item>data-src</item>
+		<item>data-src</item>
+		<item>src</item>
+	</string-array>
+	<string-array name="queriesDigitIndividual">
+		<item>a.text</item>
+		<item>a.text</item>
+		<item>head > meta:nth-child(9)</item>
+	</string-array>
+	<string-array name="queriesDigitIndividualAttr">
+		<item>href</item>
+		<item>href</item>
+		<item>content</item>
+	</string-array>
+    <string-array name="queriesNoResult">
+        <item>div.Ks_UyariDiv</item>
+        <item>div.no-result</item>
+        <item>div.no_product_found</item>
+    </string-array>
+
 	<string-array name="listOptions">
-		<item>1001 KİTAP</item>
-		<item>724kitapal</item>
+		<!--<item>1001 KİTAP</item>-->
+		<!--<item>724kitapal</item>-->
 		<item>ADA</item>
 		<item>ALFA</item>
 		<item>alkitap</item>
@@ -13,7 +198,6 @@
 		<item>Arkadaş Kitabevi</item>
 		<item>atlaskitap</item>
 		<item>avantajkitap</item>
-		<item>Babil</item>
 		<item>Banada Kitap</item>
 		<item>başarı DAĞITIM</item>
 		<item>Benli Kitap</item>
@@ -28,6 +212,7 @@
 		<item>EĞİTİM MARKET</item>
 		<item>EKİN</item>
 		<item>elitkitap</item>
+		<item>enaktif</item>
 		<item>EREN Kitap</item>
 		<item>EVRENSEL KİTABEVİ</item>
 		<item>fatihkitap</item>
@@ -35,7 +220,7 @@
 		<item>Garanti Kitap</item>
 		<item>Gazi Kitabevi</item>
 		<item>Halk Kitabevi</item>
-		<item>harmankitap</item>
+		<!--<item>harmankitap</item>-->
 		<item>Hazırlık Kitap</item>
 		<item>HEMENKİTAP</item>
 		<item>hepsikitap</item>
@@ -51,14 +236,13 @@
 		<item>isemkitap</item>
 		<item>İSTANBUL KİTAPÇISI</item>
 		<item>İŞLER Kitabevleri</item>
-		<item>KABALCI</item>
+		<!--<item>KABALCI</item>-->
 		<item>Kariyer Kitapları</item>
 		<item>KELEPİR</item>
 		<item>kidega</item>
 		<item>kitabevimiz</item>
 		<item>kitap365</item>
-		<item>kitapaktif</item>
-		<item>kitapalalim</item>
+		<!--<item>kitapalalim</item>-->
 		<item>kitapaloku</item>
 		<item>KİTAPAMBARI</item>
 		<item>Kitapbende</item>
@@ -90,7 +274,7 @@
 		<item>millet kitabevi</item>
 		<item>nezih</item>
 		<item>NOBEL KİTAP</item>
-		<item>odakitap</item>
+		<!--<item>odakitap</item>-->
 		<item>OKUYAN BOĞA</item>
 		<item>PALME KİTABEVİ</item>
 		<item>paNdora</item>
@@ -105,24 +289,24 @@
 		<item>simetrikitap</item>
 		<item>simurg</item>
 		<item>SÖZCÜ KİTABEVİ</item>
-		<item>stoktankitap</item>
+		<!--<item>stoktankitap</item>-->
 		<item>TDK Bilim</item>
 		<item>TELE1 kitap</item>
 		<item>TERCİH KİTABEVİ</item>
-		<item>toptanasya</item>
+		<!--<item>toptanasya</item>-->
 		<item>türkmen kitabevi</item>
 		<item>UCUZKİTAPAL</item>
 		<item>uygunkitapal</item>
-		<item>Uygun Kitapçı</item>
+		<!--<item>Uygun Kitapçı</item>-->
 		<item>YARDIMCI KİTAPLAR</item>
 		<item>yargı yayınevi</item>
 		<item>YEDİİKLİM</item>
-		<item>yeşil KOALA</item>
+		<!--<item>yeşil KOALA</item>-->
 		<item>Yıldız Kitabevi</item>
 	</string-array>
-	<string-array name="listValues" >  <!--30.10.2020-->
-		<item>www.1001kitap.com.tr</item> <!--ulaşılamıyor-->
-		<item>www.724kitapal.com</item> <!--domain el değiştirmiş-->
+	<string-array name="listValues" >  <!--30.10.2020--><!--09.03.2021-->
+		<!--<item>www.1001kitap.com.tr</item>--> <!--ulaşılamıyor-->
+		<!--<item>www.724kitapal.com</item>--> <!--domain el değiştirmiş-->
 		<item>www.adakitap.com.tr</item> <!--düzeltildi-->
 		<item>www.alfakitap.com</item> <!--düzeltildi-->
 		<item>www.alkitap.com</item><!--düzeltildi-->
@@ -133,7 +317,6 @@
 		<item>www.arkadas.com.tr</item><!--düzeltildi-->
 		<item>www.atlaskitap.com</item><!--düzeltildi-->
 		<item>www.avantajkitap.com</item><!--düzeltildi-->
-		<item>www.babil.com</item>
 		<item>www.banadakitap.com</item><!--kitapcenter-->
 		<item>basaridagitim.com</item><!--kontrol edildi-->
 		<item>www.benlikitap.com</item><!--düzeltildi-->
@@ -146,8 +329,9 @@
 		<item>www.eganba.com</item>
 		<item>www.egitimkitap.com</item>
 		<item>www.egitimmarket.com.tr</item>
-		<item>www.ekinyayinevi.com</item>
+		<item>www.ekinkitap.com</item>
 		<item>www.elitkitap.com</item>
+		<item>www.enaktif.com</item>
 		<item>www.eren.com.tr</item>
 		<item>www.dukakitap.com</item>
 		<item>www.fatihkitap.com</item><!--düzeltildi-->
@@ -155,7 +339,7 @@
 		<item>www.garantikitap.com</item>
 		<item>www.gazikitabevi.com.tr</item>
 		<item>www.halkkitabevi.com</item>
-		<item>www.harmankitap.com</item>
+		<!--<item>www.harmankitap.com</item>-->
 		<item>www.hazirlikkitap.com</item>
 		<item>www.hemenkitap.com</item>
 		<item>www.hepsikitap.com</item>
@@ -171,14 +355,13 @@
 		<item>www.isemkitap.com</item>
 		<item>www.istanbulkitapcisi.com</item>
 		<item>www.kitapisler.com</item>
-		<item>www.kabalci.com.tr</item>
+		<!--<item>www.kabalci.com.tr</item>-->
 		<item>www.kariyerkitaplari.com</item>
 		<item>www.kelepirkitap.com</item>
 		<item>kidega.com</item>
 		<item>www.kitabevimiz.com</item><!--düzeltildi-->
 		<item>www.kitap365.com</item>
-		<item>www.kitapaktif.com</item>
-		<item>www.kitapalalim.com</item>
+		<!--<item>www.kitapalalim.com</item>-->
 		<item>kitapaloku.com</item>
 		<item>www.kitapambari.com</item>
 		<item>www.kitapbende.com</item>
@@ -210,7 +393,7 @@
 		<item>www.milletkitabevi.com</item>
 		<item>www.nezih.com.tr</item><!--düzeltildi-->
 		<item>www.nobelkitap.com</item>
-		<item>www.odakitap.com</item>
+		<!--<item>www.odakitap.com</item>-->
 		<item>www.okuyanboga.com</item>
 		<item>palmekitabevi.com</item>
 		<item>www.pandora.com.tr</item>
@@ -225,19 +408,19 @@
 		<item>www.simetrikitap.com</item><!--kontrol edildi-->
 		<item>www.simurg.com.tr</item>
 		<item>www.sozcukitabevi.com</item>
-		<item>www.stoktankitap.com</item>
+		<!--<item>www.stoktankitap.com</item>-->
 		<item>www.tdk.com.tr</item><!--kontrol edildi-->
 		<item>www.tele1kitap.com</item><!--düzeltildi-->
 		<item>www.tercihkitabevi.com</item><!--kontrol edildi-->
-		<item>www.toptanasya.com</item>
+		<!--<item>www.toptanasya.com</item>-->
 		<item>www.turkmenkitabevi.com.tr</item>
 		<item>www.ucuzkitapal.com</item>
-		<item>www.uygunkitapal.com</item>
-		<item>www.uygunkitapci.com</item>
+		<item>uygunkitapal.com</item> <!----><!--düzeltildi-->
+		<!--<item>www.uygunkitapci.com</item>-->
 		<item>www.yardimcikitaplar.com</item><!--kontrol edildi-->
 		<item>www.yargiyayinevi.com</item><!--düzeltildi-->
 		<item>www.yediiklim.com.tr</item>
-		<item>www.yesilkoala.com</item><!--düzeltildi-->
+		<!--<item>www.yesilkoala.com</item>--><!--düzeltildi-->
 		<item>www.yildizkitabevi.com</item>
 	</string-array>
 	<string-array name="bilim">

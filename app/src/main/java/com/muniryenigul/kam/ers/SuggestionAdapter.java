@@ -6,11 +6,11 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -20,7 +20,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,13 +30,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
@@ -79,12 +76,13 @@ import static com.muniryenigul.kam.activities.PriceActivity.fav;
 import static com.muniryenigul.kam.activities.PriceActivity.askToUpdate;
 import static com.muniryenigul.kam.MainActivity.favPosition;
 import static com.muniryenigul.kam.MainActivity.indexesForUpdate;
+
 public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private CheckBox selectAll;
     public ArrayList<SingleItemModel> feedItemList;
     private ArrayList<HowMuchAndWhere> arrayListComparison;
     private SingleItemModel singleItemModel;
-    private Context context;
+    private final Context context;
     private ArrayList<HashMap<String, String>> arrayListInfoFinal;
     private final int TYPE_ITEM = 0;
     private BroadcastingInnerClass receiver;
@@ -101,6 +99,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private RecyclerView recyclerView;
     private String from, volume, pages;
     private ArrayList<CategoryModel> categoryList;
+
     public class BroadcastingInnerClass extends BroadcastReceiver {
         boolean connected = false;
         @Override
@@ -126,23 +125,12 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return false;
         }
     }
-    public SuggestionAdapter(Context context, ArrayList<HashMap<String, String>> arrayListInfoFinal, String type, ImageView coverLoading, ArrayList<String> arrayForSelectedSites) {
-        this.arrayListInfoFinal = arrayListInfoFinal;
-        this.context = context;
-        this.coverLoading = coverLoading;
-        this.arrayForSelectedSites = arrayForSelectedSites;
-        receiver = new BroadcastingInnerClass();
-        context.registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-    }
+
     public SuggestionAdapter(Context context, ArrayList<HowMuchAndWhere> arrayListComparison) {
         this.arrayListComparison = arrayListComparison;
         this.context = context;
     }
-    public SuggestionAdapter(Context context, ArrayList<CategoryModel> categoryList, String from) {
-        this.categoryList = categoryList;
-        this.from = from;
-        this.context = context;
-    }
+
     public SuggestionAdapter(Context context, ArrayList<HowMuchAndWhere> arrayListComparison, ArrayList<String> arrayForSelectedSites, SingleItemModel singleItemModel, RecyclerView recyclerView, String volume, String pages, String from) {
         this.arrayListComparison = arrayListComparison;
         this.arrayForSelectedSites = arrayForSelectedSites;
@@ -153,6 +141,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.volume = volume;
         this.pages = pages;
     }
+
     public SuggestionAdapter(Context context, CheckBox selectAll, ArrayList<SingleItemModel> feedItemList, ArrayList<String> contextList, TextView howManySelected, RelativeLayout outer_contextLayout, LinearLayout outer_searchLayout, ImageView shadowImageForContext, LockableNestedScrollView nestedScrollView, Button update, LinearLayout favLayout, ImageView coverLoading, Button deleteAllFavs, Button findOptimumForAll) {
         this.feedItemList = feedItemList;
         this.selectAll = selectAll;
@@ -188,11 +177,11 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return new LoadHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.progress_item, null));
         }
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder customViewHolder, int i) {
         try {
             if(arrayListComparison != null && from == null) {
-                Log.d("onBindViewHolder","1");
                 if(arrayListComparison.get(i).getHowMuch()==null) {
                     ((CustomViewHolder) customViewHolder).bestSiteItem.setVisibility(View.GONE);
                     double color;
@@ -399,8 +388,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         }
                     }
                 } else {
-                    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) ((CustomViewHolder) customViewHolder).imageView.setBackgroundDrawable(categoryList.get(i).getDrawable());
-                    else ((CustomViewHolder) customViewHolder).imageView.setBackground(categoryList.get(i).getDrawable());
+                    ((CustomViewHolder) customViewHolder).imageView.setBackground(categoryList.get(i).getDrawable());
                     if(((CustomViewHolder) customViewHolder).textSite != null) ((CustomViewHolder) customViewHolder).textSite.setText(categoryList.get(i).getCategoryName());
                 }
             } else {
@@ -412,11 +400,13 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             e.printStackTrace();
         }
     }
+
     @Override
     public int getItemViewType(int position) {
         if (arrayListInfoFinal != null && arrayListInfoFinal.get(position).get("type") != null && arrayListInfoFinal.get(position).get("type").equals("load")) return 1;
         else return TYPE_ITEM;
     }
+
     @Override
     public int getItemCount() {
         int size;
@@ -430,16 +420,19 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else size = 0;
         return size;
     }
+
     private void refreshAdapter() {
         feedItemList = favSingleItem;
         synchronized(SuggestionAdapter.this){ SuggestionAdapter.this.notifyDataSetChanged(); }
     }
+
     class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AdapterView.OnLongClickListener {
-        private ImageView imageView;
-        private TextView bestSiteItem, textSite, textPrice, siteText,textViewSite,textViewPrice,textViewCargo,textViewTotalPrice, textViewPayment,textViewPayCash,textViewPayCard,textViewInfo,textViewMore, textViewCreditCard,textViewTransfer,textViewPaypal;
-        private ProgressBar progressBar;
-        private CardView cv;
-        private Switch switchControl;
+        private final ImageView imageView;
+        private final TextView bestSiteItem, textSite, textPrice, siteText,textViewSite,textViewPrice,textViewCargo,textViewTotalPrice, textViewPayment,textViewPayCash,textViewPayCard,textViewInfo,textViewMore, textViewCreditCard,textViewTransfer,textViewPaypal;
+        private final ProgressBar progressBar;
+        private final CardView cv;
+        private final SwitchCompat switchControl;
+
         CustomViewHolder(View view) {
             super(view);
             imageView = view.findViewById(R.id.itemImage);
@@ -465,6 +458,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if(arrayListComparison == null || from != null && from.equals("price")) cv.setOnClickListener(this);
             if(arrayListComparison == null || from != null && from.equals("price")) cv.setOnLongClickListener(this);
         }
+
         @Override
         public boolean onLongClick(View view) {
             if (view != null) {
@@ -513,6 +507,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             return true;
         }
+
         @Override
         public void onClick(View view) {
             try {
@@ -577,19 +572,16 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             }
                         }
                     } else {
-                        if(arrayListComparison.get(itemPosition).getURL().isEmpty()) Snackbar.make(view, "Seçili olmayan site.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Seç ve Yenile", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String[] array = context.getResources().getStringArray(R.array.listOptions);
-                                for(int i = 0; i<array.length; i++) {
-                                    if(array[i].equals(arrayListComparison.get(itemPosition).getSite())) {
-                                        arrayForSelectedSites.add(context.getResources().getStringArray(R.array.listValues)[i]);
-                                        storeArray(i, context);
-                                        storeArrayList(arrayForSelectedSites, context);
-                                        loadArrayList(context);
-                                        createIntent(singleItemModel,null, itemPosition,"refresh");
-                                        break;
-                                    }
+                        if(arrayListComparison.get(itemPosition).getURL().isEmpty()) Snackbar.make(view, "Seçili olmayan site.", Snackbar.LENGTH_LONG).setActionTextColor(Color.YELLOW).setAction("Seç ve Yenile", v -> {
+                            String[] array = context.getResources().getStringArray(R.array.listOptions);
+                            for(int i = 0; i<array.length; i++) {
+                                if(array[i].equals(arrayListComparison.get(itemPosition).getSite())) {
+                                    arrayForSelectedSites.add(context.getResources().getStringArray(R.array.listValues)[i]);
+                                    storeArray(i, context);
+                                    storeArrayList(arrayForSelectedSites, context);
+                                    loadArrayList(context);
+                                    createIntent(singleItemModel,null, itemPosition,"refresh");
+                                    break;
                                 }
                             }
                         }).show();
@@ -602,18 +594,21 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 Toast.makeText(context, "Bir hata meydana geldi. Lütfen yeniden deneyiniz.", Toast.LENGTH_LONG).show();
             }
         }
+
         private void loadArrayList(Context mContext) {
             SharedPreferences prefs = mContext.getSharedPreferences("preference2", 0);
             int size = prefs.getInt("arrayForSelectedSites" +"_size", 0);
             ArrayList<String> arrayList = new ArrayList<>();
             for(int i=0;i<size;i++) arrayList.add(prefs.getString("arrayForSelectedSites" + "_" + i," "));
         }
+
         private void storeArray(int i,Context mContext) {
             SharedPreferences prefs = mContext.getSharedPreferences("preference", 0);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("checkedItems" + "_" + i, true);
             editor.apply();
         }
+
         private void storeArrayList(ArrayList<String> arrayList, Context mContext) {
             Set<String> set = new HashSet<>(arrayList);
             arrayList.clear();
@@ -624,6 +619,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             for (int i = 0; i < arrayList.size(); i++) editor.putString("arrayForSelectedSites" + "_" + i, arrayList.get(i));
             editor.apply();
         }
+
         private void checkContext(int position) {
             if (position >= 0) {
                 if(!indexesForUpdate.contains(Integer.toString(position))) {
@@ -658,6 +654,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             else update.setVisibility(View.GONE);
             refreshAdapter();
         }
+
         void bringFavs() {
             favList = new ArrayList<>();
             favSingleItem = new ArrayList<>();
@@ -690,6 +687,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             else favLayout.setVisibility(View.GONE);
             refreshAdapter();
         }
+
         private void noInternet() {
             View alertLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_click, null);
             final LinearLayout buttonLay = alertLayout.findViewById(R.id.buttons_lay);
@@ -708,6 +706,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 });
         }
+
         private void changeValue(int position) {
             View alertLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_click4, null);
             final Button buttonAbsence = alertLayout.findViewById(R.id.buttonDelete);
@@ -806,6 +805,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             });
         }
+
         private void sortNumeric() {
             try {
                 Collections.sort(arrayListComparison, new Comparator<HowMuchAndWhere>() {
@@ -823,6 +823,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 e.printStackTrace();
             }
         }
+
         private void createIntentFinalDetailFinal(ArrayList<HashMap<String, String>> arrayList, int position, String way) {
             if (arrayList != null && !arrayList.get(position).get("name").contains("Error")) {
                 try { (new Retrofit.Builder().addConverterFactory(ScalarsConverterFactory.create()).baseUrl("https://www.bkmkitap.com/").client(new OkHttpClient().newBuilder().build()).build())
@@ -907,6 +908,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if(progressBar != null) progressBar.setVisibility(View.GONE);
             if(info.equals("refresh")) ((Activity)context).finish();
         }
+
         private void createIntent(SingleItemModel singleItemModel, ArrayList<SingleItemModel> singleItem, int position, String info) {
             String cover, individual;
             if(singleItem != null) {
@@ -951,6 +953,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
     }
+
     static class LoadHolder extends RecyclerView.ViewHolder {
         LoadHolder(View itemView) { super(itemView); }
     }

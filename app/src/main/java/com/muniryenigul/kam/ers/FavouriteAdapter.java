@@ -2,9 +2,9 @@ package com.muniryenigul.kam.ers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.res.Resources;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -15,21 +15,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import com.muniryenigul.kam.R;
 import java.util.ArrayList;
 import static com.muniryenigul.kam.MainActivity.detect;
 import static com.muniryenigul.kam.MainActivity.favList;
+
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyViewHolder> {
-    private String from;
-    private ArrayList<String> searchedItems;
+    private final String from;
+    private final ArrayList<String> searchedItems;
     private Context context;
     private ArrayAdapter<String> spinnerAdapter;
+
     public FavouriteAdapter(ArrayList<String> arrayList, String from) {
         this.searchedItems = arrayList;
         this.from = from;
     }
+
     public FavouriteAdapter(Context context, ArrayList<String> arrayList, String from) {
         this.searchedItems = arrayList;
         this.from = from;
@@ -37,13 +39,15 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
         String[] limitItems = new String[]{"5", "10", "20"};
         spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, limitItems);
     }
+
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView historyImage;
-        private TextView siteText;
-        private ProgressBar progressBar;
-        private Switch switchControl;
-        private CardView cardView;
-        private Spinner limitSpinner;
+        private final ImageView historyImage;
+        private final TextView siteText;
+        private final ProgressBar progressBar;
+        private final SwitchCompat switchControl;
+        private final CardView cardView;
+        private final Spinner limitSpinner;
+
         MyViewHolder(View view) {
             super(view);
             historyImage = view.findViewById(R.id.historyImage);
@@ -54,12 +58,14 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
             limitSpinner = view.findViewById(R.id.limitSpinner);
         }
     }
+
     @SuppressLint("InflateParams")
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new MyViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null));
     }
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder customViewHolder, int i) {
         try {
@@ -114,6 +120,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
             e.printStackTrace();
         }
     }
+
     @Override
     public int getItemCount() {
         return searchedItems.size();

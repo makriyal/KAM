@@ -2,14 +2,18 @@ package com.muniryenigul.kam.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.io.Serializable;
+
 public class HowMuchAndWhere implements Serializable, Parcelable {
-    private String howMuch, site, price, URL, cargo, totalPrice, payAtTheDoorCash, payAtTheDoorCard, otherMethods, info;
+    private String howMuch, price, cargo, totalPrice, payAtTheDoorCash, payAtTheDoorCard, otherMethods, info;
+    private final String site, URL;
     private boolean isFree, hasCard, hasTransfer, hasPayPal;
+
     public HowMuchAndWhere(String site, String price, String URL) {
         this.site = site;
         this.price = price;
         this.URL = URL;
     }
+
     public HowMuchAndWhere(String howMuch, String site, String price, String cargo, String totalPrice, boolean isFree,  boolean hasCard, boolean hasTransfer, boolean hasPayPal,String otherMethods, String payAtTheDoorCash, String payAtTheDoorCard, String info, String URL) {
         this.howMuch = howMuch;
         this.site = site;
@@ -26,21 +30,25 @@ public class HowMuchAndWhere implements Serializable, Parcelable {
         this.info = info;
         this.URL = URL;
     }
+
     public HowMuchAndWhere(Parcel in) {
         site = in.readString();
         price = in.readString();
         URL = in.readString();
     }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(site);
         dest.writeString(price);
         dest.writeString(URL);
     }
+
     @Override
     public int describeContents() {
         return 0;
     }
+
     public static final Creator<HowMuchAndWhere> CREATOR = new Creator<HowMuchAndWhere>() {
         @Override
         public HowMuchAndWhere createFromParcel(Parcel in) {
@@ -51,6 +59,7 @@ public class HowMuchAndWhere implements Serializable, Parcelable {
             return new HowMuchAndWhere[size];
         }
     };
+
     public String getPrice() {
         return price;
     }

@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -65,6 +64,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 public class PriceActivity extends AppCompatActivity {
     private RelativeLayout sortLayout;
     public static boolean askToUpdate= false;
@@ -75,7 +75,6 @@ public class PriceActivity extends AppCompatActivity {
     public static SQLiteDatabase database, fav;
     private SuggestionAdapter adapter;
     private Button buttonFindPrices2;
-    int all, position;
     private ProgressBar progressBar2;
     private ImageView coverLoading;
     private FloatingActionButton fab, fabUpdate, fab2, fabUpdate2;
@@ -155,7 +154,6 @@ public class PriceActivity extends AppCompatActivity {
         description = getIntent().getStringExtra("description");
         intentInfo = getIntent().getStringExtra("info");
         singleItemModel = new SingleItemModel(name, author, publisher, getIntent().getStringExtra("cover"), getIntent().getStringExtra("individual"), coverBig, isbn, description);
-        position = getIntent().getIntExtra("position",0);
         arrayListPrice = new ArrayList<>();
         buttonFindPrices2 = findViewById(R.id.buttonSeeOrSearch2);
         sortLayout = findViewById(R.id.sortLayout);
@@ -167,7 +165,6 @@ public class PriceActivity extends AppCompatActivity {
         textDescription2 = findViewById(R.id.textDescription2);
         arrayForSelectedSites=new ArrayList<>();
         loadArrayList(arrayForSelectedSites,PriceActivity.this);
-        all = getResources().getStringArray(R.array.listOptions).length;
         progressBar2 = findViewById(R.id.progressBar2);
         recyclerView = findViewById(R.id.recylerView);
         recyclerView.setHasFixedSize(true);
@@ -181,8 +178,8 @@ public class PriceActivity extends AppCompatActivity {
         linear2 = findViewById(R.id.linear2);
         behavior = BottomSheetBehavior.from(linear2);
         Picasso mPicasso = Picasso.get();
-        mPicasso.load(coverBig).error(R.drawable./*error*/ic_virus).into(toolbar_image);
-        mPicasso.load(coverBig).error(R.drawable./*error*/ic_virus).into(toolbar_image2);
+        try { if(coverBig != null) mPicasso.load(coverBig).error(R.drawable.ic_virus).into(toolbar_image); } catch (Exception e) { e.printStackTrace(); }
+        try { if(coverBig != null) mPicasso.load(coverBig).error(R.drawable.ic_virus).into(toolbar_image2); } catch (Exception e) { e.printStackTrace(); }
         nameText.setText(name);
         nameText2.setText(name);
         fab = findViewById(R.id.fab);
@@ -205,6 +202,7 @@ public class PriceActivity extends AppCompatActivity {
         paramsForPublisherButton.setMargins(12, 48, 24, 24);
         buttonPublisher2.setLayoutParams(paramsForPublisherButton);
         buttonPublisher.setLayoutParams(paramsForPublisherButton);
+
         fab.setOnLongClickListener(view -> {
             try {
                 if (intentInfo.equalsIgnoreCase("old")||intentInfo.equalsIgnoreCase("update")) {
@@ -222,6 +220,7 @@ public class PriceActivity extends AppCompatActivity {
             } catch (Exception e) { e.printStackTrace(); catchAndSend("delay error"); }
             return true;
         });
+
         fab2.setOnLongClickListener(view -> {
             try {
                 if (intentInfo.equalsIgnoreCase("old")||intentInfo.equalsIgnoreCase("update")) {
@@ -239,6 +238,7 @@ public class PriceActivity extends AppCompatActivity {
             } catch (Exception e) { e.printStackTrace(); catchAndSend("delay error"); }
             return true;
         });
+
         fab.setOnClickListener(view -> {
             try {
                 if (intentInfo.equalsIgnoreCase("old")||intentInfo.equalsIgnoreCase("update")) {
@@ -261,6 +261,7 @@ public class PriceActivity extends AppCompatActivity {
                 else Toast.makeText(PriceActivity.this, "Bu kitap zaten favoriler listesinde.", Toast.LENGTH_LONG).show();
             } catch (Exception e) { e.printStackTrace(); catchAndSend("delay error"); }
         });
+
         fab2.setOnClickListener(view -> {
             try { if (intentInfo.equalsIgnoreCase("old")||intentInfo.equalsIgnoreCase("update")) delete();
                 else if (intentInfo.equalsIgnoreCase("detail")||intentInfo.equalsIgnoreCase("new from Sugs")) {
@@ -281,6 +282,7 @@ public class PriceActivity extends AppCompatActivity {
                 else Toast.makeText(PriceActivity.this, "Bu kitap zaten favoriler listesinde.", Toast.LENGTH_LONG).show();
             } catch (Exception e) { e.printStackTrace(); catchAndSend("delay error"); }
         });
+
         fabUpdate.setOnClickListener(v -> {
             @SuppressLint("InflateParams") View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
             final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -304,6 +306,7 @@ public class PriceActivity extends AppCompatActivity {
             });
             buttonCancel.setOnClickListener(v2 -> dialog.dismiss());
         });
+
         fabUpdate2.setOnClickListener(v -> {
             @SuppressLint("InflateParams") View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
             final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -327,6 +330,7 @@ public class PriceActivity extends AppCompatActivity {
             });
             buttonCancel.setOnClickListener(v2 -> dialog.dismiss());
         });
+
         if(intentInfo != null) {
             if (intentInfo.equalsIgnoreCase("old")) {
                 searched = true;
@@ -351,11 +355,13 @@ public class PriceActivity extends AppCompatActivity {
             }
         }
     }
+
     private void freeMemory(){
         System.runFinalization();
         Runtime.getRuntime().gc();
         System.gc();
     }
+
     private void bringSearched() {
         freeMemory();
         try {
@@ -381,12 +387,14 @@ public class PriceActivity extends AppCompatActivity {
         } catch (SQLException e) { catchAndSend("databaseError"); e.printStackTrace();}
         freeMemory();
     }
+
     private void common() {
         fab.setImageDrawable(ContextCompat.getDrawable(PriceActivity.this,R.drawable.search));
         sortLayout.setVisibility(View.GONE);
         fabUpdate.hide();
         commonInCommon();
     }
+
     private void commonInCommon() {
         try {
             StringBuilder sb = new StringBuilder();
@@ -433,6 +441,7 @@ public class PriceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void delete() {
         @SuppressLint("InflateParams") View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
         final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -458,6 +467,7 @@ public class PriceActivity extends AppCompatActivity {
         });
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
     }
+
     private void saveDB(String nameDB, String table, String name2, String author2, String publisher2, String cover, String individual, String coverBig2, String isbn2, String description2) {
         SQLiteDatabase database = openOrCreateDatabase(nameDB, MODE_PRIVATE, null);
         SQLiteStatement statement;
@@ -492,6 +502,7 @@ public class PriceActivity extends AppCompatActivity {
         }
         database.close();
     }
+
     private void deleteDB() {
         fav = openOrCreateDatabase("Favs", MODE_PRIVATE, null);
         fav.execSQL("CREATE TABLE IF NOT EXISTS fav (name VARCHAR)");
@@ -500,6 +511,7 @@ public class PriceActivity extends AppCompatActivity {
         statement.execute();
         fav.close();
     }
+
     private void catchAndSend(String error) {
         Intent intent=new Intent(PriceActivity.this, MainActivity.class);
         intent.putExtra("info", error);
@@ -508,6 +520,7 @@ public class PriceActivity extends AppCompatActivity {
         searched = false;
         PriceActivity.this.finish();
     }
+
     private void save() {
         @SuppressLint("InflateParams") View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
         final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -527,10 +540,12 @@ public class PriceActivity extends AppCompatActivity {
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
         buttonFav.setOnClickListener(v -> saveProcess(dialog));
     }
+
     public void addToFavs(View view) {
         if(!favList.contains(name)) save();
         else Toast.makeText(PriceActivity.this, "Bu kitap zaten favoriler listesinde.", Toast.LENGTH_LONG).show();
     }
+
     private void saveProcess(Dialog dialog) {
         progressBar2.setVisibility(View.VISIBLE);
         coordinator.setEnabled(false);
@@ -544,6 +559,7 @@ public class PriceActivity extends AppCompatActivity {
         searched = false;
         PriceActivity.this.finish();
     }
+
     public void alert(String which) {
         @SuppressLint("InflateParams") View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
         final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -580,6 +596,7 @@ public class PriceActivity extends AppCompatActivity {
             finish();
         });
     }
+
     public void more(View view) {
         if(!receiver.isNetworkAvailable(PriceActivity.this)) alert("internet");
         else {
@@ -600,6 +617,7 @@ public class PriceActivity extends AppCompatActivity {
         }
 
     }
+
     public void findPrices(View view) {
         try {
             if (arrayForSelectedSites == null || arrayForSelectedSites.isEmpty()) startActivity(new Intent(PriceActivity.this, Settings2Activity.class).putExtra("from", intentInfo));
@@ -621,12 +639,14 @@ public class PriceActivity extends AppCompatActivity {
         }
 
     }
+
     private void loadArrayList(ArrayList<String> arrayList, Context mContext) {
         SharedPreferences prefs = mContext.getSharedPreferences("preference2", 0);
         int size = prefs.getInt("arrayForSelectedSites" +"_size", 0);
         arrayList.clear();
         for(int i=0;i<size;i++) arrayList.add(prefs.getString("arrayForSelectedSites" + "_" + i," "));
     }
+
     private void search(String s) {
         coverLoading.setVisibility(View.VISIBLE);
         stillSearch=true;
@@ -670,7 +690,9 @@ public class PriceActivity extends AppCompatActivity {
         }
         freeMemory();
     }
+
     public void expand(View view) { behavior.setState(BottomSheetBehavior.STATE_EXPANDED); }
+
     public class BroadcastingInnerClass extends BroadcastReceiver {
         boolean connected = false;
         @Override
@@ -695,6 +717,7 @@ public class PriceActivity extends AppCompatActivity {
             return false;
         }
     }
+
     @Override
     public void onBackPressed() {
         if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -716,7 +739,8 @@ public class PriceActivity extends AppCompatActivity {
             }
         }
     }
-        public class MyResultReceiver extends ResultReceiver {
+
+    public class MyResultReceiver extends ResultReceiver {
         Handler handler = new Handler();
         MyResultReceiver(Handler handler) {
             super(handler);
@@ -756,34 +780,36 @@ public class PriceActivity extends AppCompatActivity {
                 saveDB(StringUtils.replace(name, "/", ""),"data","site","price","url",null,null,null,null,null);
             } catch (Exception e) { e.printStackTrace(); }
     }
-private void situations() {
-    int notFound = 0, error = 0, unselect = 0, localAll = 0;
-    localAll = arrayListPrice.size();
-    for(int r = 0 ; r < localAll ; r++ ){
-        switch (arrayListPrice.get(r).getPrice()) {
-            case "¯\\_(ツ)_/¯": notFound++; break;
-            case "ಠ_ಠ": error++; break;
-            case "□": unselect++; break;
+
+    private void situations() {
+        int notFound = 0, error = 0, /*unselect = 0, */localAll;
+        localAll = arrayListPrice.size();
+        for(int r = 0 ; r < localAll ; r++ ){
+            switch (arrayListPrice.get(r).getPrice()) {
+                case "¯\\_(ツ)_/¯": notFound++; break;
+                case "ಠ_ಠ": error++; break;
+//                case "□": unselect++; break;
+            }
+        }
+        if(stillSearch) {
+            String message;
+            if(localAll == notFound + error) {
+                if(arrayForSelectedSites.size() == 1) message = "Seçilen sitede fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor.";
+                else message = "Seçilen sitelerde fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor.";
+            }
+            else {
+                int result = localAll -notFound - error;
+                message = +result+" sitede fiyat bulundu.";
+            }
+            try {
+                snackbar = Snackbar.make(linear2, message, Snackbar.LENGTH_LONG);
+                snackbar.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-    if(stillSearch) {
-        String message;
-        if(localAll == notFound + error) {
-            if(arrayForSelectedSites.size() == 1) message = "Seçilen sitede fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor :(";
-            else message = "Seçilen sitelerde fiyat bulunamadı; stokta yok, satış dışı ya da temin edilemiyor :(";
-        }
-        else {
-            int result = localAll -notFound - error;
-            message = +result+" sitede fiyat bulundu :)";
-        }
-        try {
-            snackbar = Snackbar.make(linear2, message, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
+
     public void ofAdapter() {
         try {
             adapter = new SuggestionAdapter(PriceActivity.this, arrayListPrice, arrayForSelectedSites, singleItemModel, recyclerView, volume, pages,"price");
@@ -793,6 +819,7 @@ private void situations() {
             e.printStackTrace();
         }
     }
+
     public void sortNumeric() {
         try {
             Collections.sort(arrayListPrice, new Comparator<HowMuchAndWhere>() {
@@ -811,6 +838,7 @@ private void situations() {
             e.printStackTrace();
         }
     }
+
     public void sortNumeric2() {
         Collections.sort(arrayListPrice, new Comparator<HowMuchAndWhere>() {
             @Override
@@ -836,6 +864,7 @@ private void situations() {
             adapter.notifyDataSetChanged();
         }
     }
+
     public void sortAlpha2(View view) {
         Collections.sort(arrayListPrice, (o1, o2) -> {
             Collator collator = Collator.getInstance(new Locale("tr", "TR"));
@@ -847,6 +876,7 @@ private void situations() {
             adapter.notifyDataSetChanged();
         }
     }
+
     public void sortAlpha(View view) {
         Collections.sort(arrayListPrice, (o1, o2) -> {
             Collator collator = Collator.getInstance(new Locale("tr", "TR"));
@@ -858,6 +888,8 @@ private void situations() {
             adapter.notifyDataSetChanged();
         }
     }
+
     public void sortNumer(View view) {sortNumeric(); }
+
     public void sortNumer2(View view) {sortNumeric2(); }
 }

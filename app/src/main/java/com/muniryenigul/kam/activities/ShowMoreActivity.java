@@ -61,6 +61,7 @@ import static com.muniryenigul.kam.MainActivity.favSingleItem;
 import static com.muniryenigul.kam.activities.PriceActivity.database;
 import static com.muniryenigul.kam.activities.PriceActivity.fav;
 import static com.muniryenigul.kam.activities.PriceActivity.stillSearch;
+
 public class ShowMoreActivity extends AppCompatActivity {
     private RecyclerView recShowMore;
     private ProgressBar progressBar;
@@ -70,7 +71,7 @@ public class ShowMoreActivity extends AppCompatActivity {
     private Spinner spinner;
     private BroadcastingInnerClass receiver;
     private Dialog dialog;
-    public int search=1, all, count;
+    private int search=1, all, count;
     public static int pages;
     private String mQuery, currentNameBook;
     private HashMap<String, String> mapInfoFinal;
@@ -78,6 +79,7 @@ public class ShowMoreActivity extends AppCompatActivity {
     private boolean firstRun=false;
     private GridLayoutManager glm;
     public static boolean searched = false;
+
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -101,17 +103,21 @@ public class ShowMoreActivity extends AppCompatActivity {
         recShowMore.setLayoutManager(glm);
         recShowMore.setAdapter(bookFinalAdapter);
     }
+
     @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(receiver);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         register(receiver);
     }
+
     private void register(BroadcastingInnerClass receiver) { registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)); }
+
     @Override
     public void onBackPressed() {
         if(coverLoading.getVisibility()==View.VISIBLE) coverLoading.setVisibility(View.GONE);
@@ -120,6 +126,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +140,7 @@ public class ShowMoreActivity extends AppCompatActivity {
         loadArrayList(arrayForSelectedSites,this);
         recShowMore=findViewById(R.id.recShowMore);
         progressBar=findViewById(R.id.progressBar);
+
         if(getResources().getConfiguration().orientation==2) {
             switch(getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
                 case Configuration.SCREENLAYOUT_SIZE_LARGE: glm = new GridLayoutManager(this, 5); break;
@@ -148,8 +156,10 @@ public class ShowMoreActivity extends AppCompatActivity {
                 default:
             }
         }
+
         recShowMore.setLayoutManager(glm);
         recShowMore.setHasFixedSize(true);
+
         recShowMore.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recShowMore, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -169,6 +179,7 @@ public class ShowMoreActivity extends AppCompatActivity {
                 }
             }
         }));
+
         if (!receiver.isNetworkAvailable()) {
             firstRun=false;
             noInternet();
@@ -177,6 +188,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             load();
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -184,6 +196,7 @@ public class ShowMoreActivity extends AppCompatActivity {
         loadArrayList(arrayForSelectedSites,ShowMoreActivity.this);
         coverLoading.setVisibility(View.GONE);
     }
+
     public void bringFavs() {
         favList = new ArrayList<>();
         favSingleItem = new ArrayList<>();
@@ -221,10 +234,12 @@ public class ShowMoreActivity extends AppCompatActivity {
             } catch (SQLException e) { e.printStackTrace(); }
         }
     }
+
     public void home(View view) {
         caseforMore("home",null,null);
         finish();
     }
+
     private void createIntentFinal(ArrayList<HashMap<String, String>> arrayList, int position, String way) {
         currentNameBook=arrayList.get(position).get("name");
         if (!receiver.isNetworkAvailable()) {
@@ -244,14 +259,13 @@ public class ShowMoreActivity extends AppCompatActivity {
                                 StringBuilder sb = new StringBuilder();
                                 progressBar.setVisibility(View.GONE);
                                 if (arrayList.get(position).get("name") != null && favList != null && favList.contains(arrayList.get(position).get("name"))) {
-                                    Log.d("dialog","1");
                                     if (!receiver.isNetworkAvailable()) {
                                         progressBar.setVisibility(View.GONE);
                                         noInternet();
-                                    } else if (searched && getIntent().getStringExtra("book name") != null && getIntent().getStringExtra("book name").equals(currentNameBook)) finish();
+                                    } else if (searched && getIntent().getStringExtra("book name") != null && Objects.equals(getIntent().getStringExtra("book name"), currentNameBook)) finish();
                                     else createIntent(favSingleItem, favList.indexOf(arrayList.get(position).get("name")), "old");
-                                } else if (/*searched && */getIntent().getStringExtra("book name") != null && getIntent().getStringExtra("book name").equals(currentNameBook)) finish();
-                                else { Log.d("dialog","3");
+                                } else if (/*searched && */getIntent().getStringExtra("book name") != null && Objects.equals(getIntent().getStringExtra("book name"), currentNameBook)) finish();
+                                else {
                                     if (!receiver.isNetworkAvailable()) {
                                         progressBar.setVisibility(View.GONE);
                                         noInternet();
@@ -300,6 +314,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             }
         }
     }
+
     private void caseforMore(String info, String currentName, String currentLink) {
         Intent i;
         if(info.equals("home"))  {
@@ -316,6 +331,7 @@ public class ShowMoreActivity extends AppCompatActivity {
         i.putStringArrayListExtra("linkList", null);
         startActivity(i);
     }
+
     public void createIntent(ArrayList<SingleItemModel> singleItem, int position, String info) {
         Picasso.get().load(singleItem.get(position).getCoverBig()).fit().error(R.drawable./*error*/ic_virus).into(coverLoading, new com.squareup.picasso.Callback() {
                     @Override public void onSuccess() {
@@ -358,17 +374,21 @@ public class ShowMoreActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
     }
+
     public void noSelection(String from) {
         firstRun=true;
         intent(from);
     }
+
     public void intent(String from) { startActivity(new Intent(ShowMoreActivity.this, Settings2Activity.class).putExtra("from", from)); }
+
     private void loadArrayList(ArrayList<String> arrayList, Context mContext) {
         arrayList.clear();
         SharedPreferences prefs = mContext.getSharedPreferences("preference2", 0);
         int size = prefs.getInt("arrayForSelectedSites" + "_size", 0);
         for (int i = 0; i < size; i++) arrayList.add(prefs.getString("arrayForSelectedSites" + "_" + i, " "));
     }
+
     public void noInternet() {
         View alertLayout = getLayoutInflater().inflate(R.layout.custom_click, null);
         final LinearLayout buttons_lay= alertLayout.findViewById(R.id.buttons_lay);
@@ -377,8 +397,8 @@ public class ShowMoreActivity extends AppCompatActivity {
         buttonConnect.setVisibility(View.VISIBLE);
         final TextView textView = alertLayout.findViewById(R.id.textView);
         AlertDialog.Builder builder = new AlertDialog.Builder(ShowMoreActivity.this);
-        textView.setText("İnternet bağlantısı yok.");
-        buttonConnect.setText("Bağlan");
+        textView.setText(R.string.no_internet);
+        buttonConnect.setText(R.string.connect);
         builder.setCancelable(true).setView(alertLayout);
         dialog = builder.create();
         dialog.show();
@@ -387,6 +407,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
         });
     }
+
     public class BroadcastingInnerClass extends BroadcastReceiver {
         boolean connected = false;
         @Override
@@ -397,16 +418,14 @@ public class ShowMoreActivity extends AppCompatActivity {
             ConnectivityManager connectivity = (ConnectivityManager) ShowMoreActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null) {
                 NetworkInfo[] info = connectivity.getAllNetworkInfo();
-                if (info != null) {
-                    for (NetworkInfo anInfo : info) {
-                        if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
-                            if (!connected) {
-                                connected = true;
-                                if (dialog != null && dialog.isShowing()) dialog.dismiss();
-                                if(!firstRun) load();
-                            }
-                            return true;
+                for (NetworkInfo anInfo : info) {
+                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+                        if (!connected) {
+                            connected = true;
+                            if (dialog != null && dialog.isShowing()) dialog.dismiss();
+                            if(!firstRun) load();
                         }
+                        return true;
                     }
                 }
             }
@@ -414,16 +433,17 @@ public class ShowMoreActivity extends AppCompatActivity {
             return false;
         }
     }
+
     private void load() {
         ArrayAdapter<String> spinnerAdapter;
         List<String> list=new ArrayList<>();
         List<String> listLink=new ArrayList<>();
         if(getIntent().getStringExtra("info")!=null) {
-            if(!getIntent().getStringExtra("info").equals("main")) {
+            if(!Objects.equals(getIntent().getStringExtra("info"), "main")) {
                 list.add(getIntent().getStringExtra("current name"));
                 listLink.add(getIntent().getStringExtra("current link"));
             } else {
-                switch (getIntent().getStringExtra("current name")) {
+                switch (Objects.requireNonNull(getIntent().getStringExtra("current name"))) {
                     case /*"Bilim - Mühendislik"*/"moreScience":
                         list = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.bilim)));
                         listLink = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.bilim_link)));
@@ -517,7 +537,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             Objects.requireNonNull(spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
             spinner.setSelection(spinnerAdapter.getPosition(getIntent().getStringExtra("current name")));
-            if(getIntent().getStringExtra("info")!=null && !getIntent().getStringExtra("info").equals("main")) spinner.setEnabled(false);
+            if(getIntent().getStringExtra("info")!=null && !Objects.equals(getIntent().getStringExtra("info"), "main")) spinner.setEnabled(false);
             List<String> finalListLink = listLink;
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -532,6 +552,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             });
         } else Toast.makeText(this, "Bir hata meydana geldi. Lütfen yeniden deneyiniz.", Toast.LENGTH_LONG).show();
     }
+
     private void searchSug(String link) {
         stillSearch=true;
         progressBar.setVisibility(View.VISIBLE);
@@ -541,6 +562,7 @@ public class ShowMoreActivity extends AppCompatActivity {
         intent.putExtra("link", link);
         startService(intent);
     }
+
     public class Receiver extends ResultReceiver {
         Handler handler = new Handler();
         Receiver(Handler handler) {
@@ -567,6 +589,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             }
             super.onReceiveResult(resultCode, resultData);
         }
+
         private void loadMore() {
             HashMap<String, String> mapLoad = new HashMap<>();
             mapLoad.put("type", "load");
@@ -621,6 +644,7 @@ public class ShowMoreActivity extends AppCompatActivity {
             } catch (Exception e) { e.printStackTrace(); }
         }
     }
+
     private void check(String from, RecyclerView.Adapter adapter) {
         if(from.equals("text")) {
             count += 1;

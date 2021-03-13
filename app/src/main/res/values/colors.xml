@@ -4,9 +4,8 @@
     <color name="actionModeColor">#FF80AB</color>
     <color name="colorPrimary">#4527A0</color>
     <color name="colorPrimaryDark">#311B92</color>
-    <!--<color name="colorPrimaryDark">#004684</color>-->
+    <color name="colorPrimaryDark5">#25311B92</color>
     <color name="yellow">#FFF176</color>
-    <!--<color name="yellow">#ffef03</color>-->
     <color name="transparent">#00000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGrayLight">#eeeeee</color>
